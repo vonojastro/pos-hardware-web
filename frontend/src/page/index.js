@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import ListTab from "../components/ListTab";
 import ListTabDisplay from "../components/ListTabDisplay";
 import TransactionForm from "../components/TransactionForm";
@@ -12,14 +12,12 @@ const Home = () => {
   const date = dayjs(new Date()).format("YYYY-MM-DD");
   const [dateSearch, setDateSearch] = useState(date);
 
-  const transactionList = useSelector((state) => state.transactionList);
-  const { transactions } = transactionList;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTransactionList());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="w-11/12 mx-auto z-0">

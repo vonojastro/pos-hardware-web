@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
@@ -16,9 +16,6 @@ const Header = () => {
         <div className="flex gap-5">
           <Link to="/preview">
             <button>Print Preview</button>
-          </Link>
-          <Link to="/monthlysales">
-            <button>Monthly Sales</button>
           </Link>
         </div>
       </div>

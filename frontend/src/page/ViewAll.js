@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useReactToPrint } from "react-to-print";
 import dayjs from "dayjs";
 import { getTransactionList } from "../redux/actions/transactionsActions";
-import { addDailyReport } from "../redux/actions/dailyReportActions";
 
 const ViewAll = () => {
   const date = dayjs(new Date()).format("YYYY-MM-DD");
@@ -18,9 +17,6 @@ const ViewAll = () => {
 
   const transactionList = useSelector((state) => state.transactionList);
   const { transactions } = transactionList;
-
-  const dailyReport = useSelector((state) => state.dailyReport);
-  const { dailyreport } = dailyReport;
 
   useEffect(() => {
     dispatch(getTransactionList());
@@ -44,15 +40,6 @@ const ViewAll = () => {
   const totalOut = filteredisOut?.reduce((acc, item) => acc + item.amount, 0);
 
   const totalSales = totalIn - totalOut;
-
-  const addDaily = () => {
-    dispatch(
-      addDailyReport({
-        totalIn: filteredisIn,
-        totalOut: filteredisOut,
-      })
-    );
-  };
 
   return (
     <div className="w-11/12 mx-auto p-5">

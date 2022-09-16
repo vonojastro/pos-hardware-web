@@ -22,7 +22,7 @@ const InitialBalanceForm = ({ setAmount, setName, setDescription }) => {
     setAmount(initialTotal);
     setName("Initial Balance");
     setDescription("Initial Balance");
-  }, [initialTotal]);
+  }, [initialTotal, setAmount, setName, setDescription]);
 
   return (
     <>

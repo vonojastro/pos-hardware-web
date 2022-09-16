@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
-import { BsTrash } from "@react-icons/all-files/bs/BsTrash";
 import { BiMessageSquareDetail } from "@react-icons/all-files/bi/BiMessageSquareDetail";
 import {
   deleteTransaction,

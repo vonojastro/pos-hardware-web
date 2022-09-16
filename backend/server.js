@@ -1,10 +1,8 @@
 import express from "express";
 import dotenv from "dotenv"
 import connectDB from "./config/db.js"
-import transactions from "./data/transactions.js"
 import { errorHandler, notFound } from "./middleware/middleware.js";
 import transactionRoutes from "./routes/transactionsRoutes.js"
-import dailyreportRoutes from "./routes/dailyReportRoutes.js"
 import path from 'path'
 
 dotenv.config()
@@ -13,7 +11,6 @@ const app = express()
 app.use(express.json());
 
 app.use("/api/transactions", transactionRoutes);
-app.use("/api/dailyreport", dailyreportRoutes);
 
 const __dirname = path.resolve()
 

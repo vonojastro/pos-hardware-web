@@ -9,48 +9,6 @@ const MonthlySales = () => {
   const date = dayjs(new Date()).format("MM");
   const [dateSearchView, setDateSearchView] = useState(date);
 
-  const sample = [
-    {
-      name: "hardware",
-      amount: 100,
-      category: "hardware",
-      isIn: true,
-      fee: 0,
-      createdAt: "09-01-2022",
-    },
-    {
-      name: "hardware",
-      amount: 100,
-      category: "hardware",
-      isIn: true,
-      fee: 0,
-      createdAt: "09-01-2022",
-    },
-    {
-      name: "initial balance",
-      amount: 100,
-      category: "initial balance",
-      isIn: true,
-      fee: 0,
-      createdAt: "09-01-2022",
-    },
-    {
-      name: "atm",
-      amount: 100,
-      category: "atm",
-      isIn: false,
-      fee: 50,
-      createdAt: "09-02-2022",
-    },
-    {
-      name: "cheque",
-      amount: 100,
-      category: "cheque",
-      isIn: false,
-      fee: 50,
-      createdAt: "09-02-2022",
-    },
-  ];
 
   const dispatch = useDispatch();
 
