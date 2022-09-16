@@ -28,5 +28,6 @@
     "express-async-handler": "^1.2.0",
     "mongoose": "^6.6.0",
     "nodemon": "^2.0.19"
-  }
+  },
+  "devDependencies": {}
 }
