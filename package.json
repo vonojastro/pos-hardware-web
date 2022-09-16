@@ -4,10 +4,11 @@
   "description": "pos app",
   "main": "server.js",
   "type": "module",
-  "engines": {
-    "node": ">=16.13.1",
-    "npm": ">=8.2.0"
+    "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.19.1"
   },
+  
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
@@ -28,6 +29,5 @@
     "express-async-handler": "^1.2.0",
     "mongoose": "^6.6.0",
     "nodemon": "^2.0.19"
-  },
-  "devDependencies": {}
+  }
 }
