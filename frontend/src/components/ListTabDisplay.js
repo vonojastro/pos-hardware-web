@@ -30,8 +30,6 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
           dayjs(dateSearch).format("YYYY-MM-DD")
       );
 
-      console.log(transactionInitialValue)
-
   const transaction = useSelector((state) => state.transaction);
   const { success: successAdd } = transaction;
 
