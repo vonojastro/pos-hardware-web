@@ -19,7 +19,10 @@ const MonthlySales = () => {
     dispatch(getTransactionList());
   }, [dispatch]);
 
-  const filtered = transactions?.filter(
+
+  const transactionInitialValue = transactions ? transactions : []
+
+  const filtered = transactionInitialValue.filter(
     (item) =>
       item.category !== "initial balance" &&
       item.category !== "others" &&

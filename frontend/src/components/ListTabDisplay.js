@@ -18,13 +18,13 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
   const transactionInitialValue = transactions ? transactions : []
 
   const filtered = tab
-    ? transactionInitialValue?.filter(
+    ? transactionInitialValue.filter(
         (item) =>
           item.category === tab &&
           dayjs(item.createdAt).format("YYYY-MM-DD") ===
             dayjs(dateSearch).format("YYYY-MM-DD")
       )
-    : transactionInitialValue?.filter(
+    : transactionInitialValue.filter(
         (item) =>
           dayjs(item.createdAt).format("YYYY-MM-DD") ===
           dayjs(dateSearch).format("YYYY-MM-DD")
