@@ -20,7 +20,7 @@ const MonthlySales = () => {
   }, [dispatch]);
 
 
-  const transactionInitialValue = transactions ? transactions : []
+  const transactionInitialValue = Array.isArray(transactions) ? transactions : []
 
   const filtered = transactionInitialValue.filter(
     (item) =>

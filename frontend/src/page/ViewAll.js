@@ -23,7 +23,8 @@ const ViewAll = () => {
   }, [dispatch]);
 
 
-  const transactionInitialValue = transactions ? transactions : []
+  const transactionInitialValue = Array.isArray(transactions) ? transactions : []
+  
 
   const filtered = dateSearchView
     ? transactionInitialValue.filter(
@@ -36,7 +37,7 @@ const ViewAll = () => {
           dayjs(item.createdAt).format("YYYY-MM-DD") ===
           dayjs(dateSearchView).format("YYYY-MM-DD")
       );
-      
+
   const filteredisIn = filtered?.filter((item) => item.isIn);
   const filteredisOut = filtered?.filter((item) => !item.isIn);
 

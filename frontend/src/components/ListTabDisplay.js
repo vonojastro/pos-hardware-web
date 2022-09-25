@@ -15,7 +15,7 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
 
   const dispatch = useDispatch();
 
-  const transactionInitialValue = transactions ? transactions : []
+  const transactionInitialValue = Array.isArray(transactions) ? transactions : []
 
   const filtered = tab
     ? transactionInitialValue.filter(
@@ -29,6 +29,8 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
           dayjs(item.createdAt).format("YYYY-MM-DD") ===
           dayjs(dateSearch).format("YYYY-MM-DD")
       );
+
+      console.log(transactionInitialValue)
 
   const transaction = useSelector((state) => state.transaction);
   const { success: successAdd } = transaction;
