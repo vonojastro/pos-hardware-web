@@ -25,9 +25,8 @@ const Header = (search, setSearch) => {
           <Link to="/searchlist">
             <button>Search transaction</button>
           </Link>
-          <Link to="/searchlist">
-            <button>Search transaction</button>
-          </Link>
+        
+         
 
         </div>
       </div>
