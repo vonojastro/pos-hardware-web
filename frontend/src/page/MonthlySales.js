@@ -90,7 +90,6 @@ const MonthlySales = () => {
                 <td>₱ {item.amount.toLocaleString()}</td>
                 <td>₱ {item.fee.toLocaleString()}</td>
                 <td>₱ {(item.fee + item.amount).toLocaleString()}</td>
-                <td>₱ {(item.fee + item.amount).toLocaleString()}</td>
               </tr>
             </tbody>
           ))}
