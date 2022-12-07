@@ -12,30 +12,30 @@ const SignUp = () => {
           id="username"
           type="text"
           placeholder="Enter Email"
-          className="tracking-widest py-3 border border-[#22C55E] normal-case text-center"
+          className="tracking-widest py-3 border border-gray-300 normal-case text-center"
         />
 
         <input
           id="name"
           type="text"
           placeholder="Enter Full Name"
-          className="tracking-widest py-3 border border-[#22C55E] normal-case text-center"
+          className="tracking-widest py-3 border border-gray-300 normal-case text-center"
         />
 
         <input
           id="password"
           type="text"
           placeholder="Confirm Password"
-          className="tracking-widest py-3 border border-[#22C55E] normal-case text-center"
+          className="tracking-widest py-3 border border-gray-300 normal-case text-center"
         />
 
         <input
           id="password"
           type="text"
           placeholder="Enter Password"
-          className="tracking-widest py-3 border border-[#22C55E] normal-case text-center"
+          className="tracking-widest py-3 border border-border-gray-300 normal-case text-center"
         />
-        <button className="border border-[#22C55E] p-2 w-full btn ">Sign up</button>
+        <button className="border border-gray-300 p-2 w-full btn ">Sign up</button>
       </form>
 
       <h3 className="normal-case text-center">
