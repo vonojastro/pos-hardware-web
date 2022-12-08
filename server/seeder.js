@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import Transaction from "./model/transactionModel.js";
+import User from "./model/userModel.js";
 import transactions from "./data/transactions.js";
-import dailyReport from "./data/dailyReportData.js";
+import userData from "./data/userData.js";
 import dotenv from 'dotenv'
 import connectDB from "./config/db.js";
 
@@ -10,10 +11,10 @@ connectDB()
 
 const importData = async () => {
     try{
-await Transaction.deleteMany()
+await User.deleteMany()
 
 
-await Transaction.insertMany(transactions)
+await User.insertMany(userData)
 
 
 console.log('Data Imported')
@@ -25,7 +26,7 @@ process.exit(1)
 
 const destroyData = async () => {
     try{
-await Transaction.deleteMany()
+await User.deleteMany()
 
 console.log('Data Destroyed')
     } catch (error) {

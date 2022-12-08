@@ -1,10 +1,10 @@
-import bcrypt from;
+import bcrypt from "bcryptjs"
 
 const userData = [
     {
         username: "Von",
         name: "Von Ojastro",
-        password: 200,
+        password: bcrypt.hashSync('vonCARLO2020', 10),
     }
   
 ]

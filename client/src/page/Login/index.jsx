@@ -33,7 +33,7 @@ pauseOnHover
 theme="light"
 />
 
-const notify = () => toast.success('🦄 Wow so easy!', {
+const notify = () => toast.success('Login successful', {
   position: "top-center",
   autoClose: 5000,
   hideProgressBar: false,
@@ -43,13 +43,17 @@ const notify = () => toast.success('🦄 Wow so easy!', {
   progress: undefined,
   theme: "light",
   });
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+  }
   
   return (
     <div className="h-screen m-[-50px]  flex justify-center items-center">
       <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center w-3/12">
         <h3 className="font-bold text-center text-lg">LOGIN</h3>
         
-        <form className="flex flex-col gap-5">
+        <form className="flex flex-col gap-5" onSubmit={submitHandler}>
           <input
             id="username"
             type="text"
@@ -69,12 +73,11 @@ const notify = () => toast.success('🦄 Wow so easy!', {
           />
           <button className="border border-gray-300 p-2 w-full btn" onClick={notify}>
             LOGIN
+            
           </button>
+          <ToastContainer />
         </form>
-        <button className="border border-gray-300 p-2 w-full btn" onClick={notify}>
-            hello
-            <ToastContainer />
-          </button>
+  
 
         <h3 className="normal-case text-center">
           Create Account?
