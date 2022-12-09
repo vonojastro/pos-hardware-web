@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import { errorHandler, notFound } from "./middleware/middleware.js";
 import transactionRoutes from "./routes/transactionsRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import path from "path";
 import cors from "cors";
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/transactions", transactionRoutes);
+app.use("/api/user", userRoutes);
 
 const __dirname = path.resolve();
 
