@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch} from "react-redux";
-import ListTab from "../../components/ListTab";
-import ListTabDisplay from "../../components/ListTabDisplay";
-import TransactionForm from "../../components/TransactionForm";
-import { getTransactionList } from "../../redux/actions/transactionsActions";
+import ListTab from "../../../components/ListTab";
+import ListTabDisplay from "../../../components/ListTabDisplay";
+import TransactionForm from "../../../components/TransactionForm";
+import { getTransactionList } from "../../../redux/actions/transactionsActions";
 import dayjs from "dayjs";
 
-const Home = () => {
+const CashierDashboard = () => {
   const [tab, setTab] = useState("");
 
   const date = dayjs(new Date()).format("YYYY-MM-DD");
@@ -42,4 +42,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default CashierDashboard;

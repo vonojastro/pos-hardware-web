@@ -66,7 +66,7 @@ const TransactionForm = () => {
           </button>
         </div>
         <form
-          className=" w-full flex flex-col gap-5 p-3"
+          className="w-full flex flex-col gap-5 p-3"
           onSubmit={submitHandler}
         >
           <select

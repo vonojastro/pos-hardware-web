@@ -22,9 +22,9 @@ const ViewAll = () => {
     dispatch(getTransactionList());
   }, [dispatch]);
 
-
-  const transactionInitialValue = Array.isArray(transactions) ? transactions : []
-  
+  const transactionInitialValue = Array.isArray(transactions)
+    ? transactions
+    : [];
 
   const filtered = dateSearchView
     ? transactionInitialValue.filter(

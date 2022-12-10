@@ -35,7 +35,7 @@ const AtmForm = ({
 
       <label htmlFor="amount" className="">
         <input
-          type="text"
+          type="number"
           id="amount"
           placeholder="Enter Amount (maximun ₱5,000)"
           className="border p-2 w-full"
