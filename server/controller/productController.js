@@ -7,10 +7,11 @@ import asyncHandler from "express-async-handler";
 // @route GET /api/products
 // @access private
 const getProducts = asyncHandler(async (req, res) => {
-
+const {query} = req.body
+console.log(query)
   const products = await Product.find({});
-  // const filtered = products.filter(product => product.productName === 'Pako')
-  res.json(products);
+  const filtered = products.filter(product => product.productName.toLowerCase().includes(query.toLowerCase()))
+  res.json(filtered);
 });
 
 

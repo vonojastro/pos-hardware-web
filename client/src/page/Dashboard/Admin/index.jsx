@@ -20,14 +20,18 @@ const AdminDashboard = () => {
     storageLocation: ''
   })
 
+  const [query, setQuery] = useState('')
+
   const dispatch = useDispatch()
 
   const productList = useSelector((state) => state.productList);
   const { products } = productList;
 
   useEffect(() => {
-    dispatch(getProductsAction())
-  }, [dispatch])
+    if (!query) {
+      dispatch(getProductsAction(query))
+    }
+  }, [dispatch, query])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -41,11 +45,19 @@ const AdminDashboard = () => {
     })
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(getProductsAction(query))
+  }
+
   return (
     <div className="w-11/12 mx-auto z-0 h-[700px] p-5 relative">
 
       <div className='flex justify-end gap-5 my-4 items-center'>
-        <input className='px-4 h-[40px] border border-gray-300' placeholder='Search Item' />
+        <form onSubmit={handleSubmit} className='w-full'>
+          <input className='px-4 h-[40px] border border-gray-300 w-2/12' onChange={(e) => setQuery(e.target.value)} placeholder='Search Item' />
+        <input type='submit' value='submit' />
+        </form>
         <button className='h-[40px] px-3 border border-gray-300 my-3' onClick={() => setShowAdd(true)}>Add Product</button>
       </div>
       <div className='border border-gray-300 rounded w-full h-[600px] overflow-scroll'>
