@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch} from "react-redux";
 import ListTab from "../../../components/ListTab";
-import ListTabDisplay from "../../../components/ListTabDisplay";
+import ListTabDisplay from "../../../components/CashierDisplay";
 import TransactionForm from "../../../components/TransactionForm";
 import { getTransactionList } from "../../../redux/actions/transactionsActions";
 import dayjs from "dayjs";

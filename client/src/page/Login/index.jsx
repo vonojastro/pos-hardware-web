@@ -23,9 +23,9 @@ const Login = () => {
   useEffect(() => {
     if (userInfo && !userInfo.isAdmin) {
       navigate("/cashier");
-    } else (
+    } else if (userInfo && userInfo.isAdmin) {
       navigate("/admin")
-    )
+    }
 
   }, [userInfo, navigate]);
 

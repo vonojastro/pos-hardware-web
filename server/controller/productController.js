@@ -13,14 +13,12 @@ const getProducts = asyncHandler(async (req, res) => {
   });
   
 
-  export { getProducts };
-
 // @desc add products
 // @route POST /api/products
 // @access private
 const addProducts = asyncHandler(async (req, res) => {
 
-    res.json(products);
+    // res.json(products);
   });
   
 
