@@ -5,16 +5,18 @@ import transactions from "./data/transactions.js";
 import userData from "./data/userData.js";
 import dotenv from 'dotenv'
 import connectDB from "./config/db.js";
+import Products from "./model/productModel.js"
+import products from "./data/products.js";
 
 dotenv.config()
 connectDB()
 
 const importData = async () => {
     try{
-await User.deleteMany()
+await Products.deleteMany()
 
 
-await User.insertMany(userData)
+await Products.insertMany(products)
 
 
 console.log('Data Imported')
@@ -26,7 +28,7 @@ process.exit(1)
 
 const destroyData = async () => {
     try{
-await User.deleteMany()
+await Products.deleteMany()
 
 console.log('Data Destroyed')
     } catch (error) {
