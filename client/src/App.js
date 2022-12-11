@@ -7,8 +7,8 @@ import TransactionDetails from "./page/Transaction";
 import SearchList from "./page/Query";
 import Login from "./page/Login";
 import SignUp from "./page/SignUp";
-import CashierDashboard from "./page/Dashboard/CashierDashboard";
-import AdminDashboard from "./page/Dashboard";
+import CashierDashboard from "./page/Dashboard/Cashier";
+import AdminDashboard from "./page/Dashboard/Admin";
 
 function App() {
 

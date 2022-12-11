@@ -8,18 +8,65 @@ import asyncHandler from "express-async-handler";
 // @access private
 const getProducts = asyncHandler(async (req, res) => {
 
-    const products = await Product.find({});
-    res.json(products);
-  });
-  
+  const products = await Product.find({});
+  // const filtered = products.filter(product => product.productName === 'Pako')
+  res.json(products);
+});
 
-// @desc add products
+
+// @desc add product
 // @route POST /api/products
 // @access private
 const addProducts = asyncHandler(async (req, res) => {
 
-    // res.json(products);
-  });
-  
+  const {
+    productName,
+    brand,
+    description,
+    supplier,
+    totalCost,
+    costPerUnit,
+    retailPrice,
+    wholesalePrice,
+    qty,
+    unit,
+    storageLocation,
+  } = req.body
 
-  export { getProducts, addProducts };
+  const product = await Product.create({
+    productName,
+    brand,
+    description,
+    supplier,
+    totalCost,
+    costPerUnit,
+    retailPrice,
+    wholesalePrice,
+    qty,
+    unit,
+    storageLocation,
+  })
+
+  if (product) {
+    res.status(201).json({
+      _id: product._id,
+      productName: product.productName,
+      brand: product.brand,
+      description: product.description,
+      supplier: product.supplier,
+      totalCost: product.totalCost,
+      costPerUnit: product.costPerUnit,
+      retailPrice: product.retailPrice,
+      wholesalePrice: product.wholesalePrice,
+      qty: product.qty,
+      unit: product.unit,
+      storageLocation: product.storageLocation,
+    });
+  } else {
+    res.status(400)
+    throw new Error('Invalid Product')
+  }
+});
+
+
+export { getProducts, addProducts };

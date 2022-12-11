@@ -9,7 +9,8 @@ const products = [
         retailPrice: 25,
         wholesalePrice: 0,
         qty: 30,
-        unit: '1 kg'
+        unit: '1 kg',
+        storageLocation: 'A',
     },
     {
         productName: 'Pako 2',
@@ -21,7 +22,8 @@ const products = [
         retailPrice: 25,
         wholesalePrice: 0,
         qty: 30,
-        unit: '1 kg'
+        unit: '1 kg',
+        storageLocation: 'B',
     },
     {
         productName: 'Plywood',
@@ -33,7 +35,8 @@ const products = [
         retailPrice: 25,
         wholesalePrice: 0,
         qty: 30,
-        unit: '1 kg'
+        unit: '1 kg',
+        storageLocation: 'A',
     },
     {
         productName: 'Cement',
@@ -45,7 +48,8 @@ const products = [
         retailPrice: 25,
         wholesalePrice: 0,
         qty: 30,
-        unit: '1 kg'
+        unit: '1 kg',
+        storageLocation: 'A',
     },
     {
         productName: 'Yero',
@@ -57,7 +61,8 @@ const products = [
         retailPrice: 25,
         wholesalePrice: 0,
         qty: 30,
-        unit: '1 kg'
+        unit: '1 kg',
+        storageLocation: 'A',
     },
   
 ]

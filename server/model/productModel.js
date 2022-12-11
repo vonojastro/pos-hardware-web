@@ -15,6 +15,9 @@ const productSchema = mongoose.Schema(
         supplier: {
             type: String,
         },
+        storageLocation: {
+            type: String,
+        },
         totalCost: {
             type: Number,
             default: 0,
