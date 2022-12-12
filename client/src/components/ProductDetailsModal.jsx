@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment';
+import dayjs from "dayjs";
 
 const ProductDetailsModal = ({ allProducts, selectedId, setShowDetails }) => {
 
@@ -30,7 +30,7 @@ const ProductDetailsModal = ({ allProducts, selectedId, setShowDetails }) => {
                         <h3><strong>Quantity: </strong>{item.qty}</h3>
                         <h3><strong>Unit: </strong>{item.unit}</h3>
                         <h3><strong>Storage Location: </strong>{item.storageLocation}</h3>
-                        <h3><strong>Updated: </strong>{moment(item.createdAt).format('LL')}</h3>
+                        <h3><strong>Updated: </strong>{dayjs(item.createdAt).format("MMMM DD, YYYY")}</h3>
                     </div>
 
                 </div>

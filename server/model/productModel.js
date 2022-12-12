@@ -8,15 +8,19 @@ const productSchema = mongoose.Schema(
         },
         brand: {
             type: String,
+            default: 'None',
         },
         description: {
             type: String,
+            default: 'None',
         },
         supplier: {
             type: String,
+            default: 'None',
         },
         storageLocation: {
             type: String,
+            default: 'None',
         },
         totalCost: {
             type: Number,

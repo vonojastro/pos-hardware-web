@@ -12,6 +12,7 @@ import {
   addProductAction,
   deleteProductAction,
   getProductsAction,
+  updateProductAction,
 } from "../../redux/actions/productsAction";
 import ProductDetailsModal from "../../components/ProductDetailsModal";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,9 +24,9 @@ const ProductList = () => {
   const [selectedId, setSelectedId] = useState("");
   const [addProduct, setAddProduct] = useState({
     productName: "",
-    brand: "",
-    description: "",
-    supplier: "",
+    brand: "None",
+    description: "None",
+    supplier: "None",
     totalCost: "",
     costPerUnit: "",
     retailPrice: "",
@@ -36,7 +37,6 @@ const ProductList = () => {
   });
 
   const [query, setQuery] = useState("");
-
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,7 +51,6 @@ const ProductList = () => {
   )
  
   const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
-console.log(allProducts)
 
   const product = useSelector((state) => state.product);
   const { success } = product;
@@ -123,17 +122,17 @@ console.log(allProducts)
 
     if (editProduct) {
       setAddProduct({
-        productName: editProduct.map((item) => item.productName),
-        brand: editProduct.map((item) => item.brand),
-        description: editProduct.map((item) => item.description),
-        supplier: editProduct.map((item) => item.supplier),
-        totalCost: editProduct.map((item) => item.totalCost),
-        costPerUnit: editProduct.map((item) => item.costPerUnit),
-        retailPrice: editProduct.map((item) => item.retailPrice),
-        wholesalePrice: editProduct.map((item) => item.wholesalePrice),
-        qty: editProduct.map((item) => item.qty),
-        unit: editProduct.map((item) => item.unit),
-        storageLocation: editProduct.map((item) => item.storageLocation),
+        productName: editProduct.map((item) => item.productName)[0],
+        brand: editProduct.map((item) => item.brand)[0],
+        description: editProduct.map((item) => item.description)[0],
+        supplier: editProduct.map((item) => item.supplier)[0],
+        totalCost: editProduct.map((item) => item.totalCost)[0],
+        costPerUnit: editProduct.map((item) => item.costPerUnit)[0],
+        retailPrice: editProduct.map((item) => item.retailPrice)[0],
+        wholesalePrice: editProduct.map((item) => item.wholesalePrice)[0],
+        qty: editProduct.map((item) => item.qty)[0],
+        unit: editProduct.map((item) => item.unit)[0],
+        storageLocation: editProduct.map((item) => item.storageLocation)[0],
       });
     }
   };
@@ -166,7 +165,27 @@ console.log(allProducts)
           addProduct.storageLocation
         )
       );
+    } else if (showEdit) {
+      if(dispatch(updateProductAction({
+        _id: selectedId,
+        productName: addProduct.productName,
+        brand: addProduct.brand,
+        description: addProduct.description,
+        supplier: addProduct.supplier,
+        totalCost: addProduct.totalCost,
+        costPerUnit: addProduct.costPerUnit,
+        retailPrice: addProduct.retailPrice,
+        wholesalePrice: addProduct.wholesalePrice,
+        qty: addProduct.qty,
+        unit: addProduct.unit,
+        storageLocation: addProduct.storageLocation,
+      }))) {
+        dispatch(getProductsAction())
+        setShowEdit(false)
+      }
+     
     }
+    dispatch(getProductsAction())
   };
 
   return (

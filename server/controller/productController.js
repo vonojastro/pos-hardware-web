@@ -1,24 +1,19 @@
 import Product from "../model/productModel.js";
 import asyncHandler from "express-async-handler";
 
-
-
 // @desc Fetch products
 // @route GET /api/products
 // @access private
 const getProducts = asyncHandler(async (req, res) => {
-
   const products = await Product.find({});
   // const filtered = products.filter(product => product.productName.toLowerCase().includes(query.toLowerCase()))
   res.json(products);
 });
 
-
 // @desc add product
 // @route POST /api/products
 // @access private
 const addProducts = asyncHandler(async (req, res) => {
-
   const {
     productName,
     brand,
@@ -31,7 +26,7 @@ const addProducts = asyncHandler(async (req, res) => {
     qty,
     unit,
     storageLocation,
-  } = req.body
+  } = req.body;
 
   const product = await Product.create({
     productName,
@@ -45,7 +40,7 @@ const addProducts = asyncHandler(async (req, res) => {
     qty,
     unit,
     storageLocation,
-  })
+  });
 
   if (product) {
     res.status(201).json({
@@ -63,36 +58,91 @@ const addProducts = asyncHandler(async (req, res) => {
       storageLocation: product.storageLocation,
     });
   } else {
-    res.status(400)
-    throw new Error('Invalid Product')
+    res.status(400);
+    throw new Error("Invalid Product");
   }
 });
 
 const getProductById = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id)
-  
-  if(product) {
-  res.json(product)
+  const product = await Product.findById(req.params.id);
+
+  if (product) {
+    res.json(product);
   } else {
-      res.status(400);
-      throw new Error("Something went wrong");
-    }
-  });
+    res.status(400);
+    throw new Error("Something went wrong");
+  }
+});
 
 const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
 
-  const product = await Product.findById(req.params.id)
-  
-  if(product) {
-  await product.remove()
-  res.json({message: "Product Removed"})
+  if (product) {
+    await product.remove();
+    res.json({ message: "Product Removed" });
   } else {
-      res.status(400);
-      throw new Error("Something went wrong");
-    }
-  });
-  
-  
+    res.status(400);
+    throw new Error("Something went wrong");
+  }
+});
 
+const updateProduct = asyncHandler(async (req, res) => {
+  const {
+    _id,
+    productName,
+    brand,
+    description,
+    supplier,
+    totalCost,
+    costPerUnit,
+    retailPrice,
+    wholesalePrice,
+    qty,
+    unit,
+    storageLocation,
+  } = req.body;
 
-export { getProducts, addProducts, deleteProduct, getProductById };
+  const product = await Product.findById({ _id });
+
+  if (product) {
+    product.productName = productName || product.productName;
+    product.brand = brand || product.brand;
+    product.description = description || product.description;
+    product.supplier = supplier || product.supplier;
+    product.totalCost = totalCost || product.totalCost;
+    product.costPerUnit = costPerUnit || product.costPerUnit;
+    product.retailPrice = retailPrice || product.retailPrice;
+    product.wholesalePrice = wholesalePrice || product.wholesalePrice;
+    product.qty = qty || product.qty;
+    product.unit = unit || product.unit;
+    product.storageLocation = storageLocation || product.storageLocation;
+
+    const updatedProduct = await product.save();
+
+    res.json({
+      _id: updatedProduct._id,
+      productName: updatedProduct.productName,
+      brand: updatedProduct.brand,
+      description: updatedProduct.description,
+      supplier: updatedProduct.supplier,
+      totalCost: updatedProduct.totalCost,
+      costPerUnit: updatedProduct.costPerUnit,
+      retailPrice: updatedProduct.retailPrice,
+      wholesalePrice: updatedProduct.wholesalePrice,
+      qty: updatedProduct.qty,
+      unit: updatedProduct.unit,
+      storageLocation: updatedProduct.storageLocation,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Update went wrong");
+  }
+});
+
+export {
+  getProducts,
+  addProducts,
+  deleteProduct,
+  getProductById,
+  updateProduct,
+};

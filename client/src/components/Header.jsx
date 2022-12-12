@@ -34,16 +34,10 @@ const Header = () => {
   return (
     <div className="w-full flex justify-center bg-green-500 text-white py-6 px-10 relative">
       <div className="w-11/12 flex justify-between items-center ">
-        <Link to="/cashier">
-          <div>ENZO HARDWARE</div>
-        </Link>
-
         {userInfo ? (
           <>
-            <div>{date}</div>
-
             <div className="flex gap-5">
-              <HiMenu
+              <HiMenu className="hover:text-green-200"
                 style={{ fontSize: "30px", cursor: "pointer" }}
                 onClick={() => setShowMenu(true)}
               />
@@ -52,20 +46,34 @@ const Header = () => {
         ) : (
           ""
         )}
+
+        <Link to="/cashier">
+          <div>ENZO HARDWARE</div>
+        </Link>
+
+        <div>{date}</div>
       </div>
 
       <div
-        className={`absolute w-3/12 h-screen bg-green-500 border-l-[1px] border-white z-[100] top-[0] ease-in-out duration-500 ${
-          showMenu ? "right-[0]" : "right-[-100%]"
+        className={`absolute w-2/12 h-screen bg-green-500 border-r-[1px] border-white z-[100] top-[0] ease-in-out duration-500 ${
+          showMenu ? "left-[0]" : "left-[-100%]"
         }`}
       >
         <div className="flex flex-col justify-center items-center text-black h-full text-center relative">
           <AiOutlineClose
-            className=" text-white hover:text-gray-300 absolute top-[0] right-[0]  mt-5 mr-5 text-xl text- font-bold cursor-pointer"
+            className=" text-white hover:text-gray-300 absolute top-[0] left-[0]  mt-5 ml-5 text-xl text- font-bold cursor-pointer"
             onClick={() => setShowMenu(false)}
           />
           {userInfo?.isAdmin && userInfo ? (
             <>
+              <Link
+                onClick={() => setShowMenu(false)}
+                className="uppercase py-5 hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
+                to="/admin"
+              >
+                Home
+              </Link>
+
               <Link
                 onClick={() => setShowMenu(false)}
                 className="uppercase py-5 hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"

@@ -11,6 +11,7 @@ import CashierDashboard from "./page/Dashboard/Cashier";
 
 import ProductList from "./page/ProductList";
 import UserList from "./page/UserList";
+import AdminDashboard from "./page/Dashboard/Admin";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Login />} />
         <Route path="/cashier" element={<CashierDashboard />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/product-list" element={<ProductList />} />
         <Route path="/user-list" element={<UserList />} />
         <Route path="/transaction/:id" element={<TransactionDetails />} />

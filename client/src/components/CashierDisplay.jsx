@@ -49,10 +49,10 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
   };
 
   return (
-    <div className="w-full px-3 py-5 h-[500px] overflow-scroll flex flex-col items-end">
+    <div className="w-full  py-5 h-full overflow-y-scroll flex flex-col items-end">
       <table className="w-full text-center gap-5">
         <thead>
-          <tr className="text-sm">
+          <tr className="text-sm border-b">
             <th className="py-3">Transaction: </th>
             <th>Description: </th>
             <th>Amount: </th>
@@ -63,7 +63,7 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
         </thead>
         {filtered?.map((item, index) => (
           <tbody key={index}>
-            <tr className="hover:border-t hover:border-b cursor-pointer text-sm">
+            <tr className="border-b cursor-pointer text-sm">
               <td className="p-1 capitalize">{item.name}</td>
               <td className="capitalize">{item.description}</td>
               <td className="">₱ {item.amount.toLocaleString()}</td>

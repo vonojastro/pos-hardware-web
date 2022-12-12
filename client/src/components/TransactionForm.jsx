@@ -8,12 +8,13 @@ import AtmForm from "./AtmForm";
 import ChequeForm from "./ChequeForm";
 import HardwareForm from "./HardwareForm";
 import InitialBalanceForm from "./InitialBalanceForm";
+import OthersForm from "./OthersForm";
 
-const TransactionForm = () => {
+const TransactionForm = ({ setCategory, category, cart }) => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+
   const [isIn, setIsIn] = useState(null);
   const [fee, setFee] = useState(0);
 
@@ -38,7 +39,7 @@ const TransactionForm = () => {
   };
   return (
     <>
-      <div className="w-full m-5 bg-white border text-sm">
+      <div className="w-full m-3 bg-white border text-sm h-[650px]">
         <div className="grid grid-cols-2">
           <button
             className={`p-3 ${
@@ -66,7 +67,7 @@ const TransactionForm = () => {
           </button>
         </div>
         <form
-          className="w-full flex flex-col gap-5 p-3"
+          className="w-full flex flex-col gap-5 p-3 justify-start h-full"
           onSubmit={submitHandler}
         >
           <select
@@ -83,11 +84,21 @@ const TransactionForm = () => {
             <option value="others">Others</option>
           </select>
 
-          {category === "hardware" || category === "others" ? (
+          {category === "others" ? (
+            <OthersForm
+              setName={setName}
+              setAmount={setAmount}
+              setDescription={setDescription}
+            />
+          ) : (
+            ""
+          )}
+          {category === "hardware" ? (
             <HardwareForm
               setName={setName}
               setAmount={setAmount}
               setDescription={setDescription}
+              cart={cart} 
             />
           ) : (
             ""
