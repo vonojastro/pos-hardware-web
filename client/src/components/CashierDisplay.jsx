@@ -40,9 +40,12 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
-      dispatch(deleteTransaction(id));
+      if( dispatch(deleteTransaction(id))) {
+
+        dispatch(getTransactionList())
+      }
     }
-    window.location.reload();
+    dispatch(getTransactionList())
   };
 
   return (

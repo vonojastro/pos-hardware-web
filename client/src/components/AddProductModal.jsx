@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductModal = ({ handleAddProduct, handleChange, setShowAdd,setAddProduct, addProduct, showAdd, showEdit, setShowEdit }) => {
+const ProductModal = ({ handleAddUpdate, handleChange, setShowAdd,setAddProduct, addProduct, showAdd, showEdit, setShowEdit }) => {
 
   const handleClose = () => {
     if (showAdd) {
@@ -18,7 +18,7 @@ const ProductModal = ({ handleAddProduct, handleChange, setShowAdd,setAddProduct
 
       <form
         className="flex flex-col gap-5 grid grid-cols-2"
-        onSubmit={handleAddProduct}
+        onSubmit={handleAddUpdate}
       >
         <input
           type="text"
@@ -114,7 +114,13 @@ const ProductModal = ({ handleAddProduct, handleChange, setShowAdd,setAddProduct
         >
           Cancel
         </button>
-        <input type='submit' value='Add' className="border border-gray-300 cursor-pointer py-3 bg-white hover:bg-green-500 hover:text-white ease-in-out duration-200" />
+        <button
+          className="border border-gray-300 py-3 bg-white hover:bg-green-500 hover:text-white ease-in-out duration-200"
+          onClick={handleAddUpdate}
+        >
+         {showAdd ? 'Add' : showEdit ? 'Update' : ''}
+        </button>
+     
 
       </form>
     </div>

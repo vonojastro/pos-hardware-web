@@ -3,24 +3,24 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { BiEdit } from 'react-icons/bi';
-import { RiDeleteBinLine } from 'react-icons/ri';
-import { TbListDetails } from 'react-icons/tb';
+import { BiEdit } from "react-icons/bi";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { TbListDetails } from "react-icons/tb";
 import { toast } from "react-toastify";
-import ProductModal from "../../../components/AddProductModal";
+import ProductModal from "../../components/AddProductModal";
 import {
   addProductAction,
   deleteProductAction,
   getProductsAction,
-} from "../../../redux/actions/productsAction";
-import ProductDetailsModal from "../../../components/ProductDetailsModal";
+} from "../../redux/actions/productsAction";
+import ProductDetailsModal from "../../components/ProductDetailsModal";
 import { Link, useNavigate } from "react-router-dom";
 
-const AdminDashboard = () => {
+const ProductList = () => {
   const [showAdd, setShowAdd] = useState(null);
-  const [showDetails, setShowDetails] = useState(false)
-  const [showEdit, setShowEdit] = useState(false)
-  const [selectedId, setSelectedId] = useState('')
+  const [showDetails, setShowDetails] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [selectedId, setSelectedId] = useState("");
   const [addProduct, setAddProduct] = useState({
     productName: "",
     brand: "",
@@ -37,13 +37,21 @@ const AdminDashboard = () => {
 
   const [query, setQuery] = useState("");
 
+
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const productList = useSelector((state) => state.productList);
   const { products } = productList;
 
-  const allProducts = Array.isArray(products) ? products : [];
+  const filteredProducts = products?.filter(product => 
+    product.productName.toLowerCase().includes(query.toLowerCase()) || 
+    product.brand.toLowerCase().includes(query.toLowerCase()) || 
+    product.supplier.toLowerCase().includes(query.toLowerCase())
+  )
+ 
+  const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
+console.log(allProducts)
 
   const product = useSelector((state) => state.product);
   const { success } = product;
@@ -66,10 +74,7 @@ const AdminDashboard = () => {
         storageLocation: "",
       });
     }
-
-
   }, [dispatch, success, setShowAdd]);
-
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -83,20 +88,17 @@ const AdminDashboard = () => {
     });
   };
 
-  const handleSubmitSearch = (e) => {
-    e.preventDefault();
-    dispatch(getProductsAction());
-  };
 
   const handleDetails = (id) => {
-    setShowDetails(true)
-    setShowAdd(false)
-    setSelectedId(id)
-  }
+    setShowDetails(true);
+    setShowAdd(false);
+    setSelectedId(id);
+  };
+
   const handleAdd = () => {
-    setShowDetails(false)
-    setShowAdd(true)
-    setShowDetails(false)
+    setShowDetails(false);
+    setShowAdd(true);
+    setShowDetails(false);
     setAddProduct({
       productName: "",
       brand: "",
@@ -110,74 +112,73 @@ const AdminDashboard = () => {
       unit: "",
       storageLocation: "",
     });
-  }
+  };
 
   const handleEdit = (id) => {
-    setSelectedId(id)
-    setShowDetails(false)
-    setShowEdit(true)
-    setShowAdd(false)
-    const editProduct = allProducts.filter(item => item._id === id)
+    setSelectedId(id);
+    setShowDetails(false);
+    setShowEdit(true);
+    setShowAdd(false);
+    const editProduct = allProducts.filter((item) => item._id === id);
 
     if (editProduct) {
       setAddProduct({
-        productName: editProduct.map(item => item.productName),
-        brand: editProduct.map(item => item.brand),
-        description: editProduct.map(item => item.description),
-        supplier: editProduct.map(item => item.supplier),
-        totalCost: editProduct.map(item => item.totalCost),
-        costPerUnit: editProduct.map(item => item.costPerUnit),
-        retailPrice: editProduct.map(item => item.retailPrice),
-        wholesalePrice: editProduct.map(item => item.wholesalePrice),
-        qty: editProduct.map(item => item.qty),
-        unit: editProduct.map(item => item.unit),
-        storageLocation: editProduct.map(item => item.storageLocation),
-      })
+        productName: editProduct.map((item) => item.productName),
+        brand: editProduct.map((item) => item.brand),
+        description: editProduct.map((item) => item.description),
+        supplier: editProduct.map((item) => item.supplier),
+        totalCost: editProduct.map((item) => item.totalCost),
+        costPerUnit: editProduct.map((item) => item.costPerUnit),
+        retailPrice: editProduct.map((item) => item.retailPrice),
+        wholesalePrice: editProduct.map((item) => item.wholesalePrice),
+        qty: editProduct.map((item) => item.qty),
+        unit: editProduct.map((item) => item.unit),
+        storageLocation: editProduct.map((item) => item.storageLocation),
+      });
     }
-
-
-  }
+  };
 
   const handleDelete = (id) => {
-    setSelectedId(id)
-    navigate('/admin')
-    if(dispatch(deleteProductAction(selectedId))) {
-    
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      if (dispatch(deleteProductAction(id))) {
+        dispatch(getProductsAction());
+      }
+      dispatch(getProductsAction());
     }
-
-  }
-          
-  const handleAddProduct = (e) => {                      
-    e.preventDefault(); 
-
-    dispatch(
-      addProductAction(
-        addProduct.productName,
-        addProduct.brand,
-        addProduct.description,
-        addProduct.supplier,
-        addProduct.totalCost,
-        addProduct.costPerUnit,
-        addProduct.retailPrice,
-        addProduct.wholesalePrice,
-        addProduct.qty,
-        addProduct.unit,
-        addProduct.storageLocation
-      )
-    );
-
   };
+
+  const handleAddUpdate = (e) => {
+    e.preventDefault();
+
+    if (showAdd) {
+      dispatch(
+        addProductAction(
+          addProduct.productName,
+          addProduct.brand,
+          addProduct.description,
+          addProduct.supplier,
+          addProduct.totalCost,
+          addProduct.costPerUnit,
+          addProduct.retailPrice,
+          addProduct.wholesalePrice,
+          addProduct.qty,
+          addProduct.unit,
+          addProduct.storageLocation
+        )
+      );
+    }
+  };
+
   return (
     <div className="w-11/12 mx-auto z-0 h-[700px] p-5 relative">
       <div className="flex justify-end gap-5 my-4 items-center">
-        <form onSubmit={handleSubmitSearch} className="w-full">
+       
           <input
             className="px-4 h-[40px] border border-gray-300 w-2/12"
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search Item"
           />
-          <input type="submit" value="submit" />
-        </form>
+ 
         <button
           className="h-[40px] px-3 border border-gray-300 my-3"
           onClick={handleAdd}
@@ -206,8 +207,10 @@ const AdminDashboard = () => {
           <tbody>
             {allProducts.map((product, index) => (
               <tr className=" border-b-[1px]" key={index}>
-                <td>{index + 1}</td>
-                <td><strong>{product.productName}</strong></td>
+                <td className="py-1">{index + 1}</td>
+                <td>
+                  <strong>{product.productName}</strong>
+                </td>
                 <td>{product.brand}</td>
                 <td>{product.description}</td>
                 <td>{product.retailPrice}</td>
@@ -216,15 +219,23 @@ const AdminDashboard = () => {
                 <td>{product.unit}</td>
                 <td>{product.storageLocation}</td>
                 <td>
-                  <TbListDetails className='cursor-pointer' onClick={() => handleDetails(product._id)} />
+                  <TbListDetails
+                    className="cursor-pointer"
+                    onClick={() => handleDetails(product._id)}
+                  />
                 </td>
                 <td>
-                  <BiEdit className="cursor-pointer" onClick={() => handleEdit(product._id)} />
+                  <BiEdit
+                    className="cursor-pointer"
+                    onClick={() => handleEdit(product._id)}
+                  />
                 </td>
                 <td>
-                  <RiDeleteBinLine className="cursor-pointer" onClick={() => handleDelete(product._id)} />
+                  <RiDeleteBinLine
+                    className="cursor-pointer"
+                    onClick={() => handleDelete(product._id)}
+                  />
                 </td>
-
               </tr>
             ))}
           </tbody>
@@ -236,33 +247,33 @@ const AdminDashboard = () => {
           handleChange={handleChange}
           addProduct={addProduct}
           setShowAdd={setShowAdd}
-          handleAddProduct={handleAddProduct}
+          handleAddUpdate={handleAddUpdate}
           showAdd={showAdd}
           setAddProduct={setAddProduct}
         />
-      ) :
-        showEdit ? (
-          <ProductModal
-            handleChange={handleChange}
-            addProduct={addProduct}
-            setShowEdit={setShowEdit}
-            handleAddProduct={handleAddProduct}
-            showEdit={showEdit}
-          />
-        ) :
-          (
-            ""
-          )}
-
-      {showDetails ? (
-        <ProductDetailsModal allProducts={allProducts} selectedId={selectedId} setShowDetails={setShowDetails} />
+      ) : showEdit ? (
+        <ProductModal
+          handleChange={handleChange}
+          addProduct={addProduct}
+          setShowEdit={setShowEdit}
+          handleAddUpdate={handleAddUpdate}
+          showEdit={showEdit}
+        />
       ) : (
         ""
       )}
 
-
+      {showDetails ? (
+        <ProductDetailsModal
+          allProducts={allProducts}
+          selectedId={selectedId}
+          setShowDetails={setShowDetails}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
 
-export default AdminDashboard;
+export default ProductList;

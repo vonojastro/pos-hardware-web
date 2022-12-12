@@ -8,7 +8,9 @@ import SearchList from "./page/Query";
 import Login from "./page/Login";
 import SignUp from "./page/SignUp";
 import CashierDashboard from "./page/Dashboard/Cashier";
-import AdminDashboard from "./page/Dashboard/Admin";
+
+import ProductList from "./page/ProductList";
+import UserList from "./page/UserList";
 
 function App() {
 
@@ -18,7 +20,8 @@ function App() {
       <Routes>
       <Route path="/" element={<Login />} />
         <Route path="/cashier" element={<CashierDashboard />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/product-list" element={<ProductList />} />
+        <Route path="/user-list" element={<UserList />} />
         <Route path="/transaction/:id" element={<TransactionDetails />} />
         <Route path="/preview" element={<ViewAll />} />
         <Route path="/monthlysales" element={<MonthlySales />} />
