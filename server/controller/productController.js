@@ -68,5 +68,31 @@ const addProducts = asyncHandler(async (req, res) => {
   }
 });
 
+const getProductById = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id)
+  
+  if(product) {
+  res.json(product)
+  } else {
+      res.status(400);
+      throw new Error("Something went wrong");
+    }
+  });
 
-export { getProducts, addProducts };
+const deleteProduct = asyncHandler(async (req, res) => {
+
+  const product = await Product.findById(req.params.id)
+  
+  if(product) {
+  await product.remove()
+  res.json({message: "Product Removed"})
+  } else {
+      res.status(400);
+      throw new Error("Something went wrong");
+    }
+  });
+  
+  
+
+
+export { getProducts, addProducts, deleteProduct, getProductById };

@@ -12,7 +12,7 @@ const reducer = combineReducers({
     transactionDetails: getTransactionReducer,
     userLogin: userLoginReducer,
     productList: getProductsReducer,
-    product: addProductReducer
+    product: addProductReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null

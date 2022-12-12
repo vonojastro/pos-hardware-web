@@ -3,14 +3,24 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { BiEdit } from 'react-icons/bi';
+import { RiDeleteBinLine } from 'react-icons/ri';
+import { TbListDetails } from 'react-icons/tb';
 import { toast } from "react-toastify";
+import ProductModal from "../../../components/AddProductModal";
 import {
   addProductAction,
+  deleteProductAction,
   getProductsAction,
 } from "../../../redux/actions/productsAction";
+import ProductDetailsModal from "../../../components/ProductDetailsModal";
+import { Link, useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
-  const [showAdd, setShowAdd] = useState(false);
+  const [showAdd, setShowAdd] = useState(null);
+  const [showDetails, setShowDetails] = useState(false)
+  const [showEdit, setShowEdit] = useState(false)
+  const [selectedId, setSelectedId] = useState('')
   const [addProduct, setAddProduct] = useState({
     productName: "",
     brand: "",
@@ -28,6 +38,7 @@ const AdminDashboard = () => {
   const [query, setQuery] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const productList = useSelector((state) => state.productList);
   const { products } = productList;
@@ -36,7 +47,6 @@ const AdminDashboard = () => {
 
   const product = useSelector((state) => state.product);
   const { success } = product;
-  console.log(success);
 
   useEffect(() => {
     dispatch(getProductsAction());
@@ -56,7 +66,10 @@ const AdminDashboard = () => {
         storageLocation: "",
       });
     }
+
+
   }, [dispatch, success, setShowAdd]);
+
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -75,8 +88,67 @@ const AdminDashboard = () => {
     dispatch(getProductsAction());
   };
 
-  const handleAddProduct = (e) => {
-    e.preventDefault();
+  const handleDetails = (id) => {
+    setShowDetails(true)
+    setShowAdd(false)
+    setSelectedId(id)
+  }
+  const handleAdd = () => {
+    setShowDetails(false)
+    setShowAdd(true)
+    setShowDetails(false)
+    setAddProduct({
+      productName: "",
+      brand: "",
+      description: "",
+      supplier: "",
+      totalCost: "",
+      costPerUnit: "",
+      retailPrice: "",
+      wholesalePrice: "",
+      qty: "",
+      unit: "",
+      storageLocation: "",
+    });
+  }
+
+  const handleEdit = (id) => {
+    setSelectedId(id)
+    setShowDetails(false)
+    setShowEdit(true)
+    setShowAdd(false)
+    const editProduct = allProducts.filter(item => item._id === id)
+
+    if (editProduct) {
+      setAddProduct({
+        productName: editProduct.map(item => item.productName),
+        brand: editProduct.map(item => item.brand),
+        description: editProduct.map(item => item.description),
+        supplier: editProduct.map(item => item.supplier),
+        totalCost: editProduct.map(item => item.totalCost),
+        costPerUnit: editProduct.map(item => item.costPerUnit),
+        retailPrice: editProduct.map(item => item.retailPrice),
+        wholesalePrice: editProduct.map(item => item.wholesalePrice),
+        qty: editProduct.map(item => item.qty),
+        unit: editProduct.map(item => item.unit),
+        storageLocation: editProduct.map(item => item.storageLocation),
+      })
+    }
+
+
+  }
+
+  const handleDelete = (id) => {
+    setSelectedId(id)
+    navigate('/admin')
+    if(dispatch(deleteProductAction(selectedId))) {
+    
+    }
+
+  }
+          
+  const handleAddProduct = (e) => {                      
+    e.preventDefault(); 
 
     dispatch(
       addProductAction(
@@ -93,6 +165,7 @@ const AdminDashboard = () => {
         addProduct.storageLocation
       )
     );
+
   };
   return (
     <div className="w-11/12 mx-auto z-0 h-[700px] p-5 relative">
@@ -107,7 +180,7 @@ const AdminDashboard = () => {
         </form>
         <button
           className="h-[40px] px-3 border border-gray-300 my-3"
-          onClick={() => setShowAdd(true)}
+          onClick={handleAdd}
         >
           Add Product
         </button>
@@ -116,6 +189,7 @@ const AdminDashboard = () => {
         <table className="w-full text-center gap-5">
           <thead>
             <tr className="border-b-[1px]">
+              <th>Item No.</th>
               <th className="py-3">Product Name</th>
               <th>Brand</th>
               <th>Description</th>
@@ -132,7 +206,8 @@ const AdminDashboard = () => {
           <tbody>
             {allProducts.map((product, index) => (
               <tr className=" border-b-[1px]" key={index}>
-                <td>{product.productName}</td>
+                <td>{index + 1}</td>
+                <td><strong>{product.productName}</strong></td>
                 <td>{product.brand}</td>
                 <td>{product.description}</td>
                 <td>{product.retailPrice}</td>
@@ -141,11 +216,15 @@ const AdminDashboard = () => {
                 <td>{product.unit}</td>
                 <td>{product.storageLocation}</td>
                 <td>
-                  <button>Edit</button>
+                  <TbListDetails className='cursor-pointer' onClick={() => handleDetails(product._id)} />
                 </td>
                 <td>
-                  <button>Delete</button>
+                  <BiEdit className="cursor-pointer" onClick={() => handleEdit(product._id)} />
                 </td>
+                <td>
+                  <RiDeleteBinLine className="cursor-pointer" onClick={() => handleDelete(product._id)} />
+                </td>
+
               </tr>
             ))}
           </tbody>
@@ -153,117 +232,35 @@ const AdminDashboard = () => {
       </div>
 
       {showAdd ? (
-        <div className=" w-7/12 py-12 px-12 border border-gray-300 bg-white rounded absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <h3 className="text-[1.3rem] text-center font-bold pb-4 ">
-            Add Product
-          </h3>
+        <ProductModal
+          handleChange={handleChange}
+          addProduct={addProduct}
+          setShowAdd={setShowAdd}
+          handleAddProduct={handleAddProduct}
+          showAdd={showAdd}
+          setAddProduct={setAddProduct}
+        />
+      ) :
+        showEdit ? (
+          <ProductModal
+            handleChange={handleChange}
+            addProduct={addProduct}
+            setShowEdit={setShowEdit}
+            handleAddProduct={handleAddProduct}
+            showEdit={showEdit}
+          />
+        ) :
+          (
+            ""
+          )}
 
-          <form
-            className="flex flex-col gap-5 grid grid-cols-2"
-            onSubmit={handleAddProduct}
-          >
-            <input
-              type="text"
-              name="productName"
-              onChange={handleChange}
-              value={addProduct.productName}
-              placeholder="Product Name"
-              className="col-span-2 border border-gray-300 p-2"
-            />
-            <input
-              type="text"
-              name="brand"
-              onChange={handleChange}
-              value={addProduct.brand}
-              placeholder="Brand"
-              className="border border-gray-300 p-2"
-            />
-            <input
-              type="text"
-              name="description"
-              onChange={handleChange}
-              value={addProduct.description}
-              placeholder="Description"
-              className="border border-gray-300 p-2"
-            />
-            <input
-              type="text"
-              name="supplier"
-              onChange={handleChange}
-              value={addProduct.supplier}
-              placeholder="Supplier"
-              className="border border-gray-300 p-2"
-            />
-            <input
-              type="number"
-              name="totalCost"
-              onChange={handleChange}
-              value={addProduct.totalCost}
-              placeholder="Total Cost"
-              className="border border-gray-300 p-2"
-            />
-            <input
-              type="number"
-              name="costPerUnit"
-              onChange={handleChange}
-              value={addProduct.costPerUnit}
-              placeholder="Cost Per Unit"
-              className="border border-gray-300 p-2"
-            />
-            <input
-              type="number"
-              name="retailPrice"
-              onChange={handleChange}
-              value={addProduct.retailPrice}
-              placeholder="Retail Price"
-              className="border border-gray-300 p-2"
-            />
-            <input
-              type="number"
-              name="wholesalePrice"
-              onChange={handleChange}
-              value={addProduct.wholesalePrice}
-              placeholder="Wholesale Price"
-              className="border border-gray-300 p-2"
-            />
-            <input
-              type="number"
-              name="qty"
-              onChange={handleChange}
-              value={addProduct.qty}
-              placeholder="Quantity"
-              className="border border-gray-300 p-2"
-            />
-            <input
-              type="text"
-              name="unit"
-              onChange={handleChange}
-              value={addProduct.unit}
-              placeholder="Unit"
-              className="border border-gray-300 p-2"
-            />
-            <input
-              type="text"
-              name="storageLocation"
-              onChange={handleChange}
-              value={addProduct.storageLocation}
-              placeholder="Storage Location"
-              className="border border-gray-300 p-2"
-            />
-            <button
-              className="border border-gray-300 py-3 bg-white hover:bg-green-500 hover:text-white ease-in-out duration-200"
-              onClick={() => setShowAdd(false)}
-            >
-              Cancel
-            </button>
-            <input type='submit' value='Add' className="border border-gray-300 py-3 bg-white hover:bg-green-500 hover:text-white ease-in-out duration-200" />
-            
-
-          </form>
-        </div>
+      {showDetails ? (
+        <ProductDetailsModal allProducts={allProducts} selectedId={selectedId} setShowDetails={setShowDetails} />
       ) : (
         ""
       )}
+
+
     </div>
   );
 };

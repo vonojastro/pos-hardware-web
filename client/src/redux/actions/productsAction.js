@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_PRODUCT_FAIL, ADD_PRODUCT_REQUEST, ADD_PRODUCT_RESET, ADD_PRODUCT_SUCCESS, GET_PRODUCTS_FAIL, GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS } from "../constants/productsConstant";
+import { ADD_PRODUCT_FAIL, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS, DELETE_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, GET_PRODUCTS_FAIL, GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS } from "../constants/productsConstant";
 
 export const getProductsAction = () => async (dispatch) => {
   try {
@@ -74,3 +74,26 @@ export const addProductAction =
       });
     }
   };
+
+  export const deleteProductAction = (id) => async (dispatch) => {
+    try {
+      dispatch({
+        type: DELETE_PRODUCT_REQUEST,
+      });
+
+      await axios.delete(`/api/products/${id}`);
+  
+      dispatch({
+        type: DELETE_PRODUCT_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: DELETE_PRODUCT_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+  

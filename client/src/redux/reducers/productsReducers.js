@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_FAIL, ADD_PRODUCT_REQUEST, ADD_PRODUCT_RESET, ADD_PRODUCT_SUCCESS, GET_PRODUCTS_FAIL, GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS } from "../constants/productsConstant";
+import { ADD_PRODUCT_FAIL, ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS, DELETE_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, GET_PRODUCTS_FAIL, GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS } from "../constants/productsConstant";
 
 export const getProductsReducer = (
     state = { products: [] },
@@ -43,9 +43,30 @@ export const getProductsReducer = (
           loading: false,
           error: action.payload,
         };
-      case ADD_PRODUCT_RESET:
-        return {};
+
       default:
         return state;
     }
   };
+
+  export const deleteProductReducer = (state = {}, action) => {
+    switch (action.payload) {
+      case DELETE_PRODUCT_REQUEST:
+        return {
+          loading: true,
+        };
+      case DELETE_PRODUCT_SUCCESS:
+        return {
+          loading: false,
+          success: true,
+        };
+      case DELETE_PRODUCT_FAIL:
+        return {
+          loading: false,
+          error: action.payload,
+        };
+      default:
+        return state;
+    }
+  };
+  
