@@ -20,7 +20,7 @@ export const getTransactionList = () => async (dispatch) => {
       type: TRANSACTIONS_REQUEST,
     });
 
-    const { data } = await axios.get(`${process.env.BACKEND_SERVER}/api/transactions`);
+    const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/transactions`);
 
     dispatch({
       type: TRANSACTIONS_SUCCESS,
@@ -43,7 +43,7 @@ export const getTransactionDetails = (id) => async (dispatch) => {
       type: TRANSACTION_DETAILS_REQUEST,
     });
 
-    const { data } = await axios.get(`${process.env.BACKEND_SERVER}/api/transactions/${id}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/transactions/${id}`);
 
     dispatch({
       type: TRANSACTION_DETAILS_SUCCESS,
@@ -67,7 +67,7 @@ export const addTransaction =
         type: TRANSACTION_ADD_REQUEST,
       });
 
-      const { data } = await axios.post(`${process.env.BACKEND_SERVER}/api/transactions`, {
+      const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/transactions`, {
         name,
         amount,
         description,
@@ -97,7 +97,7 @@ export const deleteTransaction = (id) => async (dispatch) => {
       type: TRANSACTION_DELETE_REQUEST,
     });
 
-    await axios.delete(`${process.env.BACKEND_SERVER}/api/transactions/${id}`);
+    await axios.delete(`${process.env.REACT_APP_BASE_URL}/api/transactions/${id}`);
 
     dispatch({
       type: TRANSACTION_DELETE_SUCCESS,

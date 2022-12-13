@@ -18,7 +18,7 @@ export const userLoginAction = (username, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `${process.env.BACKEND_SERVER}/api/user/login`,
+      `${process.env.REACT_APP_BASE_URL}/api/user/login`,
       { username, password },
       config
     );
