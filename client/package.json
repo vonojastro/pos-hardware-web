@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy": "https://pos-hardware.vercel.app/",
+  "proxy": "https://pos-hardware.vercel.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
