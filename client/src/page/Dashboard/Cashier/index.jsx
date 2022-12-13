@@ -12,9 +12,10 @@ import { getProductsAction } from "../../../redux/actions/productsAction";
 const CashierDashboard = () => {
   const [tab, setTab] = useState("");
   const [category, setCategory] = useState("");
-
+  const [hardwareQuery, setHardwareQuery] = useState('')
   const [cart, setCart] = useState([]);
 
+  
   const date = dayjs(new Date()).format("YYYY-MM-DD");
   const [dateSearch, setDateSearch] = useState(date);
 
@@ -28,26 +29,35 @@ const CashierDashboard = () => {
   const productList = useSelector((state) => state.productList);
   const { products } = productList;
 
-  const allProducts = Array.isArray(products) ? products : [];
+  const filteredProducts = products?.filter(product => 
+    product.productName.toLowerCase().includes(hardwareQuery.toLowerCase()) || 
+    product.brand.toLowerCase().includes(hardwareQuery.toLowerCase()) 
+  )
+ 
+  const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
 
   const handleAddCart = (id) => {
     const item = allProducts.filter((item) => item._id === id)[0];
     const existItem = cart.find((product) => product._id === item._id);
-   
-    if(existItem) {
+
+    if (existItem) {
       setCart([cart.map((x) => x._id === existItem.id ? item : x)[0]])
     } else {
       setCart([...cart, item]);
     }
   }
-  console.log(cart);
-
 
   return (
     <div className="w-11/12 mx-auto z-0">
       <div className="grid grid-cols-3 h-screen content-start">
         <div className="col-span-1 flex flex-col justify-center items-center">
-          <TransactionForm category={category} setCategory={setCategory} cart={cart} />
+          <TransactionForm
+            category={category}
+            setCategory={setCategory}
+            cart={cart}
+            setCart={setCart}
+            setHardwareQuery={setHardwareQuery}
+          />
         </div>
         <div className="col-span-2 border m-3 ">
           <div className="bg-white w-full h-full">
@@ -71,8 +81,7 @@ const CashierDashboard = () => {
                       <th>Brand</th>
                       <th>Description</th>
                       <th>Retail Price</th>
-
-                      <th>Quantity</th>
+                      <th>Stock</th>
                       <th>Unit</th>
                       <th>Item Location</th>
                       <th></th>
@@ -89,7 +98,7 @@ const CashierDashboard = () => {
                         <td>{product.description}</td>
                         <td>{product.retailPrice}</td>
 
-                        <td>{product.qty}</td>
+                        <td>{product.stock}</td>
                         <td>{product.unit}</td>
                         <td>{product.storageLocation}</td>
                         <td>

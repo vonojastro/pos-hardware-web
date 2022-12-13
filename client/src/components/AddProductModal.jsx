@@ -86,10 +86,10 @@ const ProductModal = ({ handleAddUpdate, handleChange, setShowAdd,setAddProduct,
         />
         <input
           type="number"
-          name="qty"
+          name="stock"
           onChange={handleChange}
-          value={addProduct.qty}
-          placeholder="Quantity"
+          value={addProduct.stock}
+          placeholder="Stock"
           className="border border-gray-300 p-2"
         />
         <input

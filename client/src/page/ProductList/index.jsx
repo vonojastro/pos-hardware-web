@@ -31,7 +31,7 @@ const ProductList = () => {
     costPerUnit: "",
     retailPrice: "",
     wholesalePrice: "",
-    qty: "",
+    stock: "",
     unit: "",
     storageLocation: "",
   });
@@ -68,7 +68,7 @@ const ProductList = () => {
         costPerUnit: "",
         retailPrice: "",
         wholesalePrice: "",
-        qty: "",
+        stock: "",
         unit: "",
         storageLocation: "",
       });
@@ -107,7 +107,7 @@ const ProductList = () => {
       costPerUnit: "",
       retailPrice: "",
       wholesalePrice: "",
-      qty: "",
+      stock: "",
       unit: "",
       storageLocation: "",
     });
@@ -130,7 +130,7 @@ const ProductList = () => {
         costPerUnit: editProduct.map((item) => item.costPerUnit)[0],
         retailPrice: editProduct.map((item) => item.retailPrice)[0],
         wholesalePrice: editProduct.map((item) => item.wholesalePrice)[0],
-        qty: editProduct.map((item) => item.qty)[0],
+        stock: editProduct.map((item) => item.stock)[0],
         unit: editProduct.map((item) => item.unit)[0],
         storageLocation: editProduct.map((item) => item.storageLocation)[0],
       });
@@ -160,7 +160,7 @@ const ProductList = () => {
           addProduct.costPerUnit,
           addProduct.retailPrice,
           addProduct.wholesalePrice,
-          addProduct.qty,
+          addProduct.stock,
           addProduct.unit,
           addProduct.storageLocation
         )
@@ -176,7 +176,7 @@ const ProductList = () => {
         costPerUnit: addProduct.costPerUnit,
         retailPrice: addProduct.retailPrice,
         wholesalePrice: addProduct.wholesalePrice,
-        qty: addProduct.qty,
+        stock: addProduct.stock,
         unit: addProduct.unit,
         storageLocation: addProduct.storageLocation,
       }))) {
@@ -215,7 +215,7 @@ const ProductList = () => {
               <th>Description</th>
               <th>Retail Price</th>
               <th>Wholesale Price</th>
-              <th>Quantity</th>
+              <th>Stock</th>
               <th>Unit</th>
               <th>Item Location</th>
               <th></th>
@@ -234,7 +234,7 @@ const ProductList = () => {
                 <td>{product.description}</td>
                 <td>{product.retailPrice}</td>
                 <td>{product.wholesalePrice}</td>
-                <td>{product.qty}</td>
+                <td>{product.stock}</td>
                 <td>{product.unit}</td>
                 <td>{product.storageLocation}</td>
                 <td>

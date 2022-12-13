@@ -44,7 +44,7 @@ export const addProductAction =
     costPerUnit,
     retailPrice,
     wholesalePrice,
-    qty,
+    stock,
     unit,
     storageLocation
   ) =>
@@ -63,7 +63,7 @@ export const addProductAction =
         costPerUnit,
         retailPrice,
         wholesalePrice,
-        qty,
+        stock,
         unit,
         storageLocation,
       });
@@ -116,7 +116,7 @@ export const updateProductAction =
     costPerUnit,
     retailPrice,
     wholesalePrice,
-    qty,
+    stock,
     unit,
     storageLocation,
   }) =>
@@ -132,7 +132,7 @@ export const updateProductAction =
         costPerUnit,
         retailPrice,
         wholesalePrice,
-        qty,
+        stock,
         unit,
         storageLocation,
       });

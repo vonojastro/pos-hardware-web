@@ -10,7 +10,7 @@ import HardwareForm from "./HardwareForm";
 import InitialBalanceForm from "./InitialBalanceForm";
 import OthersForm from "./OthersForm";
 
-const TransactionForm = ({ setCategory, category, cart }) => {
+const TransactionForm = ({ setCategory, category, cart, setCart, setHardwareQuery}) => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -99,6 +99,8 @@ const TransactionForm = ({ setCategory, category, cart }) => {
               setAmount={setAmount}
               setDescription={setDescription}
               cart={cart} 
+              setCart={setCart}
+              setHardwareQuery={setHardwareQuery}
             />
           ) : (
             ""

@@ -23,7 +23,7 @@ const addProducts = asyncHandler(async (req, res) => {
     costPerUnit,
     retailPrice,
     wholesalePrice,
-    qty,
+    stock,
     unit,
     storageLocation,
   } = req.body;
@@ -37,7 +37,7 @@ const addProducts = asyncHandler(async (req, res) => {
     costPerUnit,
     retailPrice,
     wholesalePrice,
-    qty,
+    stock,
     unit,
     storageLocation,
   });
@@ -53,7 +53,7 @@ const addProducts = asyncHandler(async (req, res) => {
       costPerUnit: product.costPerUnit,
       retailPrice: product.retailPrice,
       wholesalePrice: product.wholesalePrice,
-      qty: product.qty,
+      stock: product.stock,
       unit: product.unit,
       storageLocation: product.storageLocation,
     });
@@ -97,7 +97,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     costPerUnit,
     retailPrice,
     wholesalePrice,
-    qty,
+    stock,
     unit,
     storageLocation,
   } = req.body;
@@ -113,7 +113,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.costPerUnit = costPerUnit || product.costPerUnit;
     product.retailPrice = retailPrice || product.retailPrice;
     product.wholesalePrice = wholesalePrice || product.wholesalePrice;
-    product.qty = qty || product.qty;
+    product.stock = stock || product.stock;
     product.unit = unit || product.unit;
     product.storageLocation = storageLocation || product.storageLocation;
 
@@ -129,7 +129,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       costPerUnit: updatedProduct.costPerUnit,
       retailPrice: updatedProduct.retailPrice,
       wholesalePrice: updatedProduct.wholesalePrice,
-      qty: updatedProduct.qty,
+      stock: updatedProduct.stock,
       unit: updatedProduct.unit,
       storageLocation: updatedProduct.storageLocation,
     });

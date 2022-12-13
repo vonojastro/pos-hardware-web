@@ -27,7 +27,7 @@ const ProductDetailsModal = ({ allProducts, selectedId, setShowDetails }) => {
 
                         <h3><strong>Retail Price: </strong>{item.retailPrice}</h3>
                         <h3><strong>Wholesale Price: </strong>{item.wholesalePrice}</h3>
-                        <h3><strong>Quantity: </strong>{item.qty}</h3>
+                        <h3><strong>Quantity: </strong>{item.stock}</h3>
                         <h3><strong>Unit: </strong>{item.unit}</h3>
                         <h3><strong>Storage Location: </strong>{item.storageLocation}</h3>
                         <h3><strong>Updated: </strong>{dayjs(item.createdAt).format("MMMM DD, YYYY")}</h3>
