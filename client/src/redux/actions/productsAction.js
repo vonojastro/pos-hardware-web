@@ -17,7 +17,7 @@ export const getProductsAction = () => async (dispatch) => {
       type: GET_PRODUCTS_REQUEST,
     });
 
-    const { data } = await axios.get("/api/products");
+    const { data } = await axios.get(`${process.env.BACKEND_SERVER}/api/products`);
 
     dispatch({
       type: GET_PRODUCTS_SUCCESS,
@@ -54,7 +54,7 @@ export const addProductAction =
         type: ADD_PRODUCT_REQUEST,
       });
 
-      const { data } = await axios.post("/api/products", {
+      const { data } = await axios.post(`${process.env.BACKEND_SERVER}/api/products`, {
         productName,
         brand,
         description,
@@ -89,7 +89,7 @@ export const deleteProductAction = (id) => async (dispatch) => {
       type: DELETE_PRODUCT_REQUEST,
     });
 
-    await axios.delete(`/api/products/${id}`);
+    await axios.delete(`${process.env.BACKEND_SERVER}/api/products/${id}`);
 
     dispatch({
       type: DELETE_PRODUCT_SUCCESS,
