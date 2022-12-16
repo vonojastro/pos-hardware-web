@@ -3,15 +3,17 @@ import { useState } from "react";
 
 const HardwareForm = ({ cart, setCart, setHardwareQuery }) => {
 
-  const [newCart, setNewCart] = useState()
+  const [newCart, setNewCart] = useState([])
+
 
   const handleQuantity = (e) => {
-    const arr = []
-    const { name, value } = e.target
 
-  
+    const { name, value } = e.target
+    const item = cart.filter(item => item._id === name)[0]
+    console.log([item, value])
   }
-  console.log(newCart)
+
+
   return (
     <>
       <input

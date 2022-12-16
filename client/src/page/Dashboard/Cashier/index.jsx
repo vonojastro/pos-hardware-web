@@ -6,6 +6,7 @@ import TransactionForm from "../../../components/TransactionForm";
 import { getTransactionList } from "../../../redux/actions/transactionsActions";
 import dayjs from "dayjs";
 import { BsCartPlus } from "react-icons/bs";
+import _ from 'lodash'
 
 import { getProductsAction } from "../../../redux/actions/productsAction";
 
@@ -15,7 +16,7 @@ const CashierDashboard = () => {
   const [hardwareQuery, setHardwareQuery] = useState('')
   const [cart, setCart] = useState([]);
 
-  
+
   const date = dayjs(new Date()).format("YYYY-MM-DD");
   const [dateSearch, setDateSearch] = useState(date);
 
@@ -29,23 +30,21 @@ const CashierDashboard = () => {
   const productList = useSelector((state) => state.productList);
   const { products } = productList;
 
-  const filteredProducts = products?.filter(product => 
-    product.productName.toLowerCase().includes(hardwareQuery.toLowerCase()) || 
-    product.brand.toLowerCase().includes(hardwareQuery.toLowerCase()) 
+  const filteredProducts = products?.filter(product =>
+    product.productName.toLowerCase().includes(hardwareQuery.toLowerCase()) ||
+    product.brand.toLowerCase().includes(hardwareQuery.toLowerCase())
   )
- 
+
   const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
 
   const handleAddCart = (id) => {
     const item = allProducts.filter((item) => item._id === id)[0];
-    const existItem = cart.find((product) => product._id === item._id);
+    const cartArr = [...cart, item]
+    setCart(_.uniq(cartArr));
 
-    if (existItem) {
-      setCart([cart.map((x) => x._id === existItem.id ? item : x)[0]])
-    } else {
-      setCart([...cart, item]);
-    }
   }
+
+ 
 
   return (
     <div className="w-11/12 mx-auto z-0">
