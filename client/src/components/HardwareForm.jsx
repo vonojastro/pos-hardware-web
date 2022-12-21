@@ -1,17 +1,9 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { RiDeleteBinLine } from "react-icons/ri";
 
-const HardwareForm = ({ cart, setCart, setHardwareQuery }) => {
-
-  const [newCart, setNewCart] = useState([])
-
-
-  const handleQuantity = (e) => {
-
-    const { name, value } = e.target
-    const item = cart.filter(item => item._id === name)[0]
-    console.log([item, value])
-  }
+const HardwareForm = ({ cart, setCart, setHardwareQuery, deleteCartItem }) => {
 
 
   return (
@@ -24,24 +16,30 @@ const HardwareForm = ({ cart, setCart, setHardwareQuery }) => {
       />
       <div className="w-full h-3/6 border border-gray-300 flex flex-col justify-start overflow-y-scroll">
 
-        {cart.map((item, index) => (
-          <div className="w-full py-4 border-b-[1px] grid grid-cols-4" key={index}>
+        {cart?.map((item, index) => (
+          <div className="w-full py-4 border-b-[1px] grid grid-cols-5" key={index}>
+
+            <div className="flex flex-col h-full items-center gap-3 justify-center">
+              <RiDeleteBinLine
+                className="cursor-pointer text-xl"
+              onClick={() => deleteCartItem(item._id)}
+              />
+            </div>
+
             <div className="flex flex-col h-full items-center col-span-2 justify-center">
               <div><strong>{item.productName}</strong></div>
               <div>{item.brand}</div>
             </div>
 
             <div className="flex flex-col h-full items-start gap-3 justify-center">
-              <label htmlFor='qty'>
-                Qty:
-                <input id='qty' type='number' name={item._id} placeholder='1' className="w-3/5 border rounded-sm py-1 px-2 ml-2" onChange={handleQuantity} />
-              </label>
+              <div>Quantity: {item.qty}</div>
               <div>Unit: {item.unit}</div>
+            </div>
 
-            </div>
             <div className="flex flex-col h-full items-center justify-center">
-              <div className="text-xl">₱ {item.retailPrice}</div>
+              <div className="text-xl">₱ {item.retailPrice * item.qty}</div>
             </div>
+
           </div>
         ))}
 
@@ -57,9 +55,7 @@ const HardwareForm = ({ cart, setCart, setHardwareQuery }) => {
         <button className="p-3 bg-green-500 hover:bg-green-300 text-white" >
           Unpaid
         </button>
-        <button className="p-3 bg-green-500 hover:bg-green-300 text-white">
-          Confirm
-        </button>
+
       </div>
     </>
   );

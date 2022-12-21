@@ -144,6 +144,7 @@ const ProductList = () => {
       }
       dispatch(getProductsAction());
     }
+    dispatch(getProductsAction());
   };
 
   const handleAddUpdate = (e) => {

@@ -10,7 +10,8 @@ import HardwareForm from "./HardwareForm";
 import InitialBalanceForm from "./InitialBalanceForm";
 import OthersForm from "./OthersForm";
 
-const TransactionForm = ({ setCategory, category, cart, setCart, setHardwareQuery}) => {
+
+const TransactionForm = ({ setCategory, category, cart, setCart, setHardwareQuery, deleteCartItem}) => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -37,6 +38,8 @@ const TransactionForm = ({ setCategory, category, cart, setCart, setHardwareQuer
 
     e.target.reset();
   };
+
+
   return (
     <>
       <div className="w-full m-3 bg-white border text-sm h-[650px]">
@@ -101,6 +104,7 @@ const TransactionForm = ({ setCategory, category, cart, setCart, setHardwareQuer
               cart={cart} 
               setCart={setCart}
               setHardwareQuery={setHardwareQuery}
+              deleteCartItem={deleteCartItem}
             />
           ) : (
             ""

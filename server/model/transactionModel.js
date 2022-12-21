@@ -24,8 +24,10 @@ const transactionSchema = mongoose.Schema(
   },
   fee: {
     type: Number,
-    required: true,
     default: 0
+  },
+  qty: {
+    type: Number,
   },
 
 },

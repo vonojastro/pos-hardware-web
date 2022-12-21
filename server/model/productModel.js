@@ -45,6 +45,7 @@ const productSchema = mongoose.Schema(
         },
         unit: {
             type: String,
+            required: true,
         },
     }, {
         timestamps: true

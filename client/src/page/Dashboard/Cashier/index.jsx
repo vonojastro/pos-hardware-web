@@ -9,12 +9,18 @@ import { BsCartPlus } from "react-icons/bs";
 import _ from 'lodash'
 
 import { getProductsAction } from "../../../redux/actions/productsAction";
+import { toast } from "react-toastify";
 
 const CashierDashboard = () => {
   const [tab, setTab] = useState("");
   const [category, setCategory] = useState("");
   const [hardwareQuery, setHardwareQuery] = useState('')
   const [cart, setCart] = useState([]);
+  const [showQtyModal, setShowQtyModal] = useState(false)
+  const [itemId, setItemId] = useState(null)
+  const [qtyValue, setQtyValue] = useState(1)
+  const [priceValue, setPriceValue] = useState(0)
+  const [outOfstock, setOutOfStock] = useState(false)
 
 
   const date = dayjs(new Date()).format("YYYY-MM-DD");
@@ -38,16 +44,58 @@ const CashierDashboard = () => {
   const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
 
   const handleAddCart = (id) => {
-    const item = allProducts.filter((item) => item._id === id)[0];
-    const cartArr = [...cart, item]
-    setCart(_.uniq(cartArr));
-
+    setQtyValue(1)
+    setPriceValue(0)
+    setItemId(id)
+    setShowQtyModal(true)
   }
 
- 
+  const handleQtySubmit = (e) => {
+    e.preventDefault()
+
+    const item = allProducts.filter((item) => item._id === itemId)[0];
+
+    const newCart = [...new Set([...cart, item])]
+      .map(product => product._id === itemId ? ({ ...product, qty: qtyValue > product.stock ? setOutOfStock(true) : parseInt(qtyValue), retailPrice: priceValue ? priceValue : product.retailPrice }) : product)
+
+
+        setCart(_.uniqBy(newCart, '_id'));
+      
+
+    setShowQtyModal(false)
+  }
+
+  const deleteCartItem = (id) => {
+    const items = cart.filter(item => item._id !== id)
+
+    setCart(items)
+    toast.success('Out of Stock')
+  }
+
+
 
   return (
-    <div className="w-11/12 mx-auto z-0">
+    <div className="w-11/12 mx-auto z-0 relative">
+
+
+      <form onSubmit={handleQtySubmit} className={`w-6/12 py-5 bg-white border border-black absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
+      flex justify-center items-center flex-col gap-5 ${showQtyModal ? '' : 'hidden'}
+      `}>
+        <label>
+          Select Qty:
+          <input type='number' className="border border-black" value={qtyValue} onChange={(e) => setQtyValue(e.target.value)} />
+        </label>
+        <label>
+          Enter Price:
+          <input type='number' className="border border-black" value={priceValue} onChange={(e) => setPriceValue(e.target.value)} />
+        </label>
+        <div className="flex gap-5">
+          <button onClick={() => setShowQtyModal(false)}>Cancel</button>
+          <input type='submit' value='Confirm' className="cursor-pointer" />
+        </div>
+      </form>
+
+
       <div className="grid grid-cols-3 h-screen content-start">
         <div className="col-span-1 flex flex-col justify-center items-center">
           <TransactionForm
@@ -56,6 +104,7 @@ const CashierDashboard = () => {
             cart={cart}
             setCart={setCart}
             setHardwareQuery={setHardwareQuery}
+            deleteCartItem={deleteCartItem}
           />
         </div>
         <div className="col-span-2 border m-3 ">
