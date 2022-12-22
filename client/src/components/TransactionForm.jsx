@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProductAction } from "../redux/actions/productsAction";
 
 import { addTransaction } from "../redux/actions/transactionsActions";
 import { TRANSACTION_ADD_RESET } from "../redux/constants/transactionsConstants";
@@ -11,15 +12,27 @@ import InitialBalanceForm from "./InitialBalanceForm";
 import OthersForm from "./OthersForm";
 
 
-const TransactionForm = ({ setCategory, category, cart, setCart, setHardwareQuery, deleteCartItem}) => {
-  const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
-  const [description, setDescription] = useState("");
+const TransactionForm = ({ setCategory,
+  category,
+  cart,
+  setCart,
+  setHardwareQuery,
+  deleteCartItem,
+  setProductSearch,
+  productSearch
+}) => {
+  const [name, setName] = useState(['Von', 'Carlo']);
+  const [amount, setAmount] = useState(3000);
+  const [description, setDescription] = useState("hello");
 
-  const [isIn, setIsIn] = useState(null);
-  const [fee, setFee] = useState(0);
+  const [isIn, setIsIn] = useState(true);
+  const [fee, setFee] = useState(2);
 
   const dispatch = useDispatch();
+
+  const transactionList = useSelector((state) => state.transactionList);
+  const { transactions } = transactionList;
+
 
   useEffect(() => {
     dispatch({ type: TRANSACTION_ADD_RESET });
@@ -32,9 +45,35 @@ const TransactionForm = ({ setCategory, category, cart, setCart, setHardwareQuer
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (amount && name && description && category) {
+    if (amount && name && description && category !== 'hardware') {
       dispatch(addTransaction(name, amount, description, category, fee, isIn));
+    } else if (amount && name && description && category === 'hardware') {
+
+        dispatch(addTransaction(name, amount, description, category, fee, isIn));
+
+
+        const updatedProd = cart.map(product => dispatch(updateProductAction({
+          _id: product._id,
+          productName: product.productName,
+          brand: product.brand,
+          description: product.description,
+          supplier: product.supplier,
+          totalCost: product.totalCost,
+          costPerUnit: product.costPerUnit,
+          retailPrice: product.retailPrice,
+          wholesalePrice: product.wholesalePrice,
+          stock: product.stock - product.qty,
+          unit: product.unit,
+          storageLocation: product.storageLocation,
+        }
+        )))
+      if(updatedProd) {
+        setProductSearch(false)
+        setCart([])
+      }
+      
     }
+
 
     e.target.reset();
   };
@@ -45,25 +84,23 @@ const TransactionForm = ({ setCategory, category, cart, setCart, setHardwareQuer
       <div className="w-full m-3 bg-white border text-sm h-[650px]">
         <div className="grid grid-cols-2">
           <button
-            className={`p-3 ${
-              isIn === true
+            className={`p-3 ${isIn === true
                 ? "bg-green-500 text-white"
                 : isIn === null
-                ? ""
-                : ""
-            } hover:text-black border-r hover:bg-green-300`}
+                  ? ""
+                  : ""
+              } hover:text-black border-r hover:bg-green-300`}
             onClick={() => setIsIn(true)}
           >
             In
           </button>
           <button
-            className={`p-3 ${
-              isIn === false
+            className={`p-3 ${isIn === false
                 ? "bg-green-500 text-white"
                 : isIn === null
-                ? ""
-                : ""
-            } hover:text-black hover:bg-green-300`}
+                  ? ""
+                  : ""
+              } hover:text-black hover:bg-green-300`}
             onClick={() => setIsIn(false)}
           >
             Out
@@ -101,10 +138,12 @@ const TransactionForm = ({ setCategory, category, cart, setCart, setHardwareQuer
               setName={setName}
               setAmount={setAmount}
               setDescription={setDescription}
-              cart={cart} 
+              cart={cart}
               setCart={setCart}
               setHardwareQuery={setHardwareQuery}
               deleteCartItem={deleteCartItem}
+              setProductSearch={setProductSearch}
+              productSearch={productSearch}
             />
           ) : (
             ""

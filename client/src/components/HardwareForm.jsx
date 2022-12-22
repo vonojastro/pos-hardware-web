@@ -3,7 +3,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-const HardwareForm = ({ cart, setCart, setHardwareQuery, deleteCartItem }) => {
+const HardwareForm = ({ cart, 
+  setCart, 
+  setHardwareQuery, 
+  deleteCartItem, 
+  setProductSearch, 
+  productSearch 
+}) => {
 
 
   return (
@@ -13,6 +19,7 @@ const HardwareForm = ({ cart, setCart, setHardwareQuery, deleteCartItem }) => {
         placeholder="Search Item"
         className="w-full border border-gray-300 p-3"
         onChange={(e) => setHardwareQuery(e.target.value)}
+        onClick={() => setProductSearch(!productSearch)}
       />
       <div className="w-full h-3/6 border border-gray-300 flex flex-col justify-start overflow-y-scroll">
 
@@ -55,7 +62,7 @@ const HardwareForm = ({ cart, setCart, setHardwareQuery, deleteCartItem }) => {
         <button className="p-3 bg-green-500 hover:bg-green-300 text-white" >
           Unpaid
         </button>
-
+       
       </div>
     </>
   );

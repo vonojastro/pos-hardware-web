@@ -21,6 +21,7 @@ const CashierDashboard = () => {
   const [qtyValue, setQtyValue] = useState(1)
   const [priceValue, setPriceValue] = useState(0)
   const [outOfstock, setOutOfStock] = useState(false)
+  const [productSearch, setProductSearch] = useState(false)
 
 
   const date = dayjs(new Date()).format("YYYY-MM-DD");
@@ -44,10 +45,13 @@ const CashierDashboard = () => {
   const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
 
   const handleAddCart = (id) => {
-    setQtyValue(1)
-    setPriceValue(0)
-    setItemId(id)
-    setShowQtyModal(true)
+
+    if(id) {
+      setQtyValue(1)
+      setPriceValue(0)
+      setItemId(id)
+      setShowQtyModal(true)
+    }
   }
 
   const handleQtySubmit = (e) => {
@@ -58,20 +62,20 @@ const CashierDashboard = () => {
     const newCart = [...new Set([...cart, item])]
       .map(product => product._id === itemId ? ({ ...product, qty: qtyValue > product.stock ? setOutOfStock(true) : parseInt(qtyValue), retailPrice: priceValue ? priceValue : product.retailPrice }) : product)
 
-
-        setCart(_.uniqBy(newCart, '_id'));
-      
-
-    setShowQtyModal(false)
+    if (newCart) {
+      setCart(_.uniqBy(newCart, '_id'));
+      setShowQtyModal(false)
+    }
   }
 
   const deleteCartItem = (id) => {
     const items = cart.filter(item => item._id !== id)
 
-    setCart(items)
-    toast.success('Out of Stock')
-  }
+    if (items) {
+      setCart(items)
+    }
 
+  }
 
 
   return (
@@ -105,11 +109,14 @@ const CashierDashboard = () => {
             setCart={setCart}
             setHardwareQuery={setHardwareQuery}
             deleteCartItem={deleteCartItem}
+            setProductSearch={setProductSearch}
+            productSearch={productSearch}
           />
         </div>
         <div className="col-span-2 border m-3 ">
           <div className="bg-white w-full h-full">
-            {category !== "hardware" ? (
+
+            {!productSearch ? (
               <>
                 <ListTab
                   setTab={setTab}
@@ -161,6 +168,8 @@ const CashierDashboard = () => {
                 </table>
               </>
             )}
+
+
           </div>
         </div>
       </div>

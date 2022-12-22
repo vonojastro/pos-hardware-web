@@ -13,10 +13,10 @@ connectDB()
 
 const importData = async () => {
     try{
-await Products.deleteMany()
+await Transaction.deleteMany()
 
 
-await Products.insertMany(products)
+await Transaction.insertMany(transactions)
 
 
 console.log('Data Imported')
@@ -28,7 +28,7 @@ process.exit(1)
 
 const destroyData = async () => {
     try{
-await Products.deleteMany()
+await Transaction.deleteMany()
 
 console.log('Data Destroyed')
     } catch (error) {

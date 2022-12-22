@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const transactionSchema = mongoose.Schema(
     {
   name: {
-    type: String,
+    type: Array,
     required: true,
   },
   amount: {
