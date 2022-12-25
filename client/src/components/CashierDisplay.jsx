@@ -72,7 +72,13 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
                 ))}
               
                 </td>
-              <td className="capitalize">{item.description}</td>
+              <td className="">{
+             item.description.map((item, index) => (
+              <div key={index}>
+                {item}
+              </div>
+             ))
+              }</td>
               <td className="">₱ {item.amount.toLocaleString()}</td>
               <td className="" onClick={() => deleteHandler(item._id)}>
                 {item.isIn ? "In" : "Out"}

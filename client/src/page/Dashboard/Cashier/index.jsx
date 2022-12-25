@@ -18,14 +18,14 @@ const CashierDashboard = () => {
   const [cart, setCart] = useState([]);
   const [showQtyModal, setShowQtyModal] = useState(false)
   const [itemId, setItemId] = useState(null)
-  const [qtyValue, setQtyValue] = useState(1)
+  const [qtyValue, setQtyValue] = useState(0)
   const [priceValue, setPriceValue] = useState(0)
   const [outOfstock, setOutOfStock] = useState(false)
   const [productSearch, setProductSearch] = useState(false)
 
   const [name, setName] = useState([]);
   const [amount, setAmount] = useState(0);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState([]);
 
   const [isIn, setIsIn] = useState(true);
   const [fee, setFee] = useState(0);
@@ -40,7 +40,13 @@ const CashierDashboard = () => {
   useEffect(() => {
     dispatch(getTransactionList());
     dispatch(getProductsAction());
-  }, [dispatch]);
+
+    if(productSearch) {
+      dispatch(getProductsAction())
+    } else if(!productSearch) {
+      dispatch(getProductsAction())
+    }
+  }, [dispatch, productSearch]);
 
 
 
@@ -53,6 +59,7 @@ const CashierDashboard = () => {
   )
 
   const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
+  console.log(allProducts)
 
   const handleAddCart = (id) => {
 
@@ -76,13 +83,14 @@ const CashierDashboard = () => {
     if (newCart) {
       const products = _.uniqBy(newCart, '_id')
       const productNames = products.map(item => item.productName)
+      const productDesc = products.map(item => item.qty + " x " + item.unit + " (" + item.retailPrice + ")")
       const sum = products.reduce((a, v) => a = a + (v.retailPrice * v.qty), 0)
-
+   
       setAmount(sum)
       setCart(products);
       setName(productNames)
       setShowQtyModal(false)
-      setDescription("hardware")
+      setDescription(productDesc)
       setFee(0)
 
       dispatch(getProductsAction())

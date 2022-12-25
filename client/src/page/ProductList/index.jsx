@@ -184,7 +184,7 @@ const ProductList = () => {
         dispatch(getProductsAction())
         setShowEdit(false)
       }
-     
+      dispatch(getProductsAction())
     }
     dispatch(getProductsAction())
   };
