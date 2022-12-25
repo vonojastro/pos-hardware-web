@@ -19,14 +19,18 @@ const TransactionForm = ({ setCategory,
   setHardwareQuery,
   deleteCartItem,
   setProductSearch,
-  productSearch
+  productSearch,
+  name,
+  setName,
+  amount,
+  setAmount,
+  description,
+  setDescription,
+  isIn,
+  setIsIn,
+  fee,
+  setFee,
 }) => {
-  const [name, setName] = useState(['Von', 'Carlo']);
-  const [amount, setAmount] = useState(3000);
-  const [description, setDescription] = useState("hello");
-
-  const [isIn, setIsIn] = useState(true);
-  const [fee, setFee] = useState(2);
 
   const dispatch = useDispatch();
 
@@ -49,29 +53,30 @@ const TransactionForm = ({ setCategory,
       dispatch(addTransaction(name, amount, description, category, fee, isIn));
     } else if (amount && name && description && category === 'hardware') {
 
-        dispatch(addTransaction(name, amount, description, category, fee, isIn));
+      dispatch(addTransaction(name, amount, description, category, fee, isIn));
 
 
-        const updatedProd = cart.map(product => dispatch(updateProductAction({
-          _id: product._id,
-          productName: product.productName,
-          brand: product.brand,
-          description: product.description,
-          supplier: product.supplier,
-          totalCost: product.totalCost,
-          costPerUnit: product.costPerUnit,
-          retailPrice: product.retailPrice,
-          wholesalePrice: product.wholesalePrice,
-          stock: product.stock - product.qty,
-          unit: product.unit,
-          storageLocation: product.storageLocation,
-        }
-        )))
-      if(updatedProd) {
+      const updatedProd = cart.map(product => product.stock > product.qty ? dispatch(updateProductAction({
+        _id: product._id,
+        productName: product.productName,
+        brand: product.brand,
+        description: product.description,
+        supplier: product.supplier,
+        totalCost: product.totalCost,
+        costPerUnit: product.costPerUnit,
+        retailPrice: product.retailPrice,
+        wholesalePrice: product.wholesalePrice,
+        stock: product.stock - product.qty,
+        unit: product.unit,
+        storageLocation: product.storageLocation,
+      }
+      )) : console.log('out of stock'))
+
+      if (updatedProd) {
         setProductSearch(false)
         setCart([])
       }
-      
+
     }
 
 
@@ -85,10 +90,10 @@ const TransactionForm = ({ setCategory,
         <div className="grid grid-cols-2">
           <button
             className={`p-3 ${isIn === true
-                ? "bg-green-500 text-white"
-                : isIn === null
-                  ? ""
-                  : ""
+              ? "bg-green-500 text-white"
+              : isIn === null
+                ? ""
+                : ""
               } hover:text-black border-r hover:bg-green-300`}
             onClick={() => setIsIn(true)}
           >
@@ -96,10 +101,10 @@ const TransactionForm = ({ setCategory,
           </button>
           <button
             className={`p-3 ${isIn === false
-                ? "bg-green-500 text-white"
-                : isIn === null
-                  ? ""
-                  : ""
+              ? "bg-green-500 text-white"
+              : isIn === null
+                ? ""
+                : ""
               } hover:text-black hover:bg-green-300`}
             onClick={() => setIsIn(false)}
           >

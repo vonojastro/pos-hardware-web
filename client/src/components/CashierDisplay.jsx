@@ -64,7 +64,14 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
         {filtered?.map((item, index) => (
           <tbody key={index}>
             <tr className="border-b cursor-pointer text-sm">
-              <td className="p-1 capitalize">{item.name}</td>
+              <td className="p-1 capitalize">
+              {item.name.map((item, index) => (
+                  <div key={index}>
+                    {item}
+                  </div>
+                ))}
+              
+                </td>
               <td className="capitalize">{item.description}</td>
               <td className="">₱ {item.amount.toLocaleString()}</td>
               <td className="" onClick={() => deleteHandler(item._id)}>

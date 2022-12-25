@@ -23,6 +23,14 @@ const CashierDashboard = () => {
   const [outOfstock, setOutOfStock] = useState(false)
   const [productSearch, setProductSearch] = useState(false)
 
+  const [name, setName] = useState([]);
+  const [amount, setAmount] = useState(0);
+  const [description, setDescription] = useState("");
+
+  const [isIn, setIsIn] = useState(true);
+  const [fee, setFee] = useState(0);
+
+
 
   const date = dayjs(new Date()).format("YYYY-MM-DD");
   const [dateSearch, setDateSearch] = useState(date);
@@ -33,6 +41,8 @@ const CashierDashboard = () => {
     dispatch(getTransactionList());
     dispatch(getProductsAction());
   }, [dispatch]);
+
+
 
   const productList = useSelector((state) => state.productList);
   const { products } = productList;
@@ -46,7 +56,7 @@ const CashierDashboard = () => {
 
   const handleAddCart = (id) => {
 
-    if(id) {
+    if (id) {
       setQtyValue(1)
       setPriceValue(0)
       setItemId(id)
@@ -62,11 +72,25 @@ const CashierDashboard = () => {
     const newCart = [...new Set([...cart, item])]
       .map(product => product._id === itemId ? ({ ...product, qty: qtyValue > product.stock ? setOutOfStock(true) : parseInt(qtyValue), retailPrice: priceValue ? priceValue : product.retailPrice }) : product)
 
+
     if (newCart) {
-      setCart(_.uniqBy(newCart, '_id'));
+      const products = _.uniqBy(newCart, '_id')
+      const productNames = products.map(item => item.productName)
+      const sum = products.reduce((a, v) => a = a + (v.retailPrice * v.qty), 0)
+
+      setAmount(sum)
+      setCart(products);
+      setName(productNames)
       setShowQtyModal(false)
+      setDescription("hardware")
+      setFee(0)
+
+      dispatch(getProductsAction())
     }
+
   }
+
+
 
   const deleteCartItem = (id) => {
     const items = cart.filter(item => item._id !== id)
@@ -111,6 +135,16 @@ const CashierDashboard = () => {
             deleteCartItem={deleteCartItem}
             setProductSearch={setProductSearch}
             productSearch={productSearch}
+            name={name}
+            setName={setName}
+            amount={amount}
+            setAmount={setAmount}
+            description={description}
+            setDescription={setDescription}
+            isIn={isIn}
+            setIsIn={setIsIn}
+            fee={fee}
+            setFee={setFee}
           />
         </div>
         <div className="col-span-2 border m-3 ">
