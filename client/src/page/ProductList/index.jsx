@@ -236,9 +236,9 @@ const ProductList = () => {
                 </td>
                 <td>{product.brand ? product.brand : '-'}</td>
                 <td>{product.description ? product.description : '-'}</td>
-                <td>₱ {product.retailPrice}</td>
+                <td>₱ {product.retailPrice.toLocaleString()}</td>
                 <td> {product.wholesalePrice ? "₱ " + product.wholesalePrice : '-'}</td>
-                <td>{product.stock === 0 ? 'Out of Stock' : product.stock}</td>
+                <td>{product.stock === 0 ? 'Out of Stock' : product.stock.toLocaleString()}</td>
                 <td>{product.unit}</td>
                 <td>{product.storageLocation}</td>
                 <td>

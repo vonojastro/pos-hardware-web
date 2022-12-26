@@ -26,7 +26,7 @@ const HardwareForm = ({ cart,
       <div className="w-full h-3/6 border border-gray-300 flex flex-col justify-start overflow-y-scroll">
 
         {cart?.map((item, index) => (
-          <div className="w-full py-4 border-b-[1px] grid grid-cols-5" key={index}>
+          <div className="w-full py-4 border-b-[1px] grid grid-cols-4" key={index}>
 
             <div className="flex flex-col h-full items-center gap-3 justify-center">
               <RiDeleteBinLine
@@ -36,13 +36,10 @@ const HardwareForm = ({ cart,
             </div>
 
             <div className="flex flex-col h-full items-start col-span-2 ">
-              <div><strong>{item.qty + " x " +item.productName}</strong></div>
+              <div><strong>{item.qty + " x " + item.productName + ' (' + item.unit + ')'}</strong></div>
               <div>{item.brand}</div>
             </div>
 
-            <div className="flex flex-col h-full items-start gap-3 justify-center">
-              <div>Unit: {item.unit}</div>
-            </div>
 
             <div className="flex flex-col h-full items-start justify-center">
               <div className="text-xl">₱ {(item.retailPrice * item.qty).toLocaleString()}</div>
