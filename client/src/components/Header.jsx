@@ -103,6 +103,14 @@ const Header = () => {
               <Link
                 onClick={() => setShowMenu(false)}
                 className="uppercase text-white hover:bg-white hover:text-green-500 ease-in-out duration-200 py-5 w-full"
+                to="/cashier"
+              >
+                Home
+              </Link>
+
+              <Link
+                onClick={() => setShowMenu(false)}
+                className="uppercase text-white hover:bg-white hover:text-green-500 ease-in-out duration-200 py-5 w-full"
                 to="/preview"
               >
                 Print Preview
