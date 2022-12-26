@@ -55,8 +55,12 @@ const TransactionDetails = () => {
 
             <tbody>
               <tr>
-                <td>{transaction?.name}</td>
-                <td>{amount?.toLocaleString()}</td>
+                <td>{transaction?.name.map((item,index) => (
+                  <div key={index}>{item}</div>
+                ))}</td>
+                <td>{transaction?.description.map((item,index) => (
+                  <div key={index}>{item}</div>
+                ))}</td>
               </tr>
             </tbody>
             <tbody>

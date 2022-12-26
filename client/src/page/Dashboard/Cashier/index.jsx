@@ -83,7 +83,7 @@ const CashierDashboard = () => {
     if (newCart) {
       const products = _.uniqBy(newCart, '_id')
       const productNames = products.map(item => item.productName)
-      const productDesc = products.map(item => item.qty + " x " + item.unit + " (" + item.retailPrice + ")")
+      const productDesc = products.map(item => item.qty + " x " + item.unit + " - ₱ " + (item.qty * item.retailPrice).toLocaleString())
       const sum = products.reduce((a, v) => a = a + (v.retailPrice * v.qty), 0)
    
       setAmount(sum)
@@ -193,7 +193,7 @@ const CashierDashboard = () => {
                         </td>
                         <td>{product.brand}</td>
                         <td>{product.description}</td>
-                        <td>{product.retailPrice}</td>
+                        <td>₱ {product.retailPrice.toLocaleString()}</td>
 
                         <td>{product.stock}</td>
                         <td>{product.unit}</td>

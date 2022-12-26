@@ -33,18 +33,17 @@ const HardwareForm = ({ cart,
               />
             </div>
 
-            <div className="flex flex-col h-full items-center col-span-2 justify-center">
-              <div><strong>{item.productName}</strong></div>
+            <div className="flex flex-col h-full items-start col-span-2 ">
+              <div><strong>{item.qty + " x " +item.productName}</strong></div>
               <div>{item.brand}</div>
             </div>
 
             <div className="flex flex-col h-full items-start gap-3 justify-center">
-              <div>Quantity: {item.qty}</div>
               <div>Unit: {item.unit}</div>
             </div>
 
-            <div className="flex flex-col h-full items-center justify-center">
-              <div className="text-xl">₱ {item.retailPrice * item.qty}</div>
+            <div className="flex flex-col h-full items-start justify-center">
+              <div className="text-xl">₱ {(item.retailPrice * item.qty).toLocaleString()}</div>
             </div>
 
           </div>
