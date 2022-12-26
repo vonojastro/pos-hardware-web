@@ -59,7 +59,6 @@ const CashierDashboard = () => {
   )
 
   const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
-  console.log(allProducts)
 
   const handleAddCart = (id) => {
 
@@ -85,7 +84,7 @@ const CashierDashboard = () => {
       const productNames = products.map(item => item.productName)
       const productDesc = products.map(item => item.qty + " x " + item.unit + " - ₱ " + (item.qty * item.retailPrice).toLocaleString())
       const sum = products.reduce((a, v) => a = a + (v.retailPrice * v.qty), 0)
-   
+
       setAmount(sum)
       setCart(products);
       setName(productNames)

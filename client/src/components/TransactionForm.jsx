@@ -45,7 +45,7 @@ const TransactionForm = ({ setCategory,
     } else if (category === "hardware" || category === "initial balance") {
       setIsIn(true);
     }
-  }, [category, isIn, dispatch]);
+  }, [category, isIn, dispatch, setIsIn]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ const TransactionForm = ({ setCategory,
       dispatch(addTransaction(name, amount, description, category, fee, isIn));
 
 
-      const updatedProd = cart.map(product => product.stock > product.qty ? dispatch(updateProductAction({
+      const updatedProd = cart.map(product => product.stock >= product.qty ? dispatch(updateProductAction({
         _id: product._id,
         productName: product.productName,
         brand: product.brand,
@@ -72,6 +72,7 @@ const TransactionForm = ({ setCategory,
       }
       )) : console.log('out of stock'))
 
+      
       if (updatedProd) {
         setProductSearch(false)
         setCart([])
