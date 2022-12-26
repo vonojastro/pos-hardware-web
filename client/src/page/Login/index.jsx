@@ -83,7 +83,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="h-screen m-[-50px]  flex justify-center items-center">
+    <div className="h-screen  flex justify-center items-center">
       <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center w-3/12">
         <h3 className="font-bold text-center text-lg">LOGIN</h3>
 
