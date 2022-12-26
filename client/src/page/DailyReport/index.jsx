@@ -77,7 +77,7 @@ const ViewAll = () => {
           <div className="border-r pr-3">
             <p className="font-bold my-3">In</p>
             {filteredisIn?.map((item, index) => (
-              <div key={index} className="grid grid-cols-4 border-b items-center">
+              <div key={index} className="grid grid-cols-5 border-b items-center">
                 <div className="capitalize">
                   {item.name.map((item, index) => (
                     <div key={index}>{item}</div>
@@ -90,12 +90,12 @@ const ViewAll = () => {
                 >
                   <p>{item.category}</p>
                 </div>
-                <div className="text-start">
+                <div className="text-start col-span-2">
                   {item.description.map((item, index) => (
                     <div key={index}>{item}</div>
                   ))}
                 </div>
-                <div className="text-end">
+                <div className="text-end ">
                   <p>{item.amount.toLocaleString()}</p>
                 </div>
               </div>

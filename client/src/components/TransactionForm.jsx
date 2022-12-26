@@ -44,10 +44,10 @@ const TransactionForm = ({ setCategory,
       setProductSearch(false)
     } else if (category === "hardware" || category === "cash in") {
       setIsIn(true);
-      if(category === "cash in") {
+      if (category === "cash in") {
         setProductSearch(false)
-      } 
-    
+      }
+
     } else if (category === "others") {
       setProductSearch(false)
     }
@@ -55,6 +55,7 @@ const TransactionForm = ({ setCategory,
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     if (amount && name && description && category !== 'hardware') {
       dispatch(addTransaction(name, amount, description, category, fee, isIn));
     } else if (amount && name && description && category === 'hardware') {
@@ -65,15 +66,16 @@ const TransactionForm = ({ setCategory,
         _id: product._id,
         stock: product.stock - product.qty,
       }
-              
+
       )) : console.log('out of stock'))
- 
+
       if (updatedQty) {
         setProductSearch(false)
         setCart([])
       }
     }
-
+    
+    setCategory('')
     e.target.reset();
   };
 
@@ -106,7 +108,7 @@ const TransactionForm = ({ setCategory,
         </div>
         <div
           className="w-full flex flex-col gap-5 p-3 justify-start h-full"
-          // onSubmit={submitHandler}
+        // onSubmit={submitHandler}
         >
           <select
             className="border px-2 py-3"
