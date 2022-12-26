@@ -32,7 +32,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full flex justify-center bg-green-500 text-white py-6 px-10 relative">
+    <div className="w-full flex justify-center bg-[#60A3D9] text-white py-6 px-10 relative">
       <div className="w-11/12 flex justify-between items-center ">
         {userInfo ? (
           <>
@@ -55,7 +55,7 @@ const Header = () => {
       </div>
 
       <div
-        className={`absolute w-2/12 h-screen bg-green-500 border-r-[1px] border-white z-[100] top-[0] ease-in-out duration-500 ${
+        className={`absolute w-2/12 h-screen bg-[#60A3D9] border-r-[1px] border-white z-[100] top-[0] ease-in-out duration-500 ${
           showMenu ? "left-[0]" : "left-[-100%]"
         }`}
       >
@@ -108,13 +108,13 @@ const Header = () => {
                 Print Preview
               </Link>
 
-              <Link
+              {/* <Link
                 onClick={() => setShowMenu(false)}
                 className="uppercase text-white py-5 hover:bg-white hover:text-green-500 ease-in-out duration-200 w-full"
                 to="/searchlist"
               >
                 <div>Search transaction</div>
-              </Link>
+              </Link> */}
             </>
           ) : (
             ""

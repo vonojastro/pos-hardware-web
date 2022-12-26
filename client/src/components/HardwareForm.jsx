@@ -19,7 +19,7 @@ const HardwareForm = ({ cart,
         placeholder="Search Item"
         className="w-full border border-gray-300 p-3"
         onChange={(e) => setHardwareQuery(e.target.value)}
-        onClick={() => setProductSearch(!productSearch)}
+        onClick={() => setProductSearch(true)}
       />
       <div className="w-full h-3/6 border border-gray-300 flex flex-col justify-start overflow-y-scroll">
 
@@ -52,13 +52,16 @@ const HardwareForm = ({ cart,
       </div>
 
       <div className="w-full grid grid-cols-2 gap-3">
-        <button className="p-3 bg-green-500 hover:bg-green-300 text-white" onClick={() => setCart([])}>
+        <button className="p-3 bg-green-500 hover:bg-green-300 text-white" onClick={() => setProductSearch(false)}>
+         Transactions
+        </button>
+        <button className="p-3 bg-red-500 hover:bg-red-300 text-white" onClick={() => setCart([])}>
           Clear
         </button>
-        <button className="p-3 bg-green-500 hover:bg-green-300 text-white">
+        <button className="p-3 bg-blue-500 hover:bg-blue-300 text-white">
           Confirm
         </button>
-        <button className="p-3 bg-green-500 hover:bg-green-300 text-white" >
+        <button className="p-3 bg-yellow-500 hover:bg-yellow-300 text-white" >
           Unpaid
         </button>
        

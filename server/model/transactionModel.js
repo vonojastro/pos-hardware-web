@@ -28,7 +28,6 @@ const transactionSchema = mongoose.Schema(
   },
   qty: {
     type: Number,
-    default: 0,
   },
 
 },

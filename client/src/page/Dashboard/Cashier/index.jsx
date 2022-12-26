@@ -13,15 +13,15 @@ import { toast } from "react-toastify";
 
 const CashierDashboard = () => {
   const [tab, setTab] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("hardware");
   const [hardwareQuery, setHardwareQuery] = useState('')
   const [cart, setCart] = useState([]);
   const [showQtyModal, setShowQtyModal] = useState(false)
-  const [itemId, setItemId] = useState(null)
-  const [qtyValue, setQtyValue] = useState(0)
+  const [itemId, setItemId] = useState('')
+  const [qtyValue, setQtyValue] = useState(1)
   const [priceValue, setPriceValue] = useState(0)
   const [outOfstock, setOutOfStock] = useState(false)
-  const [productSearch, setProductSearch] = useState(false)
+  const [productSearch, setProductSearch] = useState(true)
 
   const [name, setName] = useState([]);
   const [amount, setAmount] = useState(0);
@@ -41,13 +41,12 @@ const CashierDashboard = () => {
     dispatch(getTransactionList());
     dispatch(getProductsAction());
 
-    if(productSearch) {
+    if (productSearch) {
       dispatch(getProductsAction())
-    } else if(!productSearch) {
+    } else if (!productSearch) {
       dispatch(getProductsAction())
     }
   }, [dispatch, productSearch]);
-
 
 
   const productList = useSelector((state) => state.productList);
@@ -62,12 +61,17 @@ const CashierDashboard = () => {
 
   const handleAddCart = (id) => {
 
-    if (id) {
+    const noStock = allProducts.find(item => item._id === id && item.stock === 0)
+
+    if (noStock) {
+      setOutOfStock(true)
+    } else if (id) {
       setQtyValue(1)
       setPriceValue(0)
       setItemId(id)
       setShowQtyModal(true)
     }
+
   }
 
   const handleQtySubmit = (e) => {
@@ -77,7 +81,6 @@ const CashierDashboard = () => {
 
     const newCart = [...new Set([...cart, item])]
       .map(product => product._id === itemId ? ({ ...product, qty: qtyValue > product.stock ? setOutOfStock(true) : parseInt(qtyValue), retailPrice: priceValue ? priceValue : product.retailPrice }) : product)
-
 
     if (newCart) {
       const products = _.uniqBy(newCart, '_id')
@@ -94,7 +97,6 @@ const CashierDashboard = () => {
 
       dispatch(getProductsAction())
     }
-
   }
 
 
@@ -108,27 +110,42 @@ const CashierDashboard = () => {
 
   }
 
-
   return (
     <div className="w-11/12 mx-auto z-0 relative">
 
 
-      <form onSubmit={handleQtySubmit} className={`w-6/12 py-5 bg-white border border-black absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
-      flex justify-center items-center flex-col gap-5 ${showQtyModal ? '' : 'hidden'}
+      <div className={`w-6/12 py-5 bg-white border border-black absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
+      flex justify-center items-center flex-col gap-5 ${showQtyModal || outOfstock ? '' : 'hidden'}
       `}>
-        <label>
-          Select Qty:
-          <input type='number' className="border border-black" value={qtyValue} onChange={(e) => setQtyValue(e.target.value)} />
-        </label>
-        <label>
-          Enter Price:
-          <input type='number' className="border border-black" value={priceValue} onChange={(e) => setPriceValue(e.target.value)} />
-        </label>
-        <div className="flex gap-5">
-          <button onClick={() => setShowQtyModal(false)}>Cancel</button>
-          <input type='submit' value='Confirm' className="cursor-pointer" />
-        </div>
-      </form>
+
+        {outOfstock ? (
+          <>
+            <div>Out of Stock</div>
+            <div className="flex gap-5">
+              <button onClick={() => setShowQtyModal(false) || setOutOfStock(false)}>Cancel</button>
+            </div>
+          </>
+        ) :
+          (
+            <>
+              <label>
+                Select Qty:
+                <input type='number' className="border border-black" value={qtyValue} onChange={(e) => setQtyValue(e.target.value)} />
+              </label>
+              <label>
+                Enter Price:
+                <input type='number' className="border border-black" value={priceValue} onChange={(e) => setPriceValue(e.target.value)} />
+              </label>
+              <div className="flex gap-5">
+                <button onClick={() => setShowQtyModal(false) || setOutOfStock(false)}>Cancel</button>
+                <button className="cursor-pointer" onClick={handleQtySubmit}>Confirm</button>
+              </div>
+            </>
+
+          )
+        }
+
+      </div>
 
 
       <div className="grid grid-cols-3 h-screen content-start">
@@ -155,7 +172,7 @@ const CashierDashboard = () => {
           />
         </div>
         <div className="col-span-2 border m-3 ">
-          <div className="bg-white w-full h-full">
+          <div className="bg-white w-full h-[600px]">
 
             {!productSearch ? (
               <>
@@ -186,7 +203,7 @@ const CashierDashboard = () => {
 
                   <tbody>
                     {allProducts.map((product, index) => (
-                      <tr className=" border-b-[1px]" key={index}>
+                      <tr className={`border-b-[1px] ${product.stock === 0 ? 'bg-red-500 text-white' : ''}`} key={index}>
                         <td className="py-1">
                           <strong>{product.productName}</strong>
                         </td>
@@ -194,7 +211,7 @@ const CashierDashboard = () => {
                         <td>{product.description}</td>
                         <td>₱ {product.retailPrice.toLocaleString()}</td>
 
-                        <td>{product.stock}</td>
+                        <td>{product.stock === 0 ? 'Out of Stock' : product.stock}</td>
                         <td>{product.unit}</td>
                         <td>{product.storageLocation}</td>
                         <td>

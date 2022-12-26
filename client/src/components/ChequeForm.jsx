@@ -6,9 +6,10 @@ const ChequeForm = ({
   setName,
   amount,
   setFee,
+  fee,
   category,
 }) => {
-  const [chequeFee, setChequeFee] = useState(30);
+  const [chequeFee, setChequeFee] = useState(10);
   const [chequeAmount, setChequeAmount] = useState(0);
 
   const charge = Math.ceil(chequeAmount / 1000) * chequeFee;
@@ -77,8 +78,11 @@ const ChequeForm = ({
         onChange={(e) => setChequeFee(e.target.value)}
         required
       >
-        <option value="30">Minimum Fee</option>
-        <option value="50">Maximum Fee</option>
+        <option value="10">₱ 10</option>
+        <option value="20">₱ 20</option>
+        <option value="30">₱ 30</option>
+        <option value="40">₱ 40</option>
+        <option value="50">₱ 50</option>
       </select>
 
       <button className="p-3 bg-green-500 hover:bg-green-300 text-white">

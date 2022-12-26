@@ -37,15 +37,21 @@ const TransactionForm = ({ setCategory,
   const transactionList = useSelector((state) => state.transactionList);
   const { transactions } = transactionList;
 
-
   useEffect(() => {
     dispatch({ type: TRANSACTION_ADD_RESET });
     if (category === "cheque" || category === "atm") {
       setIsIn(false);
+      setProductSearch(false)
     } else if (category === "hardware" || category === "initial balance") {
       setIsIn(true);
+      if(category === "initial balance") {
+        setProductSearch(false)
+      } 
+    
+    } else if (category === "others") {
+      setProductSearch(false)
     }
-  }, [category, isIn, dispatch, setIsIn]);
+  }, [category, isIn, dispatch, setIsIn, setProductSearch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -56,34 +62,22 @@ const TransactionForm = ({ setCategory,
       dispatch(addTransaction(name, amount, description, category, fee, isIn));
 
 
-      const updatedProd = cart.map(product => product.stock >= product.qty ? dispatch(updateProductAction({
+      const updatedQty = cart.map(product => product.stock >= product.qty ? dispatch(updateProductAction({
         _id: product._id,
-        productName: product.productName,
-        brand: product.brand,
-        description: product.description,
-        supplier: product.supplier,
-        totalCost: product.totalCost,
-        costPerUnit: product.costPerUnit,
-        retailPrice: product.retailPrice,
-        wholesalePrice: product.wholesalePrice,
         stock: product.stock - product.qty,
-        unit: product.unit,
-        storageLocation: product.storageLocation,
       }
+              
       )) : console.log('out of stock'))
-
-      
-      if (updatedProd) {
+ 
+      if (updatedQty) {
         setProductSearch(false)
         setCart([])
       }
 
     }
 
-
     e.target.reset();
   };
-
 
   return (
     <>
@@ -91,22 +85,22 @@ const TransactionForm = ({ setCategory,
         <div className="grid grid-cols-2">
           <button
             className={`p-3 ${isIn === true
-              ? "bg-green-500 text-white"
+              ? "bg-[#60A3D9] text-white"
               : isIn === null
                 ? ""
                 : ""
-              } hover:text-black border-r hover:bg-green-300`}
+              } hover:text-black border-r hover:bg-[#60A3D9]`}
             onClick={() => setIsIn(true)}
           >
             In
           </button>
           <button
             className={`p-3 ${isIn === false
-              ? "bg-green-500 text-white"
+              ? "bg-[#60A3D9] text-white"
               : isIn === null
                 ? ""
                 : ""
-              } hover:text-black hover:bg-green-300`}
+              } hover:text-black hover:bg-[#60A3D9]`}
             onClick={() => setIsIn(false)}
           >
             Out
@@ -171,6 +165,7 @@ const TransactionForm = ({ setCategory,
               amount={amount}
               setFee={setFee}
               category={category}
+              fee={fee}
             />
           ) : (
             ""

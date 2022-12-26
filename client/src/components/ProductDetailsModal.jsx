@@ -25,8 +25,8 @@ const ProductDetailsModal = ({ allProducts, selectedId, setShowDetails }) => {
                     </div>
                     <div className='flex flex-col'>
 
-                        <h3><strong>Retail Price: </strong>{item.retailPrice}</h3>
-                        <h3><strong>Wholesale Price: </strong>{item.wholesalePrice}</h3>
+                        <h3><strong>Retail Price: </strong>{item.retailPrice.toLocaleString()}</h3>
+                        <h3><strong>Wholesale Price: </strong>{item.wholesalePrice.toLocaleString()}</h3>
                         <h3><strong>Quantity: </strong>{item.stock}</h3>
                         <h3><strong>Unit: </strong>{item.unit}</h3>
                         <h3><strong>Storage Location: </strong>{item.storageLocation}</h3>

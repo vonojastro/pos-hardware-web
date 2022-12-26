@@ -18,7 +18,7 @@ import ProductDetailsModal from "../../components/ProductDetailsModal";
 import { Link, useNavigate } from "react-router-dom";
 
 const ProductList = () => {
-  const [showAdd, setShowAdd] = useState(null);
+  const [showAdd, setShowAdd] = useState('');
   const [showDetails, setShowDetails] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [selectedId, setSelectedId] = useState("");
@@ -114,10 +114,13 @@ const ProductList = () => {
   };
 
   const handleEdit = (id) => {
-    setSelectedId(id);
-    setShowDetails(false);
-    setShowEdit(true);
-    setShowAdd(false);
+
+    if(id) {
+      setSelectedId(id);
+      setShowDetails(false);
+      setShowEdit(true);
+      setShowAdd(false);
+    }
     const editProduct = allProducts.filter((item) => item._id === id);
 
     if (editProduct) {
@@ -226,16 +229,16 @@ const ProductList = () => {
 
           <tbody>
             {allProducts.map((product, index) => (
-              <tr className=" border-b-[1px]" key={index}>
+              <tr className={`border-b-[1px] ${product.stock === 0 ? 'bg-red-500 text-white' : ''}`} key={index}>
                 <td className="py-1">{index + 1}</td>
                 <td>
                   <strong>{product.productName}</strong>
                 </td>
-                <td>{product.brand}</td>
-                <td>{product.description}</td>
-                <td>{product.retailPrice}</td>
-                <td>{product.wholesalePrice}</td>
-                <td>{product.stock}</td>
+                <td>{product.brand ? product.brand : '-'}</td>
+                <td>{product.description ? product.description : '-'}</td>
+                <td>₱ {product.retailPrice}</td>
+                <td> {product.wholesalePrice ? "₱ " + product.wholesalePrice : '-'}</td>
+                <td>{product.stock === 0 ? 'Out of Stock' : product.stock}</td>
                 <td>{product.unit}</td>
                 <td>{product.storageLocation}</td>
                 <td>
