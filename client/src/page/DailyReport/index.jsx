@@ -85,7 +85,7 @@ const ViewAll = () => {
                 </div>
                 <div
                   className={`text-center ${
-                    item.category === "initial balance" ? "font-bold" : ""
+                    item.category === "cash in" ? "font-bold" : ""
                   } capitalize`}
                 >
                   <p>{item.category}</p>

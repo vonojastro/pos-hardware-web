@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const InitialBalanceForm = ({ setAmount, setName, setDescription }) => {
+const InitialBalanceForm = ({ setAmount, setName, setDescription, submitHandler }) => {
   const [onethousand, setOnethousand] = useState(0);
   const [fivehundred, setFivehundred] = useState(0);
   const [twohundred, setTwohundred] = useState(0);
@@ -20,8 +20,8 @@ const InitialBalanceForm = ({ setAmount, setName, setDescription }) => {
 
   useEffect(() => {
     setAmount(initialTotal);
-    setName("Initial Balance");
-    setDescription("Initial Balance");
+    setName("Cash In");
+    setDescription("Cash In");
   }, [initialTotal, setAmount, setName, setDescription]);
 
   return (
@@ -111,7 +111,7 @@ const InitialBalanceForm = ({ setAmount, setName, setDescription }) => {
         </div>
       </div>
 
-      <button className="p-3 bg-green-500 hover:bg-green-300 text-white">
+      <button className="p-3 bg-[#60A3D9] hover:bg-green-300 text-white" onClick={submitHandler}>
         Confirm
       </button>
     </>

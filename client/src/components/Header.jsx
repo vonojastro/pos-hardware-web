@@ -55,7 +55,7 @@ const Header = () => {
       </div>
 
       <div
-        className={`absolute w-2/12 h-screen bg-[#60A3D9] border-r-[1px] border-white z-[100] top-[0] ease-in-out duration-500 ${
+        className={`absolute w-3/12 h-screen bg-[#60A3D9] border-r-[1px] border-white z-[100] top-[0] ease-in-out duration-500 ${
           showMenu ? "left-[0]" : "left-[-100%]"
         }`}
       >

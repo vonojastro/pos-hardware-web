@@ -2,10 +2,10 @@ import React from "react";
 
 const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
   return (
-    <div className="grid grid-cols-6 bg-green-500">
+    <div className="grid grid-cols-6 bg-[#60A3D9]">
       <button
         className={`p-3 ${
-          tab === "" ? "bg-white" : "bg-green-500 text-white"
+          tab === "" ? "bg-white" : "bg-[#60A3D9] text-white"
         } hover:bg-green-300 text-sm`}
         onClick={() => setTab("")}
       >
@@ -13,7 +13,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
       </button>
       <button
         className={`p-3 ${
-          tab === "hardware" ? "bg-white" : "bg-green-500 text-white"
+          tab === "hardware" ? "bg-white" : "bg-[#60A3D9] text-white"
         } hover:bg-green-300 text-sm`}
         onClick={() => setTab("hardware")}
       >
@@ -21,7 +21,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
       </button>
       <button
         className={`p-3 ${
-          tab === "atm" ? "bg-white" : "bg-green-500 text-white"
+          tab === "atm" ? "bg-white" : "bg-[#60A3D9] text-white"
         } hover:bg-green-300 text-sm`}
         onClick={() => setTab("atm")}
       >
@@ -29,7 +29,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
       </button>
       <button
         className={`p-3 ${
-          tab === "cheque" ? "bg-white" : "bg-green-500 text-white"
+          tab === "cheque" ? "bg-white" : "bg-[#60A3D9] text-white"
         } hover:bg-green-300 text-sm`}
         onClick={() => setTab("cheque")}
       >
@@ -37,7 +37,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
       </button>
       <button
         className={`p-3 ${
-          tab === "others" ? "bg-white" : "bg-green-500 text-white"
+          tab === "others" ? "bg-white" : "bg-[#60A3D9] text-white"
         } hover:bg-green-300 text-sm`}
         onClick={() => setTab("others")}
       >
@@ -50,7 +50,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
         name="search-date"
         onChange={(e) => setDateSearch(e.target.value)}
         value={dateSearch}
-        className="p-1 border m-1 text-sm cursor-pointer"
+        className="p-1 border m-1 text-sm cursor-pointer "
         min="2022-01-01"
         max="2030-01-01"
       />

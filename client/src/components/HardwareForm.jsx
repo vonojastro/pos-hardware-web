@@ -8,7 +8,9 @@ const HardwareForm = ({ cart,
   setHardwareQuery, 
   deleteCartItem, 
   setProductSearch, 
-  productSearch 
+  productSearch,
+  submitHandler 
+
 }) => {
 
 
@@ -58,7 +60,7 @@ const HardwareForm = ({ cart,
         <button className="p-3 bg-red-500 hover:bg-red-300 text-white" onClick={() => setCart([])}>
           Clear
         </button>
-        <button className="p-3 bg-blue-500 hover:bg-blue-300 text-white">
+        <button className="p-3 bg-blue-500 hover:bg-blue-300 text-white" onClick={submitHandler}>
           Confirm
         </button>
         <button className="p-3 bg-yellow-500 hover:bg-yellow-300 text-white" >

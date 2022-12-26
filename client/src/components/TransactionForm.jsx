@@ -8,7 +8,7 @@ import { TRANSACTION_ADD_RESET } from "../redux/constants/transactionsConstants"
 import AtmForm from "./AtmForm";
 import ChequeForm from "./ChequeForm";
 import HardwareForm from "./HardwareForm";
-import InitialBalanceForm from "./InitialBalanceForm";
+import InitialBalanceForm from "./CashIn";
 import OthersForm from "./OthersForm";
 
 
@@ -42,9 +42,9 @@ const TransactionForm = ({ setCategory,
     if (category === "cheque" || category === "atm") {
       setIsIn(false);
       setProductSearch(false)
-    } else if (category === "hardware" || category === "initial balance") {
+    } else if (category === "hardware" || category === "cash in") {
       setIsIn(true);
-      if(category === "initial balance") {
+      if(category === "cash in") {
         setProductSearch(false)
       } 
     
@@ -61,7 +61,6 @@ const TransactionForm = ({ setCategory,
 
       dispatch(addTransaction(name, amount, description, category, fee, isIn));
 
-
       const updatedQty = cart.map(product => product.stock >= product.qty ? dispatch(updateProductAction({
         _id: product._id,
         stock: product.stock - product.qty,
@@ -73,7 +72,6 @@ const TransactionForm = ({ setCategory,
         setProductSearch(false)
         setCart([])
       }
-
     }
 
     e.target.reset();
@@ -106,9 +104,9 @@ const TransactionForm = ({ setCategory,
             Out
           </button>
         </div>
-        <form
+        <div
           className="w-full flex flex-col gap-5 p-3 justify-start h-full"
-          onSubmit={submitHandler}
+          // onSubmit={submitHandler}
         >
           <select
             className="border px-2 py-3"
@@ -120,7 +118,7 @@ const TransactionForm = ({ setCategory,
             <option value="hardware">Hardware</option>
             <option value="cheque">Cheque</option>
             <option value="atm">ATM</option>
-            <option value="initial balance">Initial Balance</option>
+            <option value="cash in">Cash In</option>
             <option value="others">Others</option>
           </select>
 
@@ -129,6 +127,7 @@ const TransactionForm = ({ setCategory,
               setName={setName}
               setAmount={setAmount}
               setDescription={setDescription}
+              submitHandler={submitHandler}
             />
           ) : (
             ""
@@ -144,15 +143,17 @@ const TransactionForm = ({ setCategory,
               deleteCartItem={deleteCartItem}
               setProductSearch={setProductSearch}
               productSearch={productSearch}
+              submitHandler={submitHandler}
             />
           ) : (
             ""
           )}
-          {category === "initial balance" ? (
+          {category === "cash in" ? (
             <InitialBalanceForm
               setName={setName}
               setAmount={setAmount}
               setDescription={setDescription}
+              submitHandler={submitHandler}
             />
           ) : (
             ""
@@ -166,6 +167,7 @@ const TransactionForm = ({ setCategory,
               setFee={setFee}
               category={category}
               fee={fee}
+              submitHandler={submitHandler}
             />
           ) : (
             ""
@@ -178,11 +180,12 @@ const TransactionForm = ({ setCategory,
               amount={amount}
               setFee={setFee}
               category={category}
+              submitHandler={submitHandler}
             />
           ) : (
             ""
           )}
-        </form>
+        </div>
       </div>
     </>
   );

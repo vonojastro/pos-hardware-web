@@ -24,7 +24,7 @@ const MonthlySales = () => {
 
   const filtered = transactionInitialValue.filter(
     (item) =>
-      item.category !== "initial balance" &&
+      item.category !== "cash in" &&
       item.category !== "others" &&
       dayjs(item.createdAt).format("MM") === dateSearchView
   );

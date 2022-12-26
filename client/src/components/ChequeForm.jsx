@@ -8,6 +8,7 @@ const ChequeForm = ({
   setFee,
   fee,
   category,
+  submitHandler
 }) => {
   const [chequeFee, setChequeFee] = useState(10);
   const [chequeAmount, setChequeAmount] = useState(0);
@@ -85,7 +86,7 @@ const ChequeForm = ({
         <option value="50">₱ 50</option>
       </select>
 
-      <button className="p-3 bg-green-500 hover:bg-green-300 text-white">
+      <button className="p-3 bg-[#60A3D9] hover:bg-green-300 text-white" onClick={submitHandler}>
         Confirm
       </button>
     </>

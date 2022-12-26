@@ -90,7 +90,7 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
               <td>
                 <Link to={`/transaction/${item._id}`}>
                   {item.category === "atm" ||
-                  item.category === "initial balance" ? (
+                  item.category === "cash in" ? (
                     ""
                   ) : (
                     <BiMessageSquareDetail />

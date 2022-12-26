@@ -1,6 +1,6 @@
 import React from "react";
 
-const OthersForm = ({ setAmount, setName, setDescription }) => {
+const OthersForm = ({ setAmount, setName, setDescription, submitHandler }) => {
   return (
     <>
       <label htmlFor="name" className="">
@@ -33,7 +33,7 @@ const OthersForm = ({ setAmount, setName, setDescription }) => {
         />
       </label>
 
-      <button className="p-3 bg-green-500 hover:bg-green-300 text-white">
+      <button className="p-3 bg-[#60A3D9] hover:bg-green-300 text-white" onClick={submitHandler}>
         Confirm
       </button>
     </>

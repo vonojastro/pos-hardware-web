@@ -21,7 +21,7 @@ const CashierDashboard = () => {
   const [qtyValue, setQtyValue] = useState(1)
   const [priceValue, setPriceValue] = useState(0)
   const [outOfstock, setOutOfStock] = useState(false)
-  const [productSearch, setProductSearch] = useState(true)
+  const [productSearch, setProductSearch] = useState(false)
 
   const [name, setName] = useState([]);
   const [amount, setAmount] = useState(0);
