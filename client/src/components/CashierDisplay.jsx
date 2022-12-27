@@ -49,15 +49,15 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
   };
 
   return (
-    <div className="w-full  py-5 h-full overflow-y-scroll flex flex-col items-end">
+    <div className="w-full  py-5 h-full overflow-y-scroll flex flex-col">
       <table className="w-full text-center gap-5">
-        <thead>
+        <thead >
           <tr className="text-sm border-b">
             <th className="py-3">Transaction: </th>
             <th>Description: </th>
             <th>Amount: </th>
             <th>Cash In/Out </th>
-            <th>Fee: </th>
+
             <th>Time: </th>
           </tr>
         </thead>
@@ -73,9 +73,10 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
               
                 </td>
               <td className="">{
-             item.description.map((item, index) => (
+             item.description.map((product, index) => (
               <div key={index}>
-                {item}
+                {product + " "}  
+                {item.fee ? '(₱ ' + item.fee + ')' : ''}
               </div>
              ))
               }</td>
@@ -83,8 +84,6 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
               <td className="" onClick={() => deleteHandler(item._id)}>
                 {item.isIn ? "In" : "Out"}
               </td>
-              <td className="">{item.fee === 0 ? "No fee" : item.fee}</td>
-
               <td className="">{dayjs(item.createdAt).format("hh:mm a")}</td>
 
               <td>

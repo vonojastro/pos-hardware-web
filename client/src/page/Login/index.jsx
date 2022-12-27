@@ -116,7 +116,7 @@ const Login = () => {
 
         <h3 className="normal-case text-center">
           Create Account?
-          <Link to="/sign-up" className="normal-case text-blue-400">
+          <Link to="/" className="normal-case text-blue-400">
             {" "}
             Sign Up
           </Link>
