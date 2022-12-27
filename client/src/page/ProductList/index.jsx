@@ -241,12 +241,12 @@ const ProductList = () => {
                 <td>{product.stock === 0 ? 'Out of Stock' : product.stock.toLocaleString()}</td>
                 <td>{product.unit}</td>
                 <td>{product.storageLocation}</td>
-                <td>
+                {/* <td>
                   <TbListDetails
                     className="cursor-pointer"
                     onClick={() => handleDetails(product._id)}
                   />
-                </td>
+                </td> */}
                 <td>
                   <BiEdit
                     className="cursor-pointer"

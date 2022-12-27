@@ -106,7 +106,7 @@ const Login = () => {
             className="tracking-widest py-3 border border-gray-300 normal-case text-center"
           />
           <button
-            className="border border-gray-300 p-2 w-full btn"
+            className="border text-white border-gray-300 p-2 w-full bg-[#60A3D9] hover:bg-white hover:text-black duration-300 ease-in-out"
             onClick={notify}
           >
             LOGIN
