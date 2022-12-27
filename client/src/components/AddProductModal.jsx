@@ -26,7 +26,7 @@ const ProductModal = ({ handleAddUpdate, handleChange, setShowAdd,setAddProduct,
           onChange={handleChange}
           value={addProduct.productName}
           placeholder="Product Name"
-          className="col-span-2 border border-gray-300 p-2"
+          className=" border border-gray-300 p-2"
         />
         <input
           type="text"
@@ -52,14 +52,7 @@ const ProductModal = ({ handleAddUpdate, handleChange, setShowAdd,setAddProduct,
           placeholder="Supplier"
           className="border border-gray-300 p-2"
         />
-        <input
-          type="number"
-          name="totalCost"
-          onChange={handleChange}
-          value={addProduct.totalCost}
-          placeholder="Total Cost"
-          className="border border-gray-300 p-2"
-        />
+  
         <input
           type="number"
           name="costPerUnit"
