@@ -51,18 +51,18 @@ const HardwareForm = ({ cart,
       </div>
 
       <div className="w-full grid grid-cols-2 gap-3">
-        <button className="p-3 bg-green-500 hover:bg-green-300 text-white" onClick={() => setProductSearch(false)}>
+        <button className="p-3 bg-[#60A3D9] hover:bg-blue-300 text-white" onClick={() => setProductSearch(false)}>
          Transactions
         </button>
-        <button className="p-3 bg-red-500 hover:bg-red-300 text-white" onClick={() => setCart([])}>
+        <button className="p-3 bg-[#60A3D9] hover:bg-blue-300 text-white" onClick={() => setCart([])}>
           Clear
         </button>
-        <button className="p-3 bg-blue-500 hover:bg-blue-300 text-white" onClick={submitHandler}>
+        <button className="p-3 bg-[#60A3D9] hover:bg-blue-300 text-white col-span-2" onClick={submitHandler}>
           Confirm
         </button>
-        <button className="p-3 bg-yellow-500 hover:bg-yellow-300 text-white" >
+        {/* <button className="p-3 bg-[#60A3D9] hover:bg-blue-300 text-white" >
           Unpaid
-        </button>
+        </button> */}
        
       </div>
     </>

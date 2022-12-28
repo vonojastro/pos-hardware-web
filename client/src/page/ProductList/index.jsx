@@ -17,7 +17,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import Alert from '@mui/material/Alert';
 
 const ProductList = () => {
   const [showAdd, setShowAdd] = useState('');
