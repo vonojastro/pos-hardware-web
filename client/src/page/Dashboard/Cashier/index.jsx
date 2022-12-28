@@ -174,7 +174,7 @@ const CashierDashboard = () => {
         <div className="col-span-2 border m-3 ">
         {loading ? (
 <div className="w-full h-full flex justify-center items-center">
-<CircularProgress color="success" />
+<CircularProgress />
 </div>
 ) : (
   <div className="bg-white w-full h-[600px]">
