@@ -48,7 +48,7 @@ const Header = () => {
         )}
 
         <Link to="/cashier">
-          <div>ENZO HARDWARE</div>
+          <div>Enzo POS</div>
         </Link>
 
         <div>{date}</div>
