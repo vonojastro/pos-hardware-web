@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { TbListDetails } from "react-icons/tb";
-import { toast } from "react-toastify";
 import ProductModal from "../../components/AddProductModal";
 import {
   addProductAction,
@@ -16,6 +14,10 @@ import {
 } from "../../redux/actions/productsAction";
 import ProductDetailsModal from "../../components/ProductDetailsModal";
 import { Link, useNavigate } from "react-router-dom";
+
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 
 const ProductList = () => {
   const [showAdd, setShowAdd] = useState('');
@@ -37,23 +39,33 @@ const ProductList = () => {
   });
 
   const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const productList = useSelector((state) => state.productList);
-  const { products } = productList;
+  const { products, loading, success: addSuccess} = productList;
 
-  const filteredProducts = products?.filter(product => 
-    product.productName.toLowerCase().includes(query.toLowerCase()) || 
-    product.brand.toLowerCase().includes(query.toLowerCase()) || 
+
+  const filteredProducts = products?.filter(product =>
+    product.productName.toLowerCase().includes(query.toLowerCase()) ||
+    product.brand.toLowerCase().includes(query.toLowerCase()) ||
     product.supplier.toLowerCase().includes(query.toLowerCase())
   )
- 
+
   const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
 
   const product = useSelector((state) => state.product);
   const { success } = product;
+
+  useEffect(() => {
+    if (loading) {
+      setOpen(true)
+    } else {
+      setOpen(false)
+    }
+  }, [setOpen, loading])
 
   useEffect(() => {
     dispatch(getProductsAction());
@@ -73,6 +85,8 @@ const ProductList = () => {
         storageLocation: "",
       });
     }
+
+
   }, [dispatch, success, setShowAdd]);
 
   const submitHandler = (e) => {
@@ -115,7 +129,7 @@ const ProductList = () => {
 
   const handleEdit = (id) => {
 
-    if(id) {
+    if (id) {
       setSelectedId(id);
       setShowDetails(false);
       setShowEdit(true);
@@ -170,7 +184,7 @@ const ProductList = () => {
         )
       );
     } else if (showEdit) {
-      if(dispatch(updateProductAction({
+      if (dispatch(updateProductAction({
         _id: selectedId,
         productName: addProduct.productName,
         brand: addProduct.brand,
@@ -194,14 +208,22 @@ const ProductList = () => {
 
   return (
     <div className="w-11/12 mx-auto z-0 h-[700px] p-5 relative">
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+
       <div className="flex justify-end gap-5 my-4 items-center">
-       
-          <input
-            className="px-4 h-[40px] border border-gray-300 w-2/12"
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search Item"
-          />
- 
+
+        <input
+          className="px-4 h-[40px] border border-gray-300 w-2/12"
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search Item"
+        />
+
         <button
           className="h-[40px] px-3 border border-gray-300 my-3"
           onClick={handleAdd}
@@ -212,7 +234,7 @@ const ProductList = () => {
       <div className="border border-gray-300 rounded w-full h-[600px] overflow-y-scroll">
         <table className="w-full text-center gap-5">
           <thead>
-            <tr className="border-b-[1px]">
+            <tr className="border-b-[1px] bg-[#60A3D9] text-white">
               <th>Item No.</th>
               <th className="py-3">Product Name</th>
               <th>Brand</th>
@@ -229,16 +251,16 @@ const ProductList = () => {
 
           <tbody>
             {allProducts.map((product, index) => (
-              <tr className={`border-b-[1px] ${product.stock === 0 ? 'bg-red-500 text-white' : ''}`} key={index}>
+              <tr className={`border-b-[1px] border-white ${product.stock === 0 ? 'bg-red-500 text-white' : ''} ${index % 2 && product.stock !== 0 && product.stock > 2 ? 'bg-gray-100' : product.stock <= 2 && product.stock !== 0 ? 'bg-yellow-200' : ''}`} key={index}>
                 <td className="py-1">{index + 1}</td>
                 <td>
                   <strong>{product.productName}</strong>
                 </td>
                 <td>{product.brand ? product.brand : '-'}</td>
                 <td>{product.description ? product.description : '-'}</td>
-                <td>₱ {product.retailPrice.toLocaleString()}</td>
+                <td>₱ {product.retailPrice}</td>
                 <td> {product.wholesalePrice ? "₱ " + product.wholesalePrice : '-'}</td>
-                <td>{product.stock === 0 ? 'Out of Stock' : product.stock.toLocaleString()}</td>
+                <td>{product.stock === 0 ? 'Out of Stock' : product.stock}</td>
                 <td>{product.unit}</td>
                 <td>{product.storageLocation}</td>
                 {/* <td>

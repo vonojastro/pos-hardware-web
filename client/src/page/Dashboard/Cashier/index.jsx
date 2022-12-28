@@ -9,7 +9,9 @@ import { BsCartPlus } from "react-icons/bs";
 import _ from 'lodash'
 
 import { getProductsAction } from "../../../redux/actions/productsAction";
-import { toast } from "react-toastify";
+
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const CashierDashboard = () => {
   const [tab, setTab] = useState("");
@@ -30,8 +32,6 @@ const CashierDashboard = () => {
   const [isIn, setIsIn] = useState(true);
   const [fee, setFee] = useState(0);
 
-
-
   const date = dayjs(new Date()).format("YYYY-MM-DD");
   const [dateSearch, setDateSearch] = useState(date);
 
@@ -50,7 +50,7 @@ const CashierDashboard = () => {
 
 
   const productList = useSelector((state) => state.productList);
-  const { products } = productList;
+  const { products, loading } = productList;
 
   const filteredProducts = products?.filter(product =>
     product.productName.toLowerCase().includes(hardwareQuery.toLowerCase()) ||
@@ -172,63 +172,70 @@ const CashierDashboard = () => {
           />
         </div>
         <div className="col-span-2 border m-3 ">
-          <div className="bg-white w-full h-[600px]">
+        {loading ? (
+<div className="w-full h-full flex justify-center items-center">
+<CircularProgress color="success" />
+</div>
+) : (
+  <div className="bg-white w-full h-[600px]">
 
-            {!productSearch ? (
-              <>
-                <ListTab
-                  setTab={setTab}
-                  tab={tab}
-                  dateSearch={dateSearch}
-                  setDateSearch={setDateSearch}
-                  date={date}
+  {!productSearch ? (
+    <>
+      <ListTab
+        setTab={setTab}
+        tab={tab}
+        dateSearch={dateSearch}
+        setDateSearch={setDateSearch}
+        date={date}
+      />
+      <ListTabDisplay tab={tab} dateSearch={dateSearch} />
+    </>
+  ) : (
+    <>
+      <table className="w-full text-center gap-5">
+        <thead>
+          <tr className="border-b-[1px] bg-[#60A3D9] text-white">
+            <th className="py-3">Product Name</th>
+            <th>Brand</th>
+            <th>Description</th>
+            <th>Retail Price</th>
+            <th>Stock</th>
+            <th>Unit</th>
+            <th>Item Location</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {allProducts.map((product, index) => (
+            <tr className={`border-b-[1px] border-white ${product.stock === 0 ? 'bg-red-500 text-white !important' : ''} ${index % 2 && product.stock !== 0 && product.stock > 2 ? 'bg-gray-100' : product.stock <= 2 && product.stock !== 0 ? 'bg-yellow-200' : ''}`} key={index}>
+              <td className="py-1">
+                <strong>{product.productName}</strong>
+              </td>
+              <td>{product.brand ? product.brand : '-'}</td>
+              <td>{product.description ? product.description : '-'}</td>
+              <td>₱ {product.retailPrice}</td>
+
+              <td>{product.stock === 0 ? 'Out of Stock' : product.stock}</td>
+              <td>{product.unit ? product.unit : '-'}</td>
+              <td>{product.storageLocation ? product.storageLocation : '-'}</td>
+              <td>
+                <BsCartPlus
+                  className="cursor-pointer"
+                  onClick={() => handleAddCart(product._id)}
                 />
-                <ListTabDisplay tab={tab} dateSearch={dateSearch} />
-              </>
-            ) : (
-              <>
-                <table className="w-full text-center gap-5">
-                  <thead>
-                    <tr className="border-b-[1px] ">
-                      <th className="py-3">Product Name</th>
-                      <th>Brand</th>
-                      <th>Description</th>
-                      <th>Retail Price</th>
-                      <th>Stock</th>
-                      <th>Unit</th>
-                      <th>Item Location</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {allProducts.map((product, index) => (
-                      <tr className={`border-b-[1px] ${product.stock === 0 ? 'bg-red-500 text-white' : ''}`} key={index}>
-                        <td className="py-1">
-                          <strong>{product.productName}</strong>
-                        </td>
-                        <td>{product.brand}</td>
-                        <td>{product.description}</td>
-                        <td>₱ {product.retailPrice.toLocaleString()}</td>
-
-                        <td>{product.stock === 0 ? 'Out of Stock' : product.stock}</td>
-                        <td>{product.unit}</td>
-                        <td>{product.storageLocation}</td>
-                        <td>
-                          <BsCartPlus
-                            className="cursor-pointer"
-                            onClick={() => handleAddCart(product._id)}
-                          />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </>
-            )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )}
 
 
-          </div>
+</div>
+)}
+         
         </div>
       </div>
     </div>

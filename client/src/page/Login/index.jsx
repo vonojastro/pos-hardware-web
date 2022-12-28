@@ -8,7 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { userLoginAction } from "../../redux/actions/userActions";
 import { useEffect } from "react";
 
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Login = () => {
+
+  const [open, setOpen] = useState(false);
+
   const [login, setLogin] = useState({
     username: null,
     password: null,
@@ -18,7 +24,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo, error } = userLogin;
+  const { userInfo, error, loading } = userLogin;
 
   useEffect(() => {
     if (userInfo && !userInfo.isAdmin) {
@@ -27,7 +33,13 @@ const Login = () => {
       navigate("/admin")
     }
 
-  }, [userInfo, navigate]);
+    if (loading) {
+      setOpen(true)
+    } else {
+      setOpen(false)
+    }
+
+  }, [userInfo, navigate, loading, setOpen]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -44,46 +56,17 @@ const Login = () => {
     });
   };
 
-  <ToastContainer
-    position="top-center"
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="light"
-  />;
 
-  const notify = () => {
-    if (error) {
-      toast.error(error, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } else if (userInfo) {
-      toast.success("Login Success", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  };
   return (
     <div className="h-screen  flex justify-center items-center">
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+
       <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center w-3/12">
         <h3 className="font-bold text-center text-lg">LOGIN</h3>
 
@@ -94,7 +77,7 @@ const Login = () => {
             placeholder="Enter Email"
             name="username"
             onChange={handleChange}
-            className="tracking-widest py-3 border border-gray-300 normal-case text-center"
+            className=" py-3 border border-gray-300 normal-case text-center"
           />
 
           <input
@@ -103,11 +86,10 @@ const Login = () => {
             placeholder="Enter Password"
             onChange={handleChange}
             name="password"
-            className="tracking-widest py-3 border border-gray-300 normal-case text-center"
+            className=" py-3 border border-gray-300 normal-case text-center"
           />
           <button
             className="border text-white border-gray-300 p-2 w-full bg-[#60A3D9] hover:bg-white hover:text-black duration-300 ease-in-out"
-            onClick={notify}
           >
             LOGIN
           </button>

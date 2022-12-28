@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
 import { BiMessageSquareDetail } from "@react-icons/all-files/bi/BiMessageSquareDetail";
@@ -9,9 +9,18 @@ import {
 import { Link } from "react-router-dom";
 import { TRANSACTION_ADD_RESET } from "../redux/constants/transactionsConstants";
 
+
+import CircularProgress from '@mui/material/CircularProgress';
+
 const ListTabDisplay = ({ tab, dateSearch }) => {
+
+
+
+  const [open, setOpen] = useState(false);
+
+
   const transactionList = useSelector((state) => state.transactionList);
-  const { transactions } = transactionList;
+  const { transactions, loading } = transactionList;
 
   const dispatch = useDispatch();
 
@@ -19,19 +28,19 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
 
   const filtered = tab
     ? transactionInitialValue.filter(
-        (item) =>
-          item.category === tab &&
-          dayjs(item.createdAt).format("YYYY-MM-DD") ===
-            dayjs(dateSearch).format("YYYY-MM-DD")
-      )
+      (item) =>
+        item.category === tab &&
+        dayjs(item.createdAt).format("YYYY-MM-DD") ===
+        dayjs(dateSearch).format("YYYY-MM-DD")
+    )
     : transactionInitialValue.filter(
-        (item) =>
-          dayjs(item.createdAt).format("YYYY-MM-DD") ===
-          dayjs(dateSearch).format("YYYY-MM-DD")
-      );
+      (item) =>
+        dayjs(item.createdAt).format("YYYY-MM-DD") ===
+        dayjs(dateSearch).format("YYYY-MM-DD")
+    );
 
   const transaction = useSelector((state) => state.transaction);
-  const { success: successAdd } = transaction;
+  const { success: successAdd, loading: addLoading } = transaction;
 
   useEffect(() => {
     dispatch(getTransactionList());
@@ -40,7 +49,7 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
-      if( dispatch(deleteTransaction(id))) {
+      if (dispatch(deleteTransaction(id))) {
 
         dispatch(getTransactionList())
       }
@@ -50,7 +59,14 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
 
   return (
     <div className="w-full  py-5 h-full overflow-y-scroll flex flex-col">
-      <table className="w-full text-center gap-5">
+
+{loading ? (
+<div className="w-full h-full flex justify-center items-center">
+<CircularProgress color="success"/>
+</div>
+) : (
+
+  <table className="w-full text-center gap-5">
         <thead >
           <tr className="text-sm border-b">
             <th className="py-3">Transaction: </th>
@@ -63,22 +79,22 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
         </thead>
         {filtered?.map((item, index) => (
           <tbody key={index}>
-            <tr className="border-b cursor-pointer text-sm">
+            <tr className={`cursor-pointer text-sm ${index % 2 ? 'bg-gray-100' : ''}`}>
               <td className="p-1 capitalize">
-              {item.name.map((item, index) => (
+                {item.name.map((item, index) => (
                   <div key={index}>
                     {item}
                   </div>
                 ))}
-              
-                </td>
+
+              </td>
               <td className="">{
-             item.description.map((product, index) => (
-              <div key={index}>
-                {product + " "}  
-                {item.fee ? '(₱ ' + item.fee + ')' : ''}
-              </div>
-             ))
+                item.description.map((product, index) => (
+                  <div key={index}>
+                    {product + " "}
+                    {item.fee ? '(₱ ' + item.fee + ')' : ''}
+                  </div>
+                ))
               }</td>
               <td className="">₱ {item.amount.toLocaleString()}</td>
               <td className="" onClick={() => deleteHandler(item._id)}>
@@ -89,7 +105,7 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
               <td>
                 <Link to={`/transaction/${item._id}`}>
                   {item.category === "atm" ||
-                  item.category === "cash in" ? (
+                    item.category === "cash in" ? (
                     ""
                   ) : (
                     <BiMessageSquareDetail />
@@ -100,6 +116,10 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
           </tbody>
         ))}
       </table>
+)}
+
+    
+
     </div>
   );
 };

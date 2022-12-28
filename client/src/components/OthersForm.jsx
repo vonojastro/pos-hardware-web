@@ -1,6 +1,12 @@
 import React from "react";
+import { useEffect } from "react";
 
-const OthersForm = ({ setAmount, setName, setDescription, submitHandler }) => {
+const OthersForm = ({ setAmount, setName, setDescription, submitHandler,setFee }) => {
+
+useEffect(() => {
+  setFee(0)
+}, [setFee])
+
   return (
     <>
       <label htmlFor="name" className="">

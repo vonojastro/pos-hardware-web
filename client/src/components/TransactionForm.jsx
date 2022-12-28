@@ -32,6 +32,7 @@ const TransactionForm = ({ setCategory,
   setFee,
 }) => {
 
+
   const dispatch = useDispatch();
 
   const transactionList = useSelector((state) => state.transactionList);
@@ -74,9 +75,9 @@ const TransactionForm = ({ setCategory,
         setCart([])
       }
     }
-    
+
     setCategory('')
-    e.target.reset();
+
   };
 
   return (
@@ -130,6 +131,7 @@ const TransactionForm = ({ setCategory,
               setAmount={setAmount}
               setDescription={setDescription}
               submitHandler={submitHandler}
+              setFee={setFee}
             />
           ) : (
             ""
@@ -156,6 +158,7 @@ const TransactionForm = ({ setCategory,
               setAmount={setAmount}
               setDescription={setDescription}
               submitHandler={submitHandler}
+              setFee={setFee}
             />
           ) : (
             ""
