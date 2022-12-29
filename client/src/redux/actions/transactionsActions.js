@@ -61,7 +61,7 @@ export const getTransactionDetails = (id) => async (dispatch) => {
 };
 
 export const addTransaction =
-  (name, amount, description, category, fee, isIn) => async (dispatch) => {
+  (name, amount, description, category, fee, isIn, isPaid) => async (dispatch) => {
     try {
       dispatch({
         type: TRANSACTION_ADD_REQUEST,
@@ -74,6 +74,7 @@ export const addTransaction =
         category,
         fee,
         isIn,
+        isPaid
       });
 
       dispatch({

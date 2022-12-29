@@ -30,6 +30,8 @@ const TransactionForm = ({ setCategory,
   setIsIn,
   fee,
   setFee,
+  isPaid,
+  setIsPaid
 }) => {
 
 
@@ -37,6 +39,7 @@ const TransactionForm = ({ setCategory,
 
   const transactionList = useSelector((state) => state.transactionList);
   const { transactions } = transactionList;
+  console.log(transactions)
 
   useEffect(() => {
     dispatch({ type: TRANSACTION_ADD_RESET });
@@ -54,20 +57,23 @@ const TransactionForm = ({ setCategory,
     }
   }, [category, isIn, dispatch, setIsIn, setProductSearch]);
 
+
   const submitHandler = (e) => {
     e.preventDefault();
 
+    if(!isPaid) {
+      setIsPaid(true)
+    }
     if (amount && name && description && category !== 'hardware') {
-      dispatch(addTransaction(name, amount, description, category, fee, isIn));
+      dispatch(addTransaction(name, amount, description, category, fee, isIn, isPaid));
     } else if (amount && name && description && category === 'hardware') {
 
-      dispatch(addTransaction(name, amount, description, category, fee, isIn));
+      dispatch(addTransaction(name, amount, description, category, fee, isIn, isPaid));
 
       const updatedQty = cart.map(product => product.stock >= product.qty ? dispatch(updateProductAction({
         _id: product._id,
         stock: product.stock - product.qty,
       }
-
       )) : console.log('out of stock'))
 
       if (updatedQty) {
@@ -77,8 +83,30 @@ const TransactionForm = ({ setCategory,
     }
 
     setCategory('')
-
   };
+
+  const submitUnpaid = (e) => {
+    e.preventDefault();
+
+    setIsPaid(false)
+    if (amount && name && description && category === 'hardware' && !isPaid) {
+
+      dispatch(addTransaction(name, amount, description, category, fee, isIn, isPaid));
+
+      const updatedQty = cart.map(product => product.stock >= product.qty ? dispatch(updateProductAction({
+        _id: product._id,
+        stock: product.stock - product.qty,
+      }
+      )) : console.log('out of stock'))
+
+      if (updatedQty) {
+        setProductSearch(false)
+        setCart([])
+      }
+    }
+    setCategory('')
+  };
+
 
   return (
     <>
@@ -148,6 +176,7 @@ const TransactionForm = ({ setCategory,
               setProductSearch={setProductSearch}
               productSearch={productSearch}
               submitHandler={submitHandler}
+              submitUnpaid={submitUnpaid}
             />
           ) : (
             ""

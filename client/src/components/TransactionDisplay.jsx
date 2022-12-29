@@ -7,14 +7,11 @@ import {
   getTransactionList,
 } from "../redux/actions/transactionsActions";
 import { Link } from "react-router-dom";
-import { TRANSACTION_ADD_RESET } from "../redux/constants/transactionsConstants";
-
+import { TRANSACTION_ADD_RESET } from "../redux/constants/transactionsConstants"
 
 import CircularProgress from '@mui/material/CircularProgress';
 
 const ListTabDisplay = ({ tab, dateSearch }) => {
-
-
 
   const [open, setOpen] = useState(false);
 
@@ -32,11 +29,13 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
         item.category === tab &&
         dayjs(item.createdAt).format("YYYY-MM-DD") ===
         dayjs(dateSearch).format("YYYY-MM-DD")
+        && item.isPaid
     )
     : transactionInitialValue.filter(
       (item) =>
         dayjs(item.createdAt).format("YYYY-MM-DD") ===
         dayjs(dateSearch).format("YYYY-MM-DD")
+        && item.isPaid
     );
 
   const transaction = useSelector((state) => state.transaction);
@@ -118,7 +117,6 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
       </table>
 )}
 
-    
 
     </div>
   );

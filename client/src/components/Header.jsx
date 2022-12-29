@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/actions/userActions";
 import { HiMenu } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
 import { useState } from "react";
 
 const Header = () => {
@@ -32,7 +33,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full flex justify-center bg-[#60A3D9] text-white py-6 px-10 relative">
+    <div className="w-full flex justify-center bg-[#60A3D9] text-white py-6 px-10 relative" onClick={() => showMenu ? setShowMenu(!showMenu) : ''}>
       <div className="w-11/12 flex justify-between items-center ">
         {userInfo ? (
           <>
@@ -68,9 +69,10 @@ const Header = () => {
             <>
               <Link
                 onClick={() => setShowMenu(false)}
-                className="uppercase py-5 px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
+                className="uppercase py-5 px-[20%] text-lg flex gap-3 items-center  hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
                 to="/admin"
               >
+                <AiOutlineHome className="text-xl"/>
                 Home
               </Link>
 
@@ -113,7 +115,7 @@ const Header = () => {
                 className="uppercase text-white px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 py-5 w-full"
                 to="/preview"
               >
-                Print Preview
+                DAILY REPORT
               </Link>
 
               {/* <Link

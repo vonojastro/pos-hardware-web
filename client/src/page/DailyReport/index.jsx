@@ -49,8 +49,8 @@ const ViewAll = () => {
   return (
     <div className="w-11/12 mx-auto p-5">
       <div className="flex gap-5">
-        <button className="px-5 py-3 border my-2" onClick={handlePrint}>
-          Print
+        <button className="px-10 rounded py-4 border my-2 text-white bg-[#60A3D9] hover:bg-blue-200 duration-300 ease-in-out" onClick={handlePrint}>
+          PRINT
         </button>
 
         <input
@@ -59,7 +59,7 @@ const ViewAll = () => {
           name="search-date"
           onChange={(e) => setDateSearchView(e.target.value)}
           value={dateSearchView}
-          className="p-3 border m-1 text-sm cursor-pointer"
+          className=" px-5 border m-1 text-sm cursor-pointer"
           min="2022-01-01"
           max="2030-01-01"
         />

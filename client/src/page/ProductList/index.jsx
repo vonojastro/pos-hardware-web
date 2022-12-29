@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { TbListDetails} from "react-icons/tb";
+import { TbListDetails } from "react-icons/tb";
 import ProductModal from "../../components/AddProductModal";
 import {
   addProductAction,
@@ -15,9 +15,16 @@ import {
 } from "../../redux/actions/productsAction";
 import ProductDetailsModal from "../../components/ProductDetailsModal";
 import { Link, useNavigate } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert'; 
 
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 
 const ProductList = () => {
   const [showAdd, setShowAdd] = useState('');
@@ -38,14 +45,16 @@ const ProductList = () => {
     storageLocation: "",
   });
 
+  const [open, setOpen] = useState(true);
+
   const [query, setQuery] = useState("");
-  const [open, setOpen] = useState(false);
+  const [loadingBar, setLoadingBar] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const productList = useSelector((state) => state.productList);
-  const { products, loading, success: addSuccess} = productList;
+  const { products, loading, success: addSuccess } = productList;
 
 
   const filteredProducts = products?.filter(product =>
@@ -61,11 +70,11 @@ const ProductList = () => {
 
   useEffect(() => {
     if (loading) {
-      setOpen(true)
+      setLoadingBar(true)
     } else {
-      setOpen(false)
+      setLoadingBar(false)
     }
-  }, [setOpen, loading])
+  }, [setLoadingBar, loading])
 
   useEffect(() => {
     dispatch(getProductsAction());
@@ -107,7 +116,7 @@ const ProductList = () => {
     setShowAdd(false);
     setSelectedId(id);
   };
-  
+
 
   const handleAdd = () => {
     setShowDetails(false);
@@ -213,25 +222,38 @@ const ProductList = () => {
 
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
+        open={loadingBar}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      <div className="flex justify-end gap-5 my-4 items-center">
+      <div className="grid grid-cols-3 w-full gap-5 my-4 items-center">
 
-        <input
-          className="px-4 h-[40px] border border-gray-300 w-2/12"
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search Item"
-        />
+        <div className="col-span-2 flex justify-start items-center gap-5">
+          <input
+            className="px-4 h-[40px] border border-gray-300 w-3/12 rounded"
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search Item"
+          />
 
-        <button
-          className="h-[40px] px-3 border border-gray-300 my-3"
-          onClick={handleAdd}
-        >
-          Add Product
-        </button>
+          <button
+            className="h-[40px] rounded px-3 border border-gray-300 my-3"
+            onClick={handleAdd}
+          >
+            Add Product
+          </button>
+        </div>
+
+<button className="h-[40px] rounded px-3 border border-gray-300 my-3" onClick={() => setOpen(!open)}>
+Hello
+</button>
+
+        <Snackbar open={open} autoHideDuration={6000} >
+        <Alert severity="success" sx={{ width: '100%', backgroundColor: 'lightgreen' }}>
+          This is a success message!
+        </Alert>
+      </Snackbar>
+
       </div>
       <div className="border border-gray-300 rounded w-full h-[600px] overflow-y-scroll">
         <table className="w-full text-center gap-5">

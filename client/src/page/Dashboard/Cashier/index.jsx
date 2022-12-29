@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ListTab from "../../../components/ListTab";
-import ListTabDisplay from "../../../components/CashierDisplay";
+import ListTabDisplay from "../../../components/TransactionDisplay";
 import TransactionForm from "../../../components/TransactionForm";
 import { getTransactionList } from "../../../redux/actions/transactionsActions";
 import dayjs from "dayjs";
@@ -24,6 +24,7 @@ const CashierDashboard = () => {
   const [priceValue, setPriceValue] = useState(0)
   const [outOfstock, setOutOfStock] = useState(false)
   const [productSearch, setProductSearch] = useState(false)
+  const [isPaid, setIsPaid] = useState(true)
 
   const [name, setName] = useState([]);
   const [amount, setAmount] = useState(0);
@@ -169,6 +170,8 @@ const CashierDashboard = () => {
             setIsIn={setIsIn}
             fee={fee}
             setFee={setFee}
+            isPaid={isPaid}
+            setIsPaid={setIsPaid}
           />
         </div>
         <div className="col-span-2 border m-3 ">

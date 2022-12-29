@@ -29,7 +29,15 @@ const transactionSchema = mongoose.Schema(
   qty: {
     type: Number,
   },
-
+  isPaid: {
+    type: Boolean,
+    required: true,
+    default: true
+  },
+  profit: {
+    type: Number,
+    default: 0
+  },
 },
 {
     timestamps: true

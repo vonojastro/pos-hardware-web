@@ -22,6 +22,8 @@ const addTransaction = asyncHandler(async (req, res) => {
     category,
     fee,
     isIn,
+    isPaid,
+    profit
  } = req.body;
 
   const transaction = await Transaction.create({
@@ -31,6 +33,8 @@ const addTransaction = asyncHandler(async (req, res) => {
     category,
     fee,
     isIn,
+    isPaid,
+    profit
   });
 
   if (transaction) {
@@ -41,6 +45,8 @@ const addTransaction = asyncHandler(async (req, res) => {
     category: transaction.category,
     fee: transaction.fee,
     isIn: transaction.isIn,
+    isPaid: transaction.isPaid,
+    profit: transaction.profit
     });
   } else {
     res.status(400);
