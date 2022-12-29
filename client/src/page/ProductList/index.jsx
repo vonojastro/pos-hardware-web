@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { TbListDetails} from "react-icons/tb";
 import ProductModal from "../../components/AddProductModal";
 import {
   addProductAction,
@@ -103,7 +104,7 @@ const ProductList = () => {
 
   const handleDetails = (id) => {
     setShowDetails(true);
-    setShowAdd(false);
+    // setShowAdd(false);
     setSelectedId(id);
   };
 
@@ -262,12 +263,12 @@ const ProductList = () => {
                 <td>{product.stock === 0 ? 'Out of Stock' : product.stock.toLocaleString()}</td>
                 <td>{product.unit}</td>
                 <td>{product.storageLocation}</td>
-                {/* <td>
+                <td>
                   <TbListDetails
                     className="cursor-pointer"
                     onClick={() => handleDetails(product._id)}
                   />
-                </td> */}
+                </td>
                 <td>
                   <BiEdit
                     className="cursor-pointer"

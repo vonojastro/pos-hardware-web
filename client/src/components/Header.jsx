@@ -55,20 +55,20 @@ const Header = () => {
       </div>
 
       <div
-        className={`absolute w-3/12 h-screen bg-[#60A3D9] border-r-[1px] border-white z-[100] top-[0] ease-in-out duration-500 ${
+        className={`absolute w-2/12 h-screen bg-[#60A3D9] border-r-[1px] border-white z-[100] top-[0] ease-in-out duration-500 ${
           showMenu ? "left-[0]" : "left-[-100%]"
         }`}
       >
-        <div className="flex flex-col justify-center items-center text-black h-full text-center relative">
+        <div className="flex flex-col justify-center items-center text-black h-full text-start relative">
           <AiOutlineClose
-            className=" text-white hover:text-gray-300 absolute top-[0] left-[0]  mt-5 ml-5 text-xl text- font-bold cursor-pointer"
+            className=" text-white hover:text-gray-300 absolute top-[0] left-[0]  mt-5 ml-5 text-xl  font-bold cursor-pointer"
             onClick={() => setShowMenu(false)}
           />
           {userInfo?.isAdmin && userInfo ? (
             <>
               <Link
                 onClick={() => setShowMenu(false)}
-                className="uppercase py-5 hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
+                className="uppercase py-5 px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
                 to="/admin"
               >
                 Home
@@ -76,7 +76,7 @@ const Header = () => {
 
               <Link
                 onClick={() => setShowMenu(false)}
-                className="uppercase py-5 hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
+                className="uppercase py-5 px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
                 to="/user-list"
               >
                 User List
@@ -84,7 +84,7 @@ const Header = () => {
 
               <Link
                 onClick={() => setShowMenu(false)}
-                className="uppercase py-5 hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
+                className="uppercase py-5 px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
                 to="/product-list"
               >
                 Product List
@@ -92,7 +92,7 @@ const Header = () => {
 
               <Link
                 onClick={() => setShowMenu(false)}
-                className="uppercase py-5 hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
+                className="uppercase py-5 px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
                 to="/monthlysales"
               >
                 Monthly Sales
@@ -102,7 +102,7 @@ const Header = () => {
             <>
               <Link
                 onClick={() => setShowMenu(false)}
-                className="uppercase text-white hover:bg-white hover:text-green-500 ease-in-out duration-200 py-5 w-full"
+                className="uppercase text-white px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 py-5 w-full"
                 to="/cashier"
               >
                 Home
@@ -110,7 +110,7 @@ const Header = () => {
 
               <Link
                 onClick={() => setShowMenu(false)}
-                className="uppercase text-white hover:bg-white hover:text-green-500 ease-in-out duration-200 py-5 w-full"
+                className="uppercase text-white px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 py-5 w-full"
                 to="/preview"
               >
                 Print Preview
@@ -130,7 +130,7 @@ const Header = () => {
 
           {userInfo ? (
             <button
-              className="uppercase py-5 text-white w-full hover:bg-white hover:text-green-500 ease-in-out duration-200"
+              className="uppercase py-5 px-[20%] text-start text-white w-full hover:bg-white hover:text-green-500 ease-in-out duration-200"
               onClick={logoutHandler}
             >
               Logout

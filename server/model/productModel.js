@@ -22,10 +22,6 @@ const productSchema = mongoose.Schema(
             type: String,
             default: 'None',
         },
-        totalCost: {
-            type: Number,
-            default: 0,
-        },
         costPerUnit: {
             type: Number,
             default: 0,

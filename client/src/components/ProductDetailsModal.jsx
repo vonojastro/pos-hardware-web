@@ -19,7 +19,6 @@ const ProductDetailsModal = ({ allProducts, selectedId, setShowDetails }) => {
                         <h3><strong>Brand: </strong>{item.brand}</h3>
                         <h3><strong>Description: </strong>{item.description}</h3>
                         <h3><strong>Supplier: </strong>{item.supplier}</h3>
-                        <h3><strong>Total Cost: </strong>{item.totalCost}</h3>
                         <h3><strong>Cost Per Unit: </strong>{item.costPerUnit}</h3>
 
                     </div>
