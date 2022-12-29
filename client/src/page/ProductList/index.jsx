@@ -104,9 +104,10 @@ const ProductList = () => {
 
   const handleDetails = (id) => {
     setShowDetails(true);
-    // setShowAdd(false);
+    setShowAdd(false);
     setSelectedId(id);
   };
+  
 
   const handleAdd = () => {
     setShowDetails(false);
@@ -152,6 +153,7 @@ const ProductList = () => {
         storageLocation: editProduct.map((item) => item.storageLocation)[0],
       });
     }
+    dispatch(getProductsAction())
   };
 
   const handleDelete = (id) => {
@@ -246,6 +248,7 @@ const ProductList = () => {
               <th>Item Location</th>
               <th></th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
 
@@ -258,7 +261,7 @@ const ProductList = () => {
                 </td>
                 <td>{product.brand ? product.brand : '-'}</td>
                 <td>{product.description ? product.description : '-'}</td>
-                <td>₱ {product.retailPrice.toLocaleString()}</td>
+                <td>₱ {product.retailPrice ? product.retailPrice.toLocaleString() : ''}</td>
                 <td> {product.wholesalePrice ? "₱ " + product.wholesalePrice : '-'}</td>
                 <td>{product.stock === 0 ? 'Out of Stock' : product.stock.toLocaleString()}</td>
                 <td>{product.unit}</td>
@@ -317,6 +320,7 @@ const ProductList = () => {
       ) : (
         ""
       )}
+
     </div>
   );
 };

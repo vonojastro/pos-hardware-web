@@ -16,16 +16,16 @@ const ProductDetailsModal = ({ allProducts, selectedId, setShowDetails }) => {
                 <div className='grid grid-cols-2 justify-items-center gap-12' key={index}>
                     <div className='flex flex-col'>
                         <h3><strong>Product Name: </strong>{item.productName}</h3>
-                        <h3><strong>Brand: </strong>{item.brand}</h3>
-                        <h3><strong>Description: </strong>{item.description}</h3>
-                        <h3><strong>Supplier: </strong>{item.supplier}</h3>
-                        <h3><strong>Cost Per Unit: </strong>{item.costPerUnit}</h3>
+                        <h3><strong>Brand: </strong>{item.brand ? item.brand : '-'}</h3>
+                        <h3><strong>Description: </strong>{item.description ? item.description : '-'}</h3>
+                        <h3><strong>Supplier: </strong>{item.supplier ? item.supplier : '-'}</h3>
+                        <h3><strong>Cost Per Unit: </strong>{item.costPerUnit ? item.costPerUnit : '-'}</h3>
 
                     </div>
                     <div className='flex flex-col'>
 
-                        <h3><strong>Retail Price: </strong>{item.retailPrice.toLocaleString()}</h3>
-                        <h3><strong>Wholesale Price: </strong>{item.wholesalePrice.toLocaleString()}</h3>
+                        <h3><strong>Retail Price: </strong>{item.retailPrice ? item.retailPrice.toLocaleString() : '-'}</h3>
+                        <h3><strong>Wholesale Price: </strong>{item.wholesalePrice ? item.wholesalePrice.toLocaleString() : '-'}</h3>
                         <h3><strong>Quantity: </strong>{item.stock}</h3>
                         <h3><strong>Unit: </strong>{item.unit}</h3>
                         <h3><strong>Storage Location: </strong>{item.storageLocation}</h3>
