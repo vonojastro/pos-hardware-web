@@ -249,7 +249,7 @@ const ProductList = () => {
           </thead>
 
           <tbody>
-            {allProducts.map((product, index) => (
+            {allProducts?.map((product, index) => (
               <tr className={`border-b-[1px] border-white ${product.stock === 0 ? 'bg-red-500 text-white' : ''} ${index % 2 && product.stock !== 0 && product.stock > 2 ? 'bg-gray-100' : product.stock <= 2 && product.stock !== 0 ? 'bg-yellow-200' : ''}`} key={index}>
                 <td className="py-1">{index + 1}</td>
                 <td>
@@ -257,9 +257,9 @@ const ProductList = () => {
                 </td>
                 <td>{product.brand ? product.brand : '-'}</td>
                 <td>{product.description ? product.description : '-'}</td>
-                <td>₱ {product.retailPrice}</td>
+                <td>₱ {product.retailPrice.toLocaleString()}</td>
                 <td> {product.wholesalePrice ? "₱ " + product.wholesalePrice : '-'}</td>
-                <td>{product.stock === 0 ? 'Out of Stock' : product.stock}</td>
+                <td>{product.stock === 0 ? 'Out of Stock' : product.stock.toLocaleString()}</td>
                 <td>{product.unit}</td>
                 <td>{product.storageLocation}</td>
                 {/* <td>

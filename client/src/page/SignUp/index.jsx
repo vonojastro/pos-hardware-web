@@ -5,10 +5,10 @@ import './styles.css'
 const SignUp = () => {
 
   const [register, setRegister] = useState({
-    username: null,
-    fullName: null,
-    password: null,
-    confirmPassword: null,
+    username: '',
+    fullName: '',
+    password: '',
+    confirmPassword: '',
   });
 
 console.log(register)
