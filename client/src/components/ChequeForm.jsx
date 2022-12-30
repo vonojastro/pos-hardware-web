@@ -5,8 +5,7 @@ const ChequeForm = ({
   setDescription,
   setName,
   amount,
-  setFee,
-  fee,
+  setProfit,
   category,
   submitHandler
 }) => {
@@ -20,11 +19,11 @@ const ChequeForm = ({
     setAmount(totalAmount);
 
     if (category === "cheque") {
-      setFee(charge);
+      setProfit(charge);
     } else {
-      setFee(0);
+      setProfit(0);
     }
-  }, [setAmount, totalAmount, charge, setFee, category]);
+  }, [setAmount, totalAmount, charge, setProfit, category]);
 
   return (
     <>

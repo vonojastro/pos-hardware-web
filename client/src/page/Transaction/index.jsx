@@ -19,8 +19,8 @@ const TransactionDetails = () => {
   const transactionDetails = useSelector((state) => state.transactionDetails);
   const { transaction } = transactionDetails;
 
-  const amount = transaction?.amount + transaction?.fee;
-  const fee = transaction?.fee;
+  const amount = transaction?.amount + transaction?.profit;
+  const fee = transaction?.profit;
   const totalAmount = transaction?.amount;
 
   const componentRef = useRef();

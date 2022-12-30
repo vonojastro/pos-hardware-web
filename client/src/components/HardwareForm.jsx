@@ -17,8 +17,7 @@ const HardwareForm = ({ cart,
   setProductSearch,
   productSearch,
   submitHandler,
-  submitUnpaid,
-  setDescription
+  submitUnpaid
 }) => {
 
 

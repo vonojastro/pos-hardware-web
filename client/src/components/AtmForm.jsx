@@ -4,7 +4,7 @@ const AtmForm = ({
   setAmount,
   setName,
   setDescription,
-  setFee,
+  setProfit,
   category,
   amount,
   submitHandler
@@ -15,12 +15,12 @@ const AtmForm = ({
     setDescription("ATM");
 
     if (category === "atm") {
-      setFee(35);
+      setProfit(35);
     } else {
-      setFee(0);
+      setProfit(0);
     }
     setAmount(atmMax);
-  }, [setDescription, setFee, category, setAmount, atmMax, amount]);
+  }, [setDescription, setProfit, category, setAmount, atmMax, amount]);
 
   return (
     <>

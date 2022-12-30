@@ -28,10 +28,10 @@ const TransactionForm = ({ setCategory,
   setDescription,
   isIn,
   setIsIn,
-  fee,
-  setFee,
   isPaid,
-  setIsPaid
+  setIsPaid,
+  profit,
+  setProfit
 }) => {
 
 
@@ -39,7 +39,6 @@ const TransactionForm = ({ setCategory,
 
   const transactionList = useSelector((state) => state.transactionList);
   const { transactions } = transactionList;
-  console.log(transactions)
 
   useEffect(() => {
     dispatch({ type: TRANSACTION_ADD_RESET });
@@ -58,6 +57,7 @@ const TransactionForm = ({ setCategory,
   }, [category, isIn, dispatch, setIsIn, setProductSearch]);
 
 
+// Confirm transaction
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -65,10 +65,10 @@ const TransactionForm = ({ setCategory,
       setIsPaid(true)
     }
     if (amount && name && description && category !== 'hardware') {
-      dispatch(addTransaction(name, amount, description, category, fee, isIn, isPaid));
+      dispatch(addTransaction(name, amount, description, category, isIn, isPaid, profit));
     } else if (amount && name && description && category === 'hardware') {
 
-      dispatch(addTransaction(name, amount, description, category, fee, isIn, isPaid));
+      dispatch(addTransaction(name, amount, description, category, isIn, isPaid, profit));
 
       const updatedQty = cart.map(product => product.stock >= product.qty ? dispatch(updateProductAction({
         _id: product._id,
@@ -81,17 +81,17 @@ const TransactionForm = ({ setCategory,
         setCart([])
       }
     }
-
     setCategory('')
   };
 
+// Confirm unpaid transaction
   const submitUnpaid = (e) => {
     e.preventDefault();
 
     setIsPaid(false)
     if (amount && name && description && category === 'hardware' && !isPaid) {
 
-      dispatch(addTransaction(name, amount, description, category, fee, isIn, isPaid));
+      dispatch(addTransaction(name, amount, description, category,isIn, isPaid, profit));
 
       const updatedQty = cart.map(product => product.stock >= product.qty ? dispatch(updateProductAction({
         _id: product._id,
@@ -159,7 +159,8 @@ const TransactionForm = ({ setCategory,
               setAmount={setAmount}
               setDescription={setDescription}
               submitHandler={submitHandler}
-              setFee={setFee}
+              profit={profit}
+              setProfit={setProfit}
             />
           ) : (
             ""
@@ -187,7 +188,8 @@ const TransactionForm = ({ setCategory,
               setAmount={setAmount}
               setDescription={setDescription}
               submitHandler={submitHandler}
-              setFee={setFee}
+              profit={profit}
+              setProfit={setProfit}
             />
           ) : (
             ""
@@ -198,9 +200,9 @@ const TransactionForm = ({ setCategory,
               setAmount={setAmount}
               setDescription={setDescription}
               amount={amount}
-              setFee={setFee}
               category={category}
-              fee={fee}
+              profit={profit}
+              setProfit={setProfit}
               submitHandler={submitHandler}
             />
           ) : (
@@ -212,9 +214,10 @@ const TransactionForm = ({ setCategory,
               setAmount={setAmount}
               setDescription={setDescription}
               amount={amount}
-              setFee={setFee}
               category={category}
               submitHandler={submitHandler}
+              profit={profit}
+            setProfit={setProfit}
             />
           ) : (
             ""

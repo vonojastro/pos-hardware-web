@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
 
-const OthersForm = ({ setAmount, setName, setDescription, submitHandler,setFee }) => {
+const OthersForm = ({ setAmount, setName, setDescription, submitHandler, setProfit }) => {
 
 useEffect(() => {
-  setFee(0)
-}, [setFee])
+  setProfit(0)
+}, [setProfit])
 
   return (
     <>

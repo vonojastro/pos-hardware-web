@@ -25,13 +25,13 @@ const CashierDashboard = () => {
   const [outOfstock, setOutOfStock] = useState(false)
   const [productSearch, setProductSearch] = useState(false)
   const [isPaid, setIsPaid] = useState(true)
+  const [profit, setProfit] = useState(20)
 
   const [name, setName] = useState([]);
   const [amount, setAmount] = useState(0);
   const [description, setDescription] = useState([]);
 
   const [isIn, setIsIn] = useState(true);
-  const [fee, setFee] = useState(0);
 
   const date = dayjs(new Date()).format("YYYY-MM-DD");
   const [dateSearch, setDateSearch] = useState(date);
@@ -60,6 +60,7 @@ const CashierDashboard = () => {
 
   const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
 
+
   const handleAddCart = (id) => {
 
     const noStock = allProducts.find(item => item._id === id && item.stock === 0)
@@ -87,14 +88,17 @@ const CashierDashboard = () => {
       const products = _.uniqBy(newCart, '_id')
       const productNames = products.map(item => item.productName)
       const productDesc = products.map(item => item.qty + " x " + item.unit + " - ₱ " + (item.qty * item.retailPrice).toLocaleString())
-      const sum = products.reduce((a, v) => a = a + (v.retailPrice * v.qty), 0)
-
-      setAmount(sum)
+      const totalSales = products.reduce((a, v) => a = a + (v.retailPrice * v.qty), 0)
+      const totalCapital = products.reduce((a, v) => a = a + (v.costPerUnit * v.qty), 0)
+      const transactionProfit = totalSales - totalCapital
+      
+      // console.log(totalSales)
+      setAmount(totalSales)
       setCart(products);
       setName(productNames)
       setShowQtyModal(false)
       setDescription(productDesc)
-      setFee(0)
+      setProfit(transactionProfit)
 
       dispatch(getProductsAction())
     }
@@ -168,77 +172,77 @@ const CashierDashboard = () => {
             setDescription={setDescription}
             isIn={isIn}
             setIsIn={setIsIn}
-            fee={fee}
-            setFee={setFee}
             isPaid={isPaid}
             setIsPaid={setIsPaid}
+            profit={profit}
+            setProfit={setProfit}
           />
         </div>
         <div className="col-span-2 border m-3 ">
-        {loading ? (
-<div className="w-full h-full flex justify-center items-center">
-<CircularProgress />
-</div>
-) : (
-  <div className="bg-white w-full h-[600px]">
+          {loading ? (
+            <div className="w-full h-full flex justify-center items-center">
+              <CircularProgress />
+            </div>
+          ) : (
+            <div className="bg-white w-full h-[600px]">
 
-  {!productSearch ? (
-    <>
-      <ListTab
-        setTab={setTab}
-        tab={tab}
-        dateSearch={dateSearch}
-        setDateSearch={setDateSearch}
-        date={date}
-      />
-      <ListTabDisplay tab={tab} dateSearch={dateSearch} />
-    </>
-  ) : (
-    <>
-      <table className="w-full text-center gap-5">
-        <thead>
-          <tr className="border-b-[1px] bg-[#60A3D9] text-white">
-            <th className="py-3">Product Name</th>
-            <th>Brand</th>
-            <th>Description</th>
-            <th>Retail Price</th>
-            <th>Stock</th>
-            <th>Unit</th>
-            <th>Item Location</th>
-            <th></th>
-          </tr>
-        </thead>
+              {!productSearch ? (
+                <>
+                  <ListTab
+                    setTab={setTab}
+                    tab={tab}
+                    dateSearch={dateSearch}
+                    setDateSearch={setDateSearch}
+                    date={date}
+                  />
+                  <ListTabDisplay tab={tab} dateSearch={dateSearch} />
+                </>
+              ) : (
+                <>
+                  <table className="w-full text-center gap-5">
+                    <thead>
+                      <tr className="border-b-[1px] bg-[#60A3D9] text-white">
+                        <th className="py-3">Product Name</th>
+                        <th>Brand</th>
+                        <th>Description</th>
+                        <th>Retail Price</th>
+                        <th>Stock</th>
+                        <th>Unit</th>
+                        <th>Item Location</th>
+                        <th></th>
+                      </tr>
+                    </thead>
 
-        <tbody>
-          {allProducts.map((product, index) => (
-            <tr className={`border-b-[1px] border-white ${product.stock === 0 ? 'bg-red-500 text-white !important' : ''} ${index % 2 && product.stock !== 0 && product.stock > 2 ? 'bg-gray-100' : product.stock <= 2 && product.stock !== 0 ? 'bg-yellow-200' : ''}`} key={index}>
-              <td className="py-1">
-                <strong>{product.productName}</strong>
-              </td>
-              <td>{product.brand ? product.brand : '-'}</td>
-              <td>{product.description ? product.description : '-'}</td>
-              <td>₱ {product.retailPrice}</td>
+                    <tbody>
+                      {allProducts.map((product, index) => (
+                        <tr className={`border-b-[1px] border-white ${product.stock === 0 ? 'bg-red-500 text-white !important' : ''} ${index % 2 && product.stock !== 0 && product.stock > 2 ? 'bg-gray-100' : product.stock <= 2 && product.stock !== 0 ? 'bg-yellow-200' : ''}`} key={index}>
+                          <td className="py-1">
+                            <strong>{product.productName}</strong>
+                          </td>
+                          <td>{product.brand ? product.brand : '-'}</td>
+                          <td>{product.description ? product.description : '-'}</td>
+                          <td>₱ {product.retailPrice}</td>
 
-              <td>{product.stock === 0 ? 'Out of Stock' : product.stock}</td>
-              <td>{product.unit ? product.unit : '-'}</td>
-              <td>{product.storageLocation ? product.storageLocation : '-'}</td>
-              <td>
-                <BsCartPlus
-                  className="cursor-pointer"
-                  onClick={() => handleAddCart(product._id)}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
-  )}
+                          <td>{product.stock === 0 ? 'Out of Stock' : product.stock}</td>
+                          <td>{product.unit ? product.unit : '-'}</td>
+                          <td>{product.storageLocation ? product.storageLocation : '-'}</td>
+                          <td>
+                            <BsCartPlus
+                              className="cursor-pointer"
+                              onClick={() => handleAddCart(product._id)}
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </>
+              )}
 
 
-</div>
-)}
-         
+            </div>
+          )}
+
         </div>
       </div>
     </div>

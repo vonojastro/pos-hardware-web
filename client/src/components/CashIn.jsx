@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const InitialBalanceForm = ({ setAmount, setName, setDescription, submitHandler,  setFee}) => {
+const InitialBalanceForm = ({ setAmount, setName, setDescription, submitHandler,  setProfit}) => {
   const [onethousand, setOnethousand] = useState(0);
   const [fivehundred, setFivehundred] = useState(0);
   const [twohundred, setTwohundred] = useState(0);
@@ -22,8 +22,8 @@ const InitialBalanceForm = ({ setAmount, setName, setDescription, submitHandler,
     setAmount(initialTotal);
     setName("Cash In");
     setDescription("Cash In");
-    setFee(0)
-  }, [initialTotal, setAmount, setName, setDescription]);
+    setProfit(0)
+  }, [initialTotal, setAmount, setName, setDescription, setProfit]);
 
   return (
     <>

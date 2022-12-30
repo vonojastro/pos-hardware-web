@@ -35,19 +35,51 @@ const MonthlySales = () => {
     ),
   ];
 
-  const dataBydates = uniqueDates.map((date) => ({
+
+  // const dataBydates = uniqueDates.map((date) => ({
+  //   createdAt: date,
+  //   amount: filtered
+  //     .filter(
+  //       (row) => dayjs(row.createdAt).format("DD/MM/YYYY") === date && row.isIn
+  //     )
+  //     .map((row) => row.amount)
+  //     .reduce((a, c) => a + c, 0),
+  //   profit: filtered
+  //     .filter(
+  //       (row) => dayjs(row.createdAt).format("DD/MM/YYYY") === date && !row.isIn
+  //     )
+  //     .map((row) => row.profit)
+  //     .reduce((a, c) => a + c, 0),
+  // }));
+
+  const monthlySales = uniqueDates.map((date) => ({
     createdAt: date,
-    amount: filtered
+    hardwareProfit: filtered
       .filter(
-        (row) => dayjs(row.createdAt).format("DD/MM/YYYY") === date && row.isIn
+        (row) => dayjs(row.createdAt).format("DD/MM/YYYY") === date && row.category === 'hardware'
       )
-      .map((row) => row.amount)
+      .map((row) => row.profit)
       .reduce((a, c) => a + c, 0),
-    fee: filtered
+
+    atmProfit: filtered
       .filter(
-        (row) => dayjs(row.createdAt).format("DD/MM/YYYY") === date && !row.isIn
+        (row) => dayjs(row.createdAt).format("DD/MM/YYYY") === date && row.category === 'atm'
       )
-      .map((row) => row.fee)
+      .map((row) => row.profit)
+      .reduce((a, c) => a + c, 0),
+
+    chequeProfit: filtered
+      .filter(
+        (row) => dayjs(row.createdAt).format("DD/MM/YYYY") === date && row.category === 'cheque'
+      )
+      .map((row) => row.profit)
+      .reduce((a, c) => a + c, 0),
+
+    totalProfit: filtered
+      .filter(
+        (row) => dayjs(row.createdAt).format("DD/MM/YYYY") === date
+      )
+      .map((row) => row.profit)
       .reduce((a, c) => a + c, 0),
   }));
 
@@ -72,28 +104,33 @@ const MonthlySales = () => {
         <option value="12">December</option>
       </select>
 
-      <div className="p-3 border w-full h-full">
+      <div className="border w-full h-full">
         <table className="w-full text-center gap-5">
           <thead>
             <tr className="text-sm">
-              <th className="py-3">Date </th>
+              <th className="py-3">Date</th>
               <th>Hardware </th>
-              <th>ATM / Cheque </th>
-              <th>Total Sales: </th>
+              <th>ATM </th>
+              <th>Cheque </th>
+              <th>Total</th>
             </tr>
           </thead>
 
-          {dataBydates.map((item, index) => (
-            <tbody className=" p-1 border" key={index}>
-              <tr>
+          <tbody >
+            {monthlySales?.map((item, index) => (
+              <tr key={index} className={index % 2 ? 'bg-gray-200' : ''}>
                 <td>{item.createdAt}</td>
-                <td>₱ {item.amount.toLocaleString()}</td>
-                <td>₱ {item.fee.toLocaleString()}</td>
-                <td>₱ {(item.fee + item.amount).toLocaleString()}</td>
+                <td>{item.hardwareProfit ? "₱ " + item.hardwareProfit.toLocaleString() : '-'}</td>
+                <td>{item.atmProfit ? "₱ " + item.atmProfit.toLocaleString() : '-'}</td>
+                <td>{item.chequeProfit ? "₱ " + item.chequeProfit.toLocaleString() : '-'}</td>
+                <td>{item.totalProfit ? "₱ " + item.totalProfit.toLocaleString() : '-'}</td>
               </tr>
-            </tbody>
-          ))}
+            ))}
+
+          </tbody>
+
         </table>
+
       </div>
     </div>
   );

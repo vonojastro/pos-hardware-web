@@ -20,7 +20,6 @@ const addTransaction = asyncHandler(async (req, res) => {
     description, 
     amount,
     category,
-    fee,
     isIn,
     isPaid,
     profit
@@ -31,7 +30,6 @@ const addTransaction = asyncHandler(async (req, res) => {
     description, 
     amount,
     category,
-    fee,
     isIn,
     isPaid,
     profit
@@ -43,7 +41,6 @@ const addTransaction = asyncHandler(async (req, res) => {
     description: transaction.description, 
     amount: transaction.amount,
     category: transaction.category,
-    fee: transaction.fee,
     isIn: transaction.isIn,
     isPaid: transaction.isPaid,
     profit: transaction.profit

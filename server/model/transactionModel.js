@@ -8,7 +8,7 @@ const transactionSchema = mongoose.Schema(
   },
   amount: {
     type: Number,
-    required: true,
+    default: 0
   },
   description: {
     type: Array,
@@ -21,10 +21,6 @@ const transactionSchema = mongoose.Schema(
   isIn: {
     type: Boolean,
     required: true,
-  },
-  fee: {
-    type: Number,
-    default: 0
   },
   qty: {
     type: Number,
