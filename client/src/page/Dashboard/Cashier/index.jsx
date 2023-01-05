@@ -119,7 +119,7 @@ const CashierDashboard = () => {
     <div className="w-11/12 mx-auto z-0 relative">
 
 
-      <div className={`w-6/12 py-5 bg-white border border-black absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
+      <div className={`w-5/12 rounded py-10 bg-white border border-gray-300 absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
       flex justify-center items-center flex-col gap-5 ${showQtyModal || outOfstock ? '' : 'hidden'}
       `}>
 
@@ -133,17 +133,19 @@ const CashierDashboard = () => {
         ) :
           (
             <>
-              <label>
-                Select Qty:
-                <input type='number' className="border border-black" value={qtyValue} onChange={(e) => setQtyValue(e.target.value)} />
-              </label>
-              <label>
-                Enter Price:
-                <input type='number' className="border border-black" value={priceValue} onChange={(e) => setPriceValue(e.target.value)} />
-              </label>
-              <div className="flex gap-5">
-                <button onClick={() => setShowQtyModal(false) || setOutOfStock(false)}>Cancel</button>
-                <button className="cursor-pointer" onClick={handleQtySubmit}>Confirm</button>
+              <div className="flex flex-col gap-3">
+                Select Qty:  {'  '}
+                <input type='number' className="border border-gray-400 px-2 py-1 w-[200px]" value={qtyValue} onChange={(e) => setQtyValue(e.target.value)} />
+              </div>
+              <div className="flex flex-col gap-3">             
+                Enter Price:  {'  '}
+                <input type='number' className="border border-gray-400 px-2 py-1 w-[200px]" value={priceValue} onChange={(e) => setPriceValue(e.target.value)} />
+              </div>
+
+              
+              <div className="flex gap-5 mt-5">
+                <button  className="border border-gray-500 rounded px-5 py-2 cursor-pointer" onClick={() => setShowQtyModal(false) || setOutOfStock(false)}>Cancel</button>
+                <button className="border border-gray-500 rounded px-5 py-2 cursor-pointer" onClick={handleQtySubmit}>Confirm</button>
               </div>
             </>
 
