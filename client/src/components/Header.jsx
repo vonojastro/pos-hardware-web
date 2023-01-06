@@ -75,13 +75,13 @@ const Header = () => {
                 Home
               </Link>
 
-              <Link
+              {/* <Link
                 onClick={() => setShowMenu(false)}
                 className="uppercase py-5 px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
                 to="/user-list"
               >
                 User List
-              </Link>
+              </Link> */}
 
               <Link
                 onClick={() => setShowMenu(false)}
@@ -91,12 +91,20 @@ const Header = () => {
                 Product List
               </Link>
 
-              <Link
+              {/* <Link
                 onClick={() => setShowMenu(false)}
                 className="uppercase py-5 px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
                 to="/monthlysales"
               >
                 Monthly Sales
+              </Link> */}
+
+              <Link
+                onClick={() => setShowMenu(false)}
+                className="uppercase text-white px-[20%] hover:bg-white hover:text-green-500 ease-in-out duration-200 py-5 w-full"
+                to="/preview"
+              >
+                DAILY REPORT
               </Link>
             </>
           ) : !userInfo?.isAdmin && userInfo ? (
