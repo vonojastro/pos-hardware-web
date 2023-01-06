@@ -245,9 +245,8 @@ const ProductList = () => {
 
       </div>
       <div className="border border-gray-300 rounded w-full h-[600px] overflow-y-scroll">
-      {allProducts.length > 0 ? allProducts?.map((product, index) => (
+   
         <table className="w-full text-center gap-5">
-       
           <thead>
             <tr className="border-b-[1px] bg-[#60A3D9] text-white">
               <th>Item No.</th>
@@ -264,6 +263,9 @@ const ProductList = () => {
               <th></th>
             </tr>
           </thead>
+
+        {allProducts.length > 0 ? allProducts?.map((product, index) => (
+
 
           <tbody>
         
@@ -300,14 +302,14 @@ const ProductList = () => {
               </tr>
        
           </tbody>
-
+     )) : (
+      <>
+      <div className="flex justify-center items-center h-full text-xl">No Record Found</div>
+      </>
+    )}
 
         </table>
-                  )) : (
-                    <>
-                    <div className="flex justify-center items-center h-full text-xl">No Record Found</div>
-                    </>
-                  )}
+             
       </div>
 
       {showAdd ? (
