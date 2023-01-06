@@ -47,10 +47,10 @@ const Header = () => {
         ) : (
           ""
         )}
-
+{/* 
         <Link to="/">
           <div>Enzo POS</div>
-        </Link>
+        </Link> */}
 
         <div>{date}</div>
       </div>
