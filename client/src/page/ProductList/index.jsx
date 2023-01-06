@@ -251,14 +251,14 @@ const ProductList = () => {
           <thead>
             <tr className="border-b-[1px] bg-[#60A3D9] text-white">
               <th>Item No.</th>
-              <th className="py-3">Product Name</th>
+              <th className="py-3">Product</th>
               <th>Brand</th>
               {/* <th>Description</th> */}
-              <th>Retail Price</th>
-              <th>Wholesale Price</th>
+              <th>Retail</th>
+              <th>Wholesale</th>
               <th>Stock</th>
               <th>Unit</th>
-              <th>Item Location</th>
+              <th>Location</th>
               <th></th>
               <th></th>
               <th></th>
