@@ -69,10 +69,9 @@ const Header = () => {
             <>
               <Link
                 onClick={() => setShowMenu(false)}
-                className="uppercase py-5 px-[20%] text-lg flex gap-3 items-center  hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
+                className="uppercase py-5 px-[20%] flex gap-3 items-center  hover:bg-white hover:text-green-500 ease-in-out duration-200 text-white w-full"
                 to="/admin"
               >
-                <AiOutlineHome className="text-xl"/>
                 Home
               </Link>
 

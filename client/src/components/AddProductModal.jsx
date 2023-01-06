@@ -11,8 +11,8 @@ const ProductModal = ({ handleAddUpdate, handleChange, setShowAdd,setAddProduct,
   }
 
   return (
-    <div className=" w-8/12 py-12 px-12 border border-gray-300 bg-white rounded absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <h3 className="text-[1.3rem] text-center font-bold pb-4 ">
+    <div className=" w-8/12 py-12 px-12 border border-gray-300 bg-white rounded absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+      <h3 className="text-[1.3rem] text-center font-bold pb-4 hover: ">
         {showAdd ? 'Add Product' : showEdit ? 'Update Product' : ''}
       </h3>
 
@@ -131,13 +131,13 @@ const ProductModal = ({ handleAddUpdate, handleChange, setShowAdd,setAddProduct,
         </div>
 
         <button
-          className="border border-gray-300 py-3 bg-white hover:bg-green-500 hover:text-white ease-in-out duration-200"
+          className="border border-gray-300 py-3 bg-white hover:bg-blue-300 hover:text-white ease-in-out duration-200"
           onClick={handleClose}
         >
           Cancel
         </button>
         <button
-          className="border border-gray-300 py-3 bg-white hover:bg-green-500 hover:text-white ease-in-out duration-200"
+          className="border border-gray-300 py-3 bg-white hover:bg-blue-300 hover:text-white ease-in-out duration-200"
           onClick={handleAddUpdate}
         >
          {showAdd ? 'Add' : showEdit ? 'Update' : ''}

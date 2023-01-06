@@ -235,7 +235,7 @@ const ProductList = () => {
           />
 
           <button
-            className="h-[40px] rounded px-3 border border-gray-300 my-3"
+            className="h-[40px] rounded px-3 border border-gray-300 my-3 hover:text-white hover:bg-blue-300 duration-300 ease-in-out"
             onClick={handleAdd}
           >
             Add Product
@@ -245,7 +245,9 @@ const ProductList = () => {
 
       </div>
       <div className="border border-gray-300 rounded w-full h-[600px] overflow-y-scroll">
+      {allProducts.length > 0 ? allProducts?.map((product, index) => (
         <table className="w-full text-center gap-5">
+       
           <thead>
             <tr className="border-b-[1px] bg-[#60A3D9] text-white">
               <th>Item No.</th>
@@ -264,7 +266,7 @@ const ProductList = () => {
           </thead>
 
           <tbody>
-            {allProducts?.map((product, index) => (
+        
               <tr className={`border-b-[1px] border-white ${product.stock === 0 ? 'bg-red-500 text-white' : ''} ${index % 2 && product.stock !== 0 && product.stock > 2 ? 'bg-gray-100' : product.stock <= 2 && product.stock !== 0 ? 'bg-yellow-200' : ''}`} key={index}>
                 <td className="py-1">{index + 1}</td>
                 <td>
@@ -296,9 +298,16 @@ const ProductList = () => {
                   />
                 </td>
               </tr>
-            ))}
+       
           </tbody>
+
+
         </table>
+                  )) : (
+                    <>
+                    <div className="flex justify-center items-center h-full text-xl">No Record Found</div>
+                    </>
+                  )}
       </div>
 
       {showAdd ? (
