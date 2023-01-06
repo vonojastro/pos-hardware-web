@@ -70,7 +70,7 @@ const Header = () => {
               <Link
                 onClick={() => setShowMenu(false)}
                 className="uppercase py-5 px-[20%] flex gap-3 items-center  hover:bg-white hover:text-black ease-in-out duration-200 text-white w-full"
-                to="/admin"
+                to="/preview"
               >
                 Home
               </Link>
@@ -99,13 +99,13 @@ const Header = () => {
                 Monthly Sales
               </Link> */}
 
-              <Link
+              {/* <Link
                 onClick={() => setShowMenu(false)}
                 className="uppercase text-white px-[20%] hover:bg-white hover:text-black ease-in-out duration-200 py-5 w-full"
                 to="/preview"
               >
                 DAILY REPORT
-              </Link>
+              </Link> */}
             </>
           ) : !userInfo?.isAdmin && userInfo ? (
             <>
