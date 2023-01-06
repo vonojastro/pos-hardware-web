@@ -96,7 +96,9 @@ const ListTabDisplay = ({ tab, dateSearch }) => {
                 ))
               }</td>
               <td className="">₱ {item.amount.toLocaleString()}</td>
-              <td className="" onClick={() => deleteHandler(item._id)}>
+              <td className="" 
+              // onClick={() => deleteHandler(item._id)}
+              >
                 {item.isIn ? "In" : "Out"}
               </td>
               <td className="">{dayjs(item.createdAt).format("hh:mm a")}</td>
