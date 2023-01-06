@@ -85,7 +85,7 @@ const ChequeForm = ({
         <option value="50">₱ 50</option>
       </select>
 
-      <button className="p-3 bg-[#60A3D9] hover:bg-green-300 text-white" onClick={submitHandler}>
+      <button className="p-3 bg-[#60A3D9] hover:bg-blue-300 text-white" onClick={submitHandler}>
         Confirm
       </button>
     </>
