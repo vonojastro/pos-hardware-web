@@ -68,7 +68,7 @@ const HardwareForm = ({ cart,
 
       </div>
 
-      <div className="w-full grid grid-cols-2 gap-3">
+      <div className="w-full grid grid-cols-2 gap-1">
         <button className="p-3 bg-[#60A3D9] hover:bg-blue-300 text-white" onClick={() => setProductSearch(false)}>
           Transactions
         </button>

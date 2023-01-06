@@ -110,7 +110,7 @@ const TransactionForm = ({ setCategory,
 
   return (
     <>
-      <div className="w-full m-3 bg-white border text-sm h-[650px]">
+      <div className="w-full m-3 bg-white border text-sm h-[600px]">
         <div className="grid grid-cols-2">
           <button
             className={`p-3 ${isIn === true
