@@ -253,7 +253,7 @@ const ProductList = () => {
               <th>Item No.</th>
               <th className="py-3">Product Name</th>
               <th>Brand</th>
-              <th>Description</th>
+              {/* <th>Description</th> */}
               <th>Retail Price</th>
               <th>Wholesale Price</th>
               <th>Stock</th>
@@ -273,7 +273,7 @@ const ProductList = () => {
                   <strong>{product.productName}</strong>
                 </td>
                 <td>{product.brand ? product.brand : '-'}</td>
-                <td>{product.description ? product.description : '-'}</td>
+                {/* <td>{product.description ? product.description : '-'}</td> */}
                 <td>₱ {product.retailPrice ? product.retailPrice.toLocaleString() : ''}</td>
                 <td> {product.wholesalePrice ? "₱ " + product.wholesalePrice : '-'}</td>
                 <td>{product.stock === 0 ? 'Out of Stock' : product.stock.toLocaleString()}</td>
