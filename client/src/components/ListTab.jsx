@@ -44,7 +44,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
         Others
       </button>
 
-<div className="w-full">
+<div className="w-full overflow-hidden ">
 <input
         type="date"
         id="start"

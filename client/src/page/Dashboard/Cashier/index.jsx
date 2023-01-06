@@ -154,7 +154,7 @@ const CashierDashboard = () => {
 
               <div className="flex flex-col justify-center text-center">
                 <div><strong>Retail: </strong>₱ {retail}</div>
-                <div><strong>Wholesale: </strong>₱ {wholesale}</div>
+                <div><strong>Wholesale: </strong>₱ {wholesale ? wholesale : 'None'}</div>
               </div>
 
               <div className="flex gap-5 mt-5">
