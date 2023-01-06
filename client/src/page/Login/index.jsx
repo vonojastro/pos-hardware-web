@@ -67,7 +67,7 @@ const Login = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center lg:w-3/12 md:w-6/12 w-8/12">
+      <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center lg:w-4/12 md:w-6/12 w-8/12">
         <h3 className="font-bold text-center text-lg">LOGIN</h3>
 
         <form className="flex flex-col gap-5" onSubmit={submitHandler}>
