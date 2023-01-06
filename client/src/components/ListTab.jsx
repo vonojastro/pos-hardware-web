@@ -6,7 +6,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
       <button
         className={`p-3 ${
           tab === "" ? "bg-white" : "bg-[#60A3D9] text-white"
-        } hover:bg-green-300 text-sm`}
+        } hover:bg-blue-300 text-sm`}
         onClick={() => setTab("")}
       >
         All
@@ -14,7 +14,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
       <button
         className={`p-3 ${
           tab === "hardware" ? "bg-white" : "bg-[#60A3D9] text-white"
-        } hover:bg-green-300 text-sm`}
+        } hover:bg-blue-300 text-sm`}
         onClick={() => setTab("hardware")}
       >
         Hardware
@@ -22,7 +22,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
       <button
         className={`p-3 ${
           tab === "atm" ? "bg-white" : "bg-[#60A3D9] text-white"
-        } hover:bg-green-300 text-sm`}
+        } hover:bg-blue-300 text-sm`}
         onClick={() => setTab("atm")}
       >
         ATM
@@ -30,7 +30,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
       <button
         className={`p-3 ${
           tab === "cheque" ? "bg-white" : "bg-[#60A3D9] text-white"
-        } hover:bg-green-300 text-sm`}
+        } hover:bg-blue-300 text-sm`}
         onClick={() => setTab("cheque")}
       >
         Cheque
@@ -38,7 +38,7 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
       <button
         className={`p-3 ${
           tab === "others" ? "bg-white" : "bg-[#60A3D9] text-white"
-        } hover:bg-green-300 text-sm`}
+        } hover:bg-blue-300 text-sm`}
         onClick={() => setTab("others")}
       >
         Others

@@ -118,7 +118,7 @@ const TransactionForm = ({ setCategory,
               : isIn === null
                 ? ""
                 : ""
-              } hover:text-black border-r hover:bg-[#60A3D9]`}
+              } hover: border-r hover:bg-blue-300`}
             onClick={() => setIsIn(true)}
           >
             In
@@ -129,7 +129,7 @@ const TransactionForm = ({ setCategory,
               : isIn === null
                 ? ""
                 : ""
-              } hover:text-black hover:bg-[#60A3D9]`}
+              } hover: hover:bg-blue-300`}
             onClick={() => setIsIn(false)}
           >
             Out
