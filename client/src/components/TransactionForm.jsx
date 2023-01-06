@@ -136,7 +136,7 @@ const TransactionForm = ({ setCategory,
           </button>
         </div>
         <div
-          className="w-full flex flex-col gap-5 p-3 justify-start h-full"
+          className="w-full flex flex-col gap-8 p-3 justify-start h-full"
         // onSubmit={submitHandler}
         >
           <select
