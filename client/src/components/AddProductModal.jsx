@@ -11,7 +11,7 @@ const ProductModal = ({ handleAddUpdate, handleChange, setShowAdd,setAddProduct,
   }
 
   return (
-    <div className=" w-8/12 py-12 px-12 border border-gray-300 bg-white rounded absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+    <div className=" lg:w-8/12 sm:w-11/12 py-12 px-12 border border-gray-300 bg-white rounded absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
       <h3 className="text-[1.3rem] text-center font-bold pb-4 hover: ">
         {showAdd ? 'Add Product' : showEdit ? 'Update Product' : ''}
       </h3>
