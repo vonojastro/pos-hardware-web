@@ -44,16 +44,19 @@ const ListTab = ({ setTab, tab, dateSearch, setDateSearch }) => {
         Others
       </button>
 
-      <input
+<div>
+<input
         type="date"
         id="start"
         name="search-date"
         onChange={(e) => setDateSearch(e.target.value)}
         value={dateSearch}
-        className="p-1 border m-1 text-sm cursor-pointer "
+        className="p-1 w-11/12 border m-1 text-sm cursor-pointer "
         min="2022-01-01"
         max="2030-01-01"
       />
+</div>
+   
     </div>
   );
 };
