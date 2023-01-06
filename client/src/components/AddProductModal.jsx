@@ -64,17 +64,6 @@ const ProductModal = ({ handleAddUpdate, handleChange, setShowAdd,setAddProduct,
         </div>
 
         <div className='flex flex-col w-full gap-1'>
-          <label>Unit Cost</label>
-        <input
-          type="number"
-          name="costPerUnit"
-          onChange={handleChange}
-          value={addProduct.costPerUnit}
-          className="border border-gray-300 p-2"
-        />
-        </div>
-
-        <div className='flex flex-col w-full gap-1'>
           <label>Retail Price</label>
         <input
           type="number"
@@ -107,6 +96,18 @@ const ProductModal = ({ handleAddUpdate, handleChange, setShowAdd,setAddProduct,
         />
         </div>
 
+
+        <div className='flex flex-col w-full gap-1'>
+          <label>Storage Location</label>       
+        <input
+          type="text"
+          name="storageLocation"
+          onChange={handleChange}
+          value={addProduct.storageLocation}
+          className="border border-gray-300 p-2"
+        />
+        </div>
+
         <div className='flex flex-col w-full gap-1'>
           <label>Unit</label>   
         <input
@@ -119,15 +120,16 @@ const ProductModal = ({ handleAddUpdate, handleChange, setShowAdd,setAddProduct,
         </div>
 
         <div className='flex flex-col w-full gap-1'>
-          <label>Storage Location</label>       
+          <label>Unit Cost</label>
         <input
-          type="text"
-          name="storageLocation"
+          type="number"
+          name="costPerUnit"
           onChange={handleChange}
-          value={addProduct.storageLocation}
+          value={addProduct.costPerUnit}
           className="border border-gray-300 p-2"
         />
         </div>
+
         <button
           className="border border-gray-300 py-3 bg-white hover:bg-green-500 hover:text-white ease-in-out duration-200"
           onClick={handleClose}

@@ -26,6 +26,9 @@ const CashierDashboard = () => {
   const [productSearch, setProductSearch] = useState(false)
   const [isPaid, setIsPaid] = useState(true)
   const [profit, setProfit] = useState(20)
+  const [wholesale, setWholesale] = useState(0)
+  const [retail, setRetail] = useState(0)
+
 
   const [name, setName] = useState([]);
   const [amount, setAmount] = useState(0);
@@ -65,6 +68,9 @@ const CashierDashboard = () => {
 
     const noStock = allProducts.find(item => item._id === id && item.stock === 0)
 
+    const wholesale = allProducts?.find(item => item._id === id).wholesalePrice
+    const retail = allProducts?.find(item => item._id === id).retailPrice
+
     if (noStock) {
       setOutOfStock(true)
     } else if (id) {
@@ -72,9 +78,11 @@ const CashierDashboard = () => {
       setPriceValue(0)
       setItemId(id)
       setShowQtyModal(true)
+      setWholesale(wholesale)
+      setRetail(retail)
     }
-
   }
+
 
   const handleQtySubmit = (e) => {
     e.preventDefault()
@@ -91,7 +99,7 @@ const CashierDashboard = () => {
       const totalSales = products.reduce((a, v) => a = a + (v.retailPrice * v.qty), 0)
       const totalCapital = products.reduce((a, v) => a = a + (v.costPerUnit * v.qty), 0)
       const transactionProfit = totalSales - totalCapital
-      
+
       // console.log(totalSales)
       setAmount(totalSales)
       setCart(products);
@@ -115,6 +123,8 @@ const CashierDashboard = () => {
 
   }
 
+
+
   return (
     <div className="w-11/12 mx-auto z-0 relative">
 
@@ -137,14 +147,18 @@ const CashierDashboard = () => {
                 Select Qty:  {'  '}
                 <input type='number' className="border border-gray-400 px-2 py-1 w-[200px]" value={qtyValue} onChange={(e) => setQtyValue(e.target.value)} />
               </div>
-              <div className="flex flex-col gap-3">             
+              <div className="flex flex-col gap-3">
                 Enter Price:  {'  '}
                 <input type='number' className="border border-gray-400 px-2 py-1 w-[200px]" value={priceValue} onChange={(e) => setPriceValue(e.target.value)} />
               </div>
 
-              
+              <div className="flex flex-col justify-center text-center">
+                <div><strong>Retail: </strong>₱ {retail}</div>
+                <div><strong>Wholesale: </strong>₱ {wholesale}</div>
+              </div>
+
               <div className="flex gap-5 mt-5">
-                <button  className="border border-gray-500 rounded px-5 py-2 cursor-pointer" onClick={() => setShowQtyModal(false) || setOutOfStock(false)}>Cancel</button>
+                <button className="border border-gray-500 rounded px-5 py-2 cursor-pointer" onClick={() => setShowQtyModal(false) || setOutOfStock(false)}>Cancel</button>
                 <button className="border border-gray-500 rounded px-5 py-2 cursor-pointer" onClick={handleQtySubmit}>Confirm</button>
               </div>
             </>

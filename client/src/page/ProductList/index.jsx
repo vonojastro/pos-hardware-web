@@ -242,15 +242,6 @@ const ProductList = () => {
           </button>
         </div>
 
-<button className="h-[40px] rounded px-3 border border-gray-300 my-3" onClick={() => setOpen(!open)}>
-Hello
-</button>
-
-        <Snackbar open={open} autoHideDuration={6000} >
-        <Alert severity="success" sx={{ width: '100%', backgroundColor: 'lightgreen' }}>
-          This is a success message!
-        </Alert>
-      </Snackbar>
 
       </div>
       <div className="border border-gray-300 rounded w-full h-[600px] overflow-y-scroll">
