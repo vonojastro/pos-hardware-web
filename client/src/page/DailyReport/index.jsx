@@ -49,7 +49,7 @@ const ViewAll = () => {
   return (
     <div className="w-11/12 mx-auto p-5">
       <div className="flex gap-5">
-        <button className="px-10 rounded py-4 border my-2 text-white bg-[#60A3D9] hover:bg-blue-200 duration-300 ease-in-out" onClick={handlePrint}>
+        <button className="px-10 py-4 border my-2 text-black hover:bg-blue-300 hover:text-white duration-300 ease-in-out" onClick={handlePrint}>
           PRINT
         </button>
 
