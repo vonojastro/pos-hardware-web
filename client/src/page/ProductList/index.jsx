@@ -59,7 +59,8 @@ const ProductList = () => {
   const filteredProducts = products?.filter(product =>
     product.productName.toLowerCase().includes(query.toLowerCase()) ||
     product.brand.toLowerCase().includes(query.toLowerCase()) ||
-    product.supplier.toLowerCase().includes(query.toLowerCase())
+    product.supplier.toLowerCase().includes(query.toLowerCase()) ||
+    product.description.toLowerCase().includes(query.toLowerCase())
   )
 
   const allProducts = Array.isArray(filteredProducts) ? filteredProducts : [];
@@ -251,10 +252,10 @@ const ProductList = () => {
         {allProducts.length > 0 ? (
           <thead>
             <tr className="border-b-[1px] bg-[#60A3D9] text-white">
-              <th>Item No.</th>
+              <th>ID</th>
               <th className="py-3">Product</th>
               <th>Brand</th>
-              {/* <th>Description</th> */}
+              <th>Description</th>
               <th>Retail</th>
               <th>Wholesale</th>
               <th>Stock</th>
@@ -279,7 +280,7 @@ const ProductList = () => {
                   <strong>{product.productName}</strong>
                 </td>
                 <td>{product.brand ? product.brand : '-'}</td>
-                {/* <td>{product.description ? product.description : '-'}</td> */}
+                <td>{product.description ? product.description : '-'}</td>
                 <td>₱ {product.retailPrice ? product.retailPrice.toLocaleString() : ''}</td>
                 <td> {product.wholesalePrice ? "₱ " + product.wholesalePrice : '-'}</td>
                 <td>{product.stock === 0 ? 'Out of Stock' : product.stock.toLocaleString()}</td>
