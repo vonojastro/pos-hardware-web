@@ -245,7 +245,7 @@ const ProductList = () => {
 
 
       </div>
-      <div className="border border-gray-300 rounded w-full h-[600px] overflow-y-scroll">
+      <div className="border border-gray-300 rounded w-full h-[600px] overflow-scroll">
    
         <table className="w-full text-center gap-5">
           
@@ -271,9 +271,7 @@ const ProductList = () => {
 
         {allProducts.length > 0 ? allProducts?.map((product, index) => (
 
-
           <tbody>
-        
               <tr className={`border-b-[1px] border-white ${product.stock === 0 ? 'bg-red-500 text-white' : ''} ${index % 2 && product.stock !== 0 && product.stock > 2 ? 'bg-gray-100' : product.stock <= 2 && product.stock !== 0 ? 'bg-yellow-200' : ''}`} key={index}>
                 <td className="py-1">{index + 1}</td>
                 <td>

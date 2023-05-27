@@ -67,14 +67,14 @@ const Login = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center max-w-[550px] min-w-[300px] md:min-w-[400px]">
+      <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center max-w-[550px] min-w-[370px] md:min-w-[400px]">
         <h3 className="font-bold text-center text-lg">LOGIN</h3>
 
         <form className="flex flex-col gap-5" onSubmit={submitHandler}>
           <input
             id="username"
             type="text"
-            placeholder="Enter Email"
+            placeholder="Enter Username"
             name="username"
             onChange={handleChange}
             className=" py-3 border border-gray-300 normal-case text-center"
