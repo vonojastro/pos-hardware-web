@@ -33,7 +33,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full flex justify-center bg-[#60A3D9] text-white py-3 px-10 relative" onClick={() => showMenu ? setShowMenu(!showMenu) : ''}>
+    <div className="w-full flex justify-center bg-[#60A3D9] text-white py-5 px-10 relative" onClick={() => showMenu ? setShowMenu(!showMenu) : ''}>
       <div className="w-11/12 flex justify-between items-center ">
         {userInfo ? (
           <>

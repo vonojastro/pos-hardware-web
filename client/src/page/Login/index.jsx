@@ -30,7 +30,7 @@ const Login = () => {
     if (userInfo && !userInfo.isAdmin) {
       navigate("/cashier");
     } else if (userInfo && userInfo.isAdmin) {
-      navigate("/admin")
+      navigate("/product-list")
     }
 
     if (loading) {
@@ -58,7 +58,7 @@ const Login = () => {
 
 
   return (
-    <div className="h-screen  flex justify-center items-center">
+    <div className="h-[90vh] flex justify-center items-center">
 
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -67,7 +67,7 @@ const Login = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center lg:w-4/12 md:w-6/12 w-8/12">
+      <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center max-w-[550px] min-w-[300px] md:min-w-[400px]">
         <h3 className="font-bold text-center text-lg">LOGIN</h3>
 
         <form className="flex flex-col gap-5" onSubmit={submitHandler}>
@@ -96,13 +96,14 @@ const Login = () => {
           <ToastContainer />
         </form>
 
+        {/* 
         <h3 className="normal-case text-center">
           Create Account?
-          <Link to="/" className="normal-case text-blue-400">
+          <Link to="/sign-up" className="normal-case text-blue-400">
             {" "}
             Sign Up
           </Link>
-        </h3>
+        </h3> */}
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ function App() {
     <>
       <Header />
       <Routes>
-      <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/cashier" element={<CashierDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/product-list" element={<ProductList />} />
@@ -28,7 +28,7 @@ function App() {
         <Route path="/preview" element={<ViewAll />} />
         <Route path="/monthlysales" element={<MonthlySales />} />
         <Route path="/searchlist" element={<SearchList />} />
-        
+
         <Route path="/sign-up" element={<SignUp />} />
 
       </Routes>

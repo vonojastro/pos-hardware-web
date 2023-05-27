@@ -11,7 +11,6 @@ const SignUp = () => {
     confirmPassword: '',
   });
 
-console.log(register)
   const handleChange = (e) => {
     const { value, name } = e.target;
 
@@ -24,7 +23,7 @@ console.log(register)
 
   return (
     <div className="h-screen m-[-50px]  flex justify-center items-center">
-    <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center w-3/12">
+    <div className="px-10 py-12 rounded shadow-lg shadow-gray-300/100 flex flex-col gap-5 justify-content-center  max-w-[600px] min-w-[300px] md:min-w-[400px]">
       <h3 className="font-bold text-center  text-lg">REGISTER</h3>
       <form className="flex flex-col gap-5">
         <input
